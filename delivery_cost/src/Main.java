@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // 12345
+        // Vars
         BigDecimal weight;
         BigDecimal distance = new BigDecimal("10000");
         BigDecimal pricePerKg = new BigDecimal("30");
@@ -27,6 +27,7 @@ public class Main {
         System.out.println("result: " + price);
     }
 
+    // Input Method for weight & distance
     public static BigDecimal inputMethod(int type) {
         // 1 - distance; 2 - weight; 0 - exit (return)
         BigDecimal result;
@@ -38,14 +39,14 @@ public class Main {
         else if(type==2)
             System.out.print("weight in kg ");
         System.out.print("or press \"0\" to exit: ");
-
+        // End of message
+        
+        // Read string:
         String inputString = scanner.nextLine();
-
-        if(inputString.matches("[a-zA-Z]+")||inputString.length() < 1) {
-            System.out.println("Input error, only digits are allowed...");
+        if(inputString.matches("^[a-zA-Z]+")||inputString.length() < 1) {
+            System.out.println("Input error: chars and empty data are not allowed...");
             return BigDecimal.ZERO;
         }
-
         else if (!inputString.toLowerCase().equals("0")) {
             result = new BigDecimal(inputString);
         }
