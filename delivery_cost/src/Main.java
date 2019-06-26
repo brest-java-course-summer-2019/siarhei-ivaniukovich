@@ -56,19 +56,19 @@ public class Main {
     }
 
     public static BigDecimal inputMethod(int type) {
-        // 1 - distance; 2 - weight
+        // 1 - distance; 2 - weight; 0 - exit (return)
         BigDecimal result;
         Scanner scanner = new Scanner(System.in);
         // Message:
         System.out.print("Enter the ");
         if(type==1)
-            System.out.print("distance in km");
+            System.out.print("distance in km ");
         else if(type==2)
             System.out.print("weight in kg ");
-        System.out.print("or press \"q\" to exit: ");
+        System.out.print("or press \"0\" to exit: ");
 
         String inputString = scanner.nextLine();
-        if (!inputString.toLowerCase().equals("q")) {
+        if (!inputString.toLowerCase().equals("0")) {
             result = new BigDecimal(inputString);
         }
         else {
