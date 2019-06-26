@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cafe menu</title>
 </head>
 <body>
+<a href="index.html"><img src="img/cmlogo.png" height="64" width="64" alt="Cafe menu Main Page"></a>
+<p></p>
+<header>
+    <br>
+    <nav>
+        <ul>
+            <li><a href="orders_list.html">Back to Orders list</a></li>
+        </ul>
+    </nav>
+    <br><br>
+    <h1>New order</h1>
+    <br>
+</header>
+
+<section>
+    <form>
+        <div>
+            <label for="field_orderid">Order ID:</label>
+            <input id="field_orderid"
+                   type="number"
+                   value="0"/>
+        </div>
+        <div>
+            <label for="field_employeeid">Employee ID:</label>
+            <input id="field_employeeid"
+                   type="number"
+                   value="0000"/>
+        </div>
+        <div>
+            <label for="field_datetime">Date/Time:</label>
+            <input id="field_datetime"
+                   type="datetime-local"
+                   value="0"/>
+        </div>
+        <div>
+            <label for="field_status">Status:</label>
+            <input id="field_status"
+                   type="text"
+                   disabled
+                   value="Open"/>
+        </div>
+        <br>
+        <div>
+            <button type="button" onclick="alert('Created. Moving to select items page...')">Create order</button>
+        </div>
+
+    </form>
+</section>
 
 </body>
 </html>

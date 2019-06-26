@@ -2,9 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cafe menu</title>
 </head>
 <body>
+<a href="index.html"><img src="img/cmlogo.png" height="64" width="64" alt="Cafe menu Main Page"></a>
+<p></p>
+<header>
+    <br>
+    <nav>
+        <ul>
+            <li><a href="main.html">Main</a></li>
+        </ul>
+    </nav>
+    <br><br>
+    <h1>Orders list</h1>
+    <br>
+    <ul>
+        <li>
+            <a href="orders_add.html">Add order</a>
+        </li>
+    </ul>
+    <br>
+</header>
+
+<section>
+    <table bgcolor="#fffff0" align="center">
+        <thead>
+        <tr align="center">
+            <th align="left" width="10%">Order ID</th>
+            <th align="left" width="10%">Employee ID</th>
+            <th align="left" width="25%">Date/Time</th>
+            <th align="left" width="25%">Status</th>
+            <th align="left" width="30%"></th>
+        </tr>
+        </thead>
+        <!-- Next lines for demo:-->
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>1985</td>
+            <td>14:39 25.06.19</td>
+            <td>Closed</td>
+            <td>
+                <a href="orders_edit.html">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>1985</td>
+            <td>14:52 25.06.19</td>
+            <td>Closed</td>
+            <td>
+                <a href="orders_edit.html">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1991</td>
+            <td>15:34 26.06.19</td>
+            <td>Open</td>
+            <td>
+                <a href="orders_edit.html">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1985</td>
+            <td>15:42 26.06.19</td>
+            <td>Open</td>
+            <td>
+                <a href="orders_edit.html">Edit</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
 
 </body>
 </html>

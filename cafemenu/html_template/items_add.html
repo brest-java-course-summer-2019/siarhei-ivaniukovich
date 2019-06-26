@@ -2,9 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cafe menu</title>
 </head>
 <body>
+<a href="index.html"><img src="img/cmlogo.png" height="64" width="64" alt="Cafe menu Main Page"></a>
+<p></p>
+<header>
+    <br>
+    <nav>
+        <ul>
+            <li><a href="items_list.html">Back to Items list</a></li>
+        </ul>
+    </nav>
+    <br><br>
+    <h1>Add item</h1>
+    <br>
+</header>
+
+<section>
+    <form>
+        <div>
+            <label for="field_itemname">Item name:</label>
+            <input id="field_itemname"
+                   type="text"
+                   value="Name"/>
+        </div>
+        <div>
+            <label for="field_itemprice">Price:</label>
+            <input id="field_itemprice"
+                   type="number"
+                   value="0.00"/>
+        </div>
+        <br>
+        <div>
+            <button type="button" onclick="alert('Item successfully added...')">Add item</button>
+        </div>
+
+    </form>
+</section>
 
 </body>
 </html>
