@@ -68,6 +68,12 @@ public class Main {
         System.out.print("or press \"0\" to exit: ");
 
         String inputString = scanner.nextLine();
+
+        if(inputString.matches("[a-zA-Z]+")||inputString.length() < 1) {
+            System.out.println("Input error, only digits are allowed...");
+            return BigDecimal.ZERO;
+        }
+
         if (!inputString.toLowerCase().equals("0")) {
             result = new BigDecimal(inputString);
         }
