@@ -37,7 +37,7 @@ public class Main {
         }
         */
 
-        // Added with inputMEthod:
+        // Added with inputMethod:
         weight=inputMethod(1);
         if(weight.equals(BigDecimal.ZERO))
             return;
@@ -45,14 +45,12 @@ public class Main {
         if(distance.equals(BigDecimal.ZERO))
             return;
 
-        // old code next:
+        // Legacy code next:
         System.out.println("Weight: " + weight);
         System.out.println("Distance: " + distance);
 
         BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
         System.out.println("result: " + price);
-
-
     }
 
     public static BigDecimal inputMethod(int type) {
@@ -74,7 +72,7 @@ public class Main {
             return BigDecimal.ZERO;
         }
 
-        if (!inputString.toLowerCase().equals("0")) {
+        else if (!inputString.toLowerCase().equals("0")) {
             result = new BigDecimal(inputString);
         }
         else {
