@@ -11,8 +11,8 @@ public class Main {
         BigDecimal pricePerKg = new BigDecimal("30");
         BigDecimal pricePerKm = new BigDecimal("50");
 
+        /* exported to inputMethod !!!
         Scanner scanner = new Scanner(System.in);
-
         // WEIGHT INPUT:
         System.out.println("Enter the weight in kg, or press \"q\" to exit");
         String inputString = scanner.nextLine();
@@ -35,7 +35,17 @@ public class Main {
             System.out.println("\nBye!");
             return;
         }
+        */
 
+        // Added with inputMEthod:
+        weight=inputMethod(1);
+        if(weight.equals(BigDecimal.ZERO))
+            return;
+        distance=inputMethod(2);
+        if(distance.equals(BigDecimal.ZERO))
+            return;
+
+        // old code next:
         System.out.println("Weight: " + weight);
         System.out.println("Distance: " + distance);
 
@@ -43,5 +53,28 @@ public class Main {
         System.out.println("result: " + price);
 
 
+    }
+
+    public static BigDecimal inputMethod(int type) {
+        // 1 - distance; 2 - weight
+        BigDecimal result;
+        Scanner scanner = new Scanner(System.in);
+        // Message:
+        System.out.print("Enter the ");
+        if(type==1)
+            System.out.print("distance in km");
+        else if(type==2)
+            System.out.print("weight in kg ");
+        System.out.print("or press \"q\" to exit: ");
+
+        String inputString = scanner.nextLine();
+        if (!inputString.toLowerCase().equals("q")) {
+            result = new BigDecimal(inputString);
+        }
+        else {
+            System.out.println("\nBye!");
+            result = new BigDecimal(BigInteger.ZERO);
+        }
+        return result;
     }
 }
