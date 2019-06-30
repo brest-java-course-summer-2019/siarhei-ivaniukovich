@@ -15,56 +15,51 @@ import java.util.stream.Collectors;
 
 public class Main {
 
-    public static final String PRICE_PER_KM_PATH = "price_per_kg.csv";
+    public static final String PRICE_PER_KG_PATH = "price_per_kg.csv";
+    public static final String PRICE_PER_KM_PATH = "price_per_km.csv";
+    public static final String FILE_NOT_FOUND_MSG = "File not found: ";
+    public static final String REQUEST_WEIGHT_VALUE_MSG = "Enter weight in kg or 'q' for cancel: ";
+    public static final String REQUEST_DISTANCE_VALUE_MSG = "Enter distance in km or 'q' for cancel: ";
+    public static final String MSG_DIVIDER = "-------------------------------------------------";
 
     public static void main(String[] args) throws IOException {
+        BigDecimal calculatedPriceFromWeight;
+        BigDecimal calculatedPriceFromDistance;
+        DataReader dataReaderKg = new CSVDataReader();
+        DataReader dataReaderKm = new CSVDataReader();
 
-        DataReader dataReader = new CSVDataReader();
-        Map<Integer, BigDecimal> pricePerKgMap = dataReader.readData(PRICE_PER_KM_PATH);
-        if (pricePerKgMap == null || pricePerKgMap.isEmpty()) {
-            throw new FileNotFoundException("File price_per_kg.csv is not found.");
-        }
+        // Reading files to MAPs
+        Map<Integer, BigDecimal> pricePerKgMap = dataReaderKg.readData(PRICE_PER_KG_PATH);
+        if (pricePerKgMap == null || pricePerKgMap.isEmpty()) { throw new FileNotFoundException(FILE_NOT_FOUND_MSG+PRICE_PER_KG_PATH); }
+        Map<Integer, BigDecimal> pricePerKmMap = dataReaderKm.readData(PRICE_PER_KM_PATH);
+        if (pricePerKmMap == null || pricePerKgMap.isEmpty()) { throw new FileNotFoundException(FILE_NOT_FOUND_MSG+PRICE_PER_KM_PATH); }
 
+        // Receiving input values from console for weight & distance (q for input cancel)
         ReceiveValue receiveValue = new ReceiveValue();
-        InputValue weightValue = receiveValue.receiveValue("Enter weight in kg or 'q' for cancel: ");
-        InputValue distanceValue = receiveValue.receiveValue("Enter distance in km  or 'q' for cancel: ");
+        InputValue weightValue = receiveValue.receiveValue(REQUEST_WEIGHT_VALUE_MSG);
+        if(weightValue.getType() == InputValue.Types.EXIT) return;
+        InputValue distanceValue = receiveValue.receiveValue(REQUEST_DISTANCE_VALUE_MSG);
+        if(distanceValue.getType() == InputValue.Types.EXIT) return;
 
-        System.out.println("###: "+pricePerKgMap.get(100));
-
+        // Check & get correct values for weight & distance
         CorrectInputValue correctWeightValue = (CorrectInputValue) weightValue;
         CorrectInputValue correctDistanceValue = (CorrectInputValue) distanceValue;
-        System.out.println("Weight: " + correctWeightValue.getValue());
-        System.out.println("Distance: " + correctDistanceValue.getValue());
-        System.out.println("$$$: "+pricePerKgMap.entrySet().stream().filter(mp->mp.getKey().intValue() >= correctWeightValue.getValue().intValue())
-                .collect(Collectors.toMap(mp->mp.getKey(), mp->mp.getValue())));
-        System.out.println("DOT: "+pricePerKgMap.entrySet().stream()
-                .filter(mp->mp.getKey().intValue() >= correctWeightValue.getValue().intValue())
-                .collect(Collectors.toMap(mp->mp.getKey(), mp->mp.getValue())));
 
-        //BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
-        //System.out.println("result: " + price);
-       /* // Vars
-        BigDecimal weight;
-        BigDecimal distance = new BigDecimal("10000");
-        BigDecimal pricePerKg = new BigDecimal("30");
-        BigDecimal pricePerKm = new BigDecimal("50");
+        // Calculating price with weight & distance by PRICE_PER_**_PATH file values
+        Calculate calculateWeightPrice = new CalculateDelivery();
+        Calculate calculateDistancePrice = new CalculateDelivery();
+        ((CalculateDelivery) calculateWeightPrice).calculcatePrice(correctWeightValue.getValue(), pricePerKgMap);
+        calculatedPriceFromWeight = calculateWeightPrice.getValue();
+        ((CalculateDelivery) calculateDistancePrice).calculcatePrice(correctDistanceValue.getValue(), pricePerKmMap);
+        calculatedPriceFromDistance = calculateDistancePrice.getValue();
+
+        // Print calculation result to console
+        System.out.println(MSG_DIVIDER);
+        System.out.println("Calculated price from Weight: " + calculatedPriceFromWeight);
+        System.out.println("Calculated price from Distance: " + calculatedPriceFromDistance);
+        System.out.println("Summary: " + calculatedPriceFromDistance.add(calculatedPriceFromWeight));
 
 
-        // Added with inputMethod:
-        weight=inputMethod(1);
-        if(weight.equals(BigDecimal.ZERO))
-            return;
-        distance=inputMethod(2);
-        if(distance.equals(BigDecimal.ZERO))
-            return;
-
-        // Legacy code next:
-        System.out.println("Weight: " + weight);
-        System.out.println("Distance: " + distance);
-
-        BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
-        System.out.println("result: " + price);
-        */
     }
 
 

@@ -1,20 +1,21 @@
 package calculate;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.HashMap;
-
 
 public class CalculateDelivery implements Calculate {
 
     private BigDecimal calculateMultiplyResult;
 
-
-
-    @Override
+   /* @Override
     public void mainCalculate(BigDecimal multiplier, BigDecimal multiplicand) {
         calculateMultiplyResult = multiplier.multiply(multiplicand);
+        return;
+    }*/
+
+    public void calculcatePrice(BigDecimal inputValue, Map<Integer, BigDecimal> inputPriceMap) {
+        calculateMultiplyResult = inputValue.multiply(getValueByKeyFromPriceMap(inputValue, inputPriceMap));
         return;
     }
 
@@ -23,9 +24,16 @@ public class CalculateDelivery implements Calculate {
         return calculateMultiplyResult;
     }
 
-    public void CalculateX(BigDecimal weight, BigDecimal distance, Map<Integer, BigDecimal> map) {
-        map.entrySet().stream().filter(mp->mp.getKey().intValue() >= weight.intValue())
-                .collect(Collectors.toMap(mp->mp.getKey(),mp->mp.getValue()));
+    private BigDecimal getValueByKeyFromPriceMap(BigDecimal inputValue, Map<Integer, BigDecimal> inputPriceMap) {
+        BigDecimal returnableValue;
+        returnableValue = inputPriceMap.entrySet()
+                .stream()
+                //.min(Comparator.comparingInt(i->Math.abs(i-inputValue)))
+                //.orElse(inputPriceMap.entrySet().stream().max());
+                .filter(mp->mp.getKey().intValue() >= inputValue.intValue())
+                .findFirst().get().getValue();
+
+        return returnableValue;
     }
 
 }
