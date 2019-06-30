@@ -1,7 +1,6 @@
 package calculate;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.Map;
 
 public class CalculateDelivery implements Calculate {
@@ -28,9 +27,7 @@ public class CalculateDelivery implements Calculate {
         BigDecimal returnableValue;
         returnableValue = inputPriceMap.entrySet()
                 .stream()
-                //.min(Comparator.comparingInt(i->Math.abs(i-inputValue)))
-                //.orElse(inputPriceMap.entrySet().stream().max());
-                .filter(mp->mp.getKey().intValue() >= inputValue.intValue())
+                .filter(mp -> mp.getKey().intValue() >= inputValue.intValue())
                 .findFirst().get().getValue();
 
         return returnableValue;
