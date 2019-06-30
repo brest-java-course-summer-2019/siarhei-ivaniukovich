@@ -1,119 +1,71 @@
+import files.CSVDataReader;
+import files.DataReader;
+import input.CorrectInputValue;
+import input.InputValue;
+import input.ReceiveValue;
+import calculate.Calculate;
+import calculate.CalculateDelivery;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.Scanner;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 
 public class Main {
 
-    public static void main(String[] args) {
-        // Vars
+    public static final String PRICE_PER_KM_PATH = "price_per_kg.csv";
+
+    public static void main(String[] args) throws IOException {
+
+        DataReader dataReader = new CSVDataReader();
+        Map<Integer, BigDecimal> pricePerKgMap = dataReader.readData(PRICE_PER_KM_PATH);
+        if (pricePerKgMap == null || pricePerKgMap.isEmpty()) {
+            throw new FileNotFoundException("File price_per_kg.csv is not found.");
+        }
+
+        ReceiveValue receiveValue = new ReceiveValue();
+        InputValue weightValue = receiveValue.receiveValue("Enter weight in kg or 'q' for cancel: ");
+        InputValue distanceValue = receiveValue.receiveValue("Enter distance in km  or 'q' for cancel: ");
+
+        System.out.println("###: "+pricePerKgMap.get(100));
+
+        CorrectInputValue correctWeightValue = (CorrectInputValue) weightValue;
+        CorrectInputValue correctDistanceValue = (CorrectInputValue) distanceValue;
+        System.out.println("Weight: " + correctWeightValue.getValue());
+        System.out.println("Distance: " + correctDistanceValue.getValue());
+        System.out.println("$$$: "+pricePerKgMap.entrySet().stream().filter(mp->mp.getKey().intValue() >= correctWeightValue.getValue().intValue())
+                .collect(Collectors.toMap(mp->mp.getKey(), mp->mp.getValue())));
+        System.out.println("DOT: "+pricePerKgMap.entrySet().stream()
+                .filter(mp->mp.getKey().intValue() >= correctWeightValue.getValue().intValue())
+                .collect(Collectors.toMap(mp->mp.getKey(), mp->mp.getValue())));
+
+        //BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
+        //System.out.println("result: " + price);
+       /* // Vars
         BigDecimal weight;
         BigDecimal distance = new BigDecimal("10000");
         BigDecimal pricePerKg = new BigDecimal("30");
         BigDecimal pricePerKm = new BigDecimal("50");
 
-<<<<<<< HEAD
-        /* exported to inputMethod !!!
-        Scanner scanner = new Scanner(System.in);
-        // WEIGHT INPUT:
-        System.out.println("Enter the weight in kg, or press \"q\" to exit");
-        String inputString = scanner.nextLine();
-        if (!inputString.toLowerCase().equals("q")) {
-            weight = new BigDecimal(inputString);
-        }
-        else {
-            System.out.println("\nBye!");
-=======
+
         // Added with inputMethod:
         weight=inputMethod(1);
         if(weight.equals(BigDecimal.ZERO))
->>>>>>> 4f8fbbd485066b4510104c2091730a3ece8302cf
             return;
         distance=inputMethod(2);
         if(distance.equals(BigDecimal.ZERO))
             return;
-<<<<<<< HEAD
-        }
-        */
-
-        // Added with inputMEthod:
-        weight=inputMethod(1);
-        if(weight.equals(BigDecimal.ZERO))
-            return;
-        distance=inputMethod(2);
-        if(distance.equals(BigDecimal.ZERO))
-            return;
-
-        // old code next:
-=======
 
         // Legacy code next:
->>>>>>> 4f8fbbd485066b4510104c2091730a3ece8302cf
         System.out.println("Weight: " + weight);
         System.out.println("Distance: " + distance);
 
         BigDecimal price = weight.multiply(pricePerKg).add(distance.multiply(pricePerKm));
         System.out.println("result: " + price);
+        */
     }
 
-    // Input Method for weight & distance
-    public static BigDecimal inputMethod(int type) {
-        // 1 - distance; 2 - weight; 0 - exit (return)
-        BigDecimal result;
-        Scanner scanner = new Scanner(System.in);
-        // Message:
-        System.out.print("Enter the ");
-        if(type==1)
-            System.out.print("distance in km ");
-        else if(type==2)
-            System.out.print("weight in kg ");
-        System.out.print("or press \"0\" to exit: ");
-        // End of message
-        
-        // Read string:
-        String inputString = scanner.nextLine();
-        if(inputString.matches("^[a-zA-Z]+")||inputString.length() < 1) {
-            System.out.println("Input error: chars and empty data are not allowed...");
-            return BigDecimal.ZERO;
-        }
-        else if (!inputString.toLowerCase().equals("0")) {
-            result = new BigDecimal(inputString);
-        }
-        else {
-            System.out.println("\nBye!");
-            result = new BigDecimal(BigInteger.ZERO);
-        }
-        return result;
-    }
-<<<<<<< HEAD
 
-    public static BigDecimal inputMethod(int type) {
-        // 1 - distance; 2 - weight; 0 - exit (return)
-        BigDecimal result;
-        Scanner scanner = new Scanner(System.in);
-        // Message:
-        System.out.print("Enter the ");
-        if(type==1)
-            System.out.print("distance in km ");
-        else if(type==2)
-            System.out.print("weight in kg ");
-        System.out.print("or press \"0\" to exit: ");
-
-        String inputString = scanner.nextLine();
-
-        if(inputString.matches("^[a-zA-Z]+")||inputString.length() < 1) {
-            System.out.println("Input error: chars and empty data are not allowed...");
-            return BigDecimal.ZERO;
-        }
-        else if (!inputString.toLowerCase().equals("0")) {
-            result = new BigDecimal(inputString);
-        }
-        else {
-            System.out.println("\nBye!");
-            result = new BigDecimal(BigInteger.ZERO);
-        }
-        return result;
-    }
 }
-=======
-}
->>>>>>> 4f8fbbd485066b4510104c2091730a3ece8302cf
