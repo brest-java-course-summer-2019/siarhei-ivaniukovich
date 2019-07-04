@@ -2,17 +2,13 @@ package calculate;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class CalculateDelivery implements Calculate {
 
     private BigDecimal calculateMultiplyResult;
 
-   /* @Override
-    public void mainCalculate(BigDecimal multiplier, BigDecimal multiplicand) {
-        calculateMultiplyResult = multiplier.multiply(multiplicand);
-        return;
-    }*/
-
+    @Override
     public void calculcatePrice(BigDecimal inputValue, Map<Integer, BigDecimal> inputPriceMap) {
         calculateMultiplyResult = inputValue.multiply(getValueByKeyFromPriceMap(inputValue, inputPriceMap));
         return;
@@ -25,11 +21,25 @@ public class CalculateDelivery implements Calculate {
 
     private BigDecimal getValueByKeyFromPriceMap(BigDecimal inputValue, Map<Integer, BigDecimal> inputPriceMap) {
         BigDecimal returnableValue;
-        returnableValue = inputPriceMap.entrySet()
-                .stream()
-                .filter(mp -> mp.getKey().intValue() >= inputValue.intValue())
-                .findFirst().get().getValue();
-
+        try {
+            returnableValue = inputPriceMap
+                    .entrySet()
+                    .stream()
+                    .sorted(Map.Entry.<Integer, BigDecimal>comparingByKey())
+                    .filter(map -> map.getKey().intValue() >= inputValue.intValue())
+                    .findFirst()
+                    .get()
+                    .getValue();
+        }
+        catch (NoSuchElementException exception) {
+            returnableValue = inputPriceMap
+                    .entrySet()
+                    .stream()
+                    .sorted(Map.Entry.<Integer, BigDecimal>comparingByKey())
+                    .reduce((a,b) -> b)
+                    .get()
+                    .getValue();
+        }
         return returnableValue;
     }
 

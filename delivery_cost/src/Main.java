@@ -26,6 +26,8 @@ public class Main {
         DataReader dataReaderKg = new CSVDataReader();
         DataReader dataReaderKm = new CSVDataReader();
 
+        System.out.println(MSG_DIVIDER);
+
         // Reading files to MAPs
         Map<Integer, BigDecimal> pricePerKgMap = dataReaderKg.readData(PRICE_PER_KG_PATH);
         if (pricePerKgMap == null || pricePerKgMap.isEmpty()) {
@@ -59,7 +61,8 @@ public class Main {
         System.out.println(MSG_DIVIDER);
         System.out.println("Calculated price from Weight: " + calculatedPriceFromWeight);
         System.out.println("Calculated price from Distance: " + calculatedPriceFromDistance);
-        System.out.println("Summary: " + calculatedPriceFromDistance.add(calculatedPriceFromWeight));
+        System.out.println("Summary price: " + calculatedPriceFromDistance.add(calculatedPriceFromWeight));
+        System.out.println(MSG_DIVIDER);
     }
 
 

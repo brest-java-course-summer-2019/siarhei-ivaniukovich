@@ -1,8 +1,9 @@
 package calculate;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public interface Calculate {
-    //void mainCalculate(BigDecimal multiplier, BigDecimal multiplicand);
+    public void calculcatePrice(BigDecimal inputValue, Map<Integer, BigDecimal> inputPriceMap);
     BigDecimal getValue();
 }
