@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>CafeMenu</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="img/cmlogo.png" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'">Main</button>
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'">Orders</button>
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'">Items</butto
+       </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5>Items list</h5>
+    </nav>
+</header>
+
+
+<section id="items">
+    <div class="container-fluid">
+        <div>
+            <a href="items_add.html" class="btn btn-secondary">Create new item</a>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <table class="table table-striped text-left">
+                        <thead>
+                        <tr class="text-left">
+                            <th width="30%">Item name</th>
+                            <th width="20%">Price $</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <!-- Next lines for demo:-->
+                        <tbody>
+                        <tr>
+                            <td>Americano</td>
+                            <td>1.50</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cappucino</td>
+                            <td>1.50</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Green tea</td>
+                            <td>1.00</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Black tea</td>
+                            <td>1.50</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Big Burger XL</td>
+                            <td>6.00</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Compact Burger S</td>
+                            <td>3.00</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Nuggets</td>
+                            <td>4.00</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>French frie (small)</td>
+                            <td>2.00</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>French frie (big)</td>
+                            <td>3.00</td>
+                            <td>
+                                <a href="items_edit.html" class="btn btn-sm btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

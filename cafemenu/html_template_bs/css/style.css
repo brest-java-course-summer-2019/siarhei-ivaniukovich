@@ -1,0 +1,99 @@
+* {
+	margin:0;
+	padding:0;
+	outline:0;
+}
+body {
+	font-size:16px;
+	line-height:20px;
+	font-family: "Trebuchet MS", Arial, sans-serif, Georgia, Arial, Helvetica, Sans-Serif, Serif;
+	color:#333;
+	background-color: whitesmoke;
+}
+a {
+	color:#ff0000;
+	text-decoration:none;
+	cursor:pointer;
+}
+a:hover {
+	text-decoration:underline;
+}
+a img {
+	border:0;
+}
+input, textarea, select {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+textarea {
+	overflow:auto;
+}
+#header {
+	height:109px;
+	position:relative;
+}
+#logo a {
+	width:356px;
+	height:109px;
+	position:absolute;
+	top:0;
+	left:0;
+}
+#navigation {
+	height:43px;
+	border-top:1px solid #dbdbdb;
+	border-bottom:1px solid #dbdbdb;
+}
+#navigation ul {
+	list-style:none;
+}
+#navigation ul li {
+	float:none;
+	height:43px;
+	border-right:1px solid #dbdbdb;
+	font-size:12px;
+	line-height:43px;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+#navigation ul li a {
+	float:none;
+	height:43px;
+	color:#000;
+	padding:0 33px;
+}
+#navigation ul li a:hover, #navigation ul li a.active {
+	color:#990000;
+	text-decoration:none;
+}
+
+#main {
+	width:932px;
+	padding:37px 24px 17px 24px;
+}
+#main h1 {
+	font-size:12px;
+	line-height:15px;
+	color:#000;
+	text-transform:uppercase;
+	border-bottom:1px solid #dbdbdb;
+	padding:0 0 9px 0;
+}
+
+#main a.more:hover {
+	text-decoration:none;
+}
+#content {
+	width:605px;
+}
+#footer {
+	font-family:Arial, sans-serif;
+	font-size:11px;
+	line-height:14px;
+	color:#7f7f7f;
+	padding:18px 27px 20px 38px;
+}
+#footer a {
+	color:#7f7f7f;
+	text-decoration:none;
+}

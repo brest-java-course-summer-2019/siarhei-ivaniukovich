@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>CafeMenu</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="img/cmlogo.png" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'">Main</button>
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'">Orders</button>
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'">Items</butto
+        </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5>Add new item</h5>
+    </nav>
+</header>
+
+<section id="item">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       for="field_itemname">Item name:</label>
+                                <input class="form-control "
+                                       id="field_itemname"
+                                       type="text" value=""/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       for="field_itemprice">Item price:</label>
+                                <input class="form-control"
+                                       id="field_itemprice"
+                                       type="number" value="0.00">
+                            </div>
+                        </form>
+                        <div>
+                            <a href="items_list.html" class="btn btn-secondary">Create item</a>
+                            <a href="items_list.html" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+
+
+</body>
+</html>
