@@ -13,6 +13,7 @@ public class testingOrders
 
     Orders orders = new Orders();
 
+
    @Test
    public void getEntityId() {
        orders.setEntityId(2);
