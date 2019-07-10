@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk11
+  - oraclejdk8
 before_script: cd cafemenu/
 script:
   - mvn clean test coveralls:report
