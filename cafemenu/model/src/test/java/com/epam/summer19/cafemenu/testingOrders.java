@@ -1,4 +1,4 @@
-package com.epam.summer19;
+package com.epam.summer19.model;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,17 +8,16 @@ import java.math.BigDecimal;
 /**
  * Unit test for simple App.
  */
-public class testingOrders
-{
+public class testingOrders {
 
     Orders orders = new Orders();
 
 
-   @Test
-   public void getEntityId() {
-       orders.setEntityId(2);
-       Assert.assertTrue(orders.getEntityId().equals(15));
-   }
+    @Test
+    public void getEntityId() {
+        orders.setEntityId(2);
+        Assert.assertTrue(orders.getEntityId().equals(15));
+    }
 
     @Test
     public void getEntityName() {

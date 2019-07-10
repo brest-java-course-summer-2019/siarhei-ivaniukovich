@@ -1,2 +1,1 @@
-
-package com.epam.summer19;
+package com.epam.summer19.model;
