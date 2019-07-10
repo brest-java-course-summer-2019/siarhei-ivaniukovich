@@ -12,11 +12,27 @@
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <java.showDeprecation>false</java.showDeprecation>
+        <java.showWarnings>false</java.showWarnings>
+        <java.optimize>true</java.optimize>
+        <java.debug>true</java.debug>
+
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+        <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
+        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+        <maven-site-plugin.vesrion>3.7.1</maven-site-plugin.vesrion>
+
+        <checkstyle.version>8.22</checkstyle.version>
+        <jacoco.version>0.8.2</jacoco.version>
+        <jacoco.bundle.coveredratio.minimum>65%</jacoco.bundle.coveredratio.minimum>
+    </properties>
 
   <dependencies>
     <dependency>
