@@ -6,12 +6,11 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 /**
- * Unit test for simple App.
+ * model test for Cafe Menu.
  */
 public class testingOrders {
 
     Orders orders = new Orders();
-
 
     @Test
     public void getEntityId() {
@@ -22,7 +21,7 @@ public class testingOrders {
     @Test
     public void getEntityName() {
         orders.setEntityName("Entity");
-        Assert.assertTrue(orders.getEntityId().equals("Entity"));
+        Assert.assertTrue(orders.getEntityName().equals("Entity"));
     }
 
     @Test
