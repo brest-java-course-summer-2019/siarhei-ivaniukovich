@@ -1,1 +1,3 @@
-com/epam/summer19/model/Orders.class
+com/epam/summer19/model/Order.class
+com/epam/summer19/model/OrdersList.class
+com/epam/summer19/model/Item.class

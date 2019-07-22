@@ -12,10 +12,10 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
-public class OrdersDaoJdbcImplTest {
+public class OrderDaoJdbcImplTest {
 
     @Autowired
-    OrdersDao ordersDao;
+    com.epam.summer19.OrderDao orderDao;
 
     @Test
     public void findAll() {

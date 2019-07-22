@@ -1,6 +1,21 @@
 [![Build Status](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich.svg?branch=master)](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich) [![Coverage Status](https://coveralls.io/repos/github/brest-java-course-summer-2019/siarhei-ivaniukovich/badge.svg?branch=master)](https://coveralls.io/github/brest-java-course-summer-2019/siarhei-ivaniukovich?branch=master)
 
-## Cafe project readme file
-* html_template - HTML templates for cafemnu project
-* src - main java source folder
-* pom.xml - Maven POM file
+
+
+## Cafe project
+ Cafemenu - application for cafe employees to control of making orders (adding/editing items), send them to job queue, check and control process, and closing after pay confirmed.
+
+## Prerequisites
+- jdk11  
+- maven 3+  
+
+  
+## Installing  
+`mvn clean install`  
+  
+## Running the tests  
+`mvn clean test`
+  
+---
+> documentation - Documentation, HTML, templates
+

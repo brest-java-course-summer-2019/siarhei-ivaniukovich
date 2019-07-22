@@ -4,12 +4,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.epam.summer19.cafemenu</groupId>
   <artifactId>dao</artifactId>
-  <version>1.0-SNAPSHOT</version>
   <name>Cafe Menu DAO</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
 
   <parent>
     <groupId>com.epam.summer19</groupId>
@@ -22,12 +18,10 @@
       <groupId>com.epam.summer19</groupId>
       <artifactId>model</artifactId>
     </dependency>
-
     <dependency>
       <groupId>com.epam.summer19</groupId>
       <artifactId>test-db</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -44,7 +38,6 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
@@ -54,10 +47,12 @@
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
     </dependency>
+
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
@@ -72,10 +67,12 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
     </dependency>
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
     </dependency>
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>

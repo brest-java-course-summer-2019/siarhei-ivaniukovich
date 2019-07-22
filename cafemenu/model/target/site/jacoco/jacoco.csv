@@ -1,2 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Cafe Menu model,com.epam.summer19.model,Orders,24,24,0,0,1,10,1,7,1,7
+Cafe Menu Model,com.epam.summer19.model,OrdersList,0,31,0,0,0,13,0,9,0,9
+Cafe Menu Model,com.epam.summer19.model,Order,0,10,0,0,0,4,0,3,0,3
+Cafe Menu Model,com.epam.summer19.model,Item,0,24,0,0,0,10,0,7,0,7

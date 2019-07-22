@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.22">
+<file name="/home/sergeblr/development/siarhei-ivaniukovich/cafemenu/model/src/main/java/com/epam/summer19/model/Order.java">
+<error line="5" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="8" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="11" severity="warning" message="Javadoc comment at column 27 has parse error. Details: no viable alternative at input &apos;&lt;Integer,&apos; while parsing HTML_ELEMENT" source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTagContinuationIndentationCheck"/>
+<error line="18" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="19" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="20" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="22" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="23" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="24" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
+<file name="/home/sergeblr/development/siarhei-ivaniukovich/cafemenu/model/src/main/java/com/epam/summer19/model/package-info.java">
+<error line="1" severity="warning" message="Block comment has incorrect indentation level 4, expected is 0, indentation should be the same level as line 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.CommentsIndentationCheck"/>
+<error line="1" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+</file>
+<file name="/home/sergeblr/development/siarhei-ivaniukovich/cafemenu/model/src/main/java/com/epam/summer19/model/Item.java">
+<error line="6" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="7" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="8" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="10" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="11" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="12" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="14" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="15" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="16" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="18" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="19" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="20" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="22" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="23" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="24" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="26" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="27" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="28" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="30" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="31" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="32" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
+<file name="/home/sergeblr/development/siarhei-ivaniukovich/cafemenu/model/src/main/java/com/epam/summer19/model/OrdersList.java">
+<error line="6" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="9" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="11" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="14" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="16" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="19" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="21" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="24" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="26" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="30" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="31" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="32" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="34" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="35" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="36" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="38" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="39" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="40" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="42" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="43" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="44" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="46" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="47" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="48" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="50" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="51" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="52" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="54" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="55" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="56" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="58" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="59" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="60" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 4, expected level should be 2." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
+</checkstyle>
