@@ -6,61 +6,61 @@ public class Orders {
     /**
      * Entity Id.
      */
-    private Integer entityId;
+    private Integer itemId;
 
     /**
      * Entity Name.
      */
-    private String entityName;
+    private String itemName;
 
     /**
      * Entity Count.
      */
-    private BigDecimal entityCount;
+    private BigDecimal itemCount;
 
     /**
      * Get Entity Id.
      */
     public Integer getEntityId() {
-        return entityId;
+        return itemId;
     }
     /**
      * Set Entity Id.
      */
     public void setEntityId(Integer entityId) {
-        this.entityId = entityId;
+        this.itemId = entityId;
     }
     /**
      * Get Entity Name.
      */
     public String getEntityName() {
-        return entityName;
+        return itemName;
     }
     /**
      * Set Entity Name.
      */
-    public void setEntityName(String entityName) {
-        this.entityName = entityName;
+    public void setEntityName(String itemName) {
+        this.itemName = itemName;
     }
     /**
      * Get Entity Count.
      */
     public BigDecimal getEntityCount() {
-        return entityCount;
+        return itemCount;
     }
     /**
      * Set Entity Count.
      */
     public void setEntityCount(BigDecimal entityCount) {
-        this.entityCount = entityCount;
+        this.itemCount = entityCount;
     }
 
     @Override
     public String toString() {
         return "Entity{"
-                + "entityId=" + entityId
-                + ", entityName='" + entityName + '\''
-                + ", entityCount=" + entityCount
+                + "entityId=" + itemId
+                + ", entityName='" + itemName + '\''
+                + ", entityCount=" + itemCount
                 + '}';
     }
 

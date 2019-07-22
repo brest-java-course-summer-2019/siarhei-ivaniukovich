@@ -13,19 +13,19 @@ public class OrdersTest {
     Orders orders = new Orders();
 
     @Test
-    public void getEntityId() {
+    public void getItemId() {
         orders.setEntityId(15);
         Assert.assertTrue(orders.getEntityId().equals(15));
     }
 
     @Test
-    public void getEntityName() {
-        orders.setEntityName("Entity");
-        Assert.assertTrue(orders.getEntityName().equals("Entity"));
+    public void getItemName() {
+        orders.setEntityName("Item");
+        Assert.assertTrue(orders.getEntityName().equals("Item"));
     }
 
     @Test
-    public void getEntityCount() {
+    public void getItemCount() {
         orders.setEntityCount(new BigDecimal("5.0"));
         Assert.assertTrue(orders.getEntityCount().compareTo(new BigDecimal("5.0")) == 0);
     }
