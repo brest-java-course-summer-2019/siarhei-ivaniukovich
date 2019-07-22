@@ -1,0 +1,11 @@
+calculate/Calculate.class
+files/CSVDataReader.class
+calculate/CalculateDelivery.class
+input/InputValue.class
+input/ReceiveValue.class
+Main.class
+input/IncorrectInputValue.class
+input/CorrectInputValue.class
+files/DataReader.class
+input/ExitInputValue.class
+input/InputValue$Types.class

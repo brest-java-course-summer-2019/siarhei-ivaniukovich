@@ -1,4 +1,4 @@
-package com.epam.summer19.cafemenu;
+package com.epam.summer19.dao;
 
 import static org.junit.Assert.assertTrue;
 

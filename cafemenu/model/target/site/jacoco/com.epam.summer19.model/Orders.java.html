@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Orders.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cafe Menu model</a> &gt; <a href="index.source.html" class="el_package">com.epam.summer19.model</a> &gt; <span class="el_source">Orders.java</span></div><h1>Orders.java</h1><pre class="source lang-java linenums">package com.epam.summer19.model;
+
+import java.math.BigDecimal;
+
+<span class="fc" id="L5">public class Orders {</span>
+    /**
+     * Entity Id.
+     */
+    private Integer entityId;
+
+    /**
+     * Entity Name.
+     */
+    private String entityName;
+
+    /**
+     * Entity Count.
+     */
+    private BigDecimal entityCount;
+
+    /**
+     * Get Entity Id.
+     */
+    public Integer getEntityId() {
+<span class="fc" id="L25">        return entityId;</span>
+    }
+    /**
+     * Set Entity Id.
+     */
+    public void setEntityId(Integer entityId) {
+<span class="fc" id="L31">        this.entityId = entityId;</span>
+<span class="fc" id="L32">    }</span>
+    /**
+     * Get Entity Name.
+     */
+    public String getEntityName() {
+<span class="fc" id="L37">        return entityName;</span>
+    }
+    /**
+     * Set Entity Name.
+     */
+    public void setEntityName(String entityName) {
+<span class="fc" id="L43">        this.entityName = entityName;</span>
+<span class="fc" id="L44">    }</span>
+    /**
+     * Get Entity Count.
+     */
+    public BigDecimal getEntityCount() {
+<span class="fc" id="L49">        return entityCount;</span>
+    }
+    /**
+     * Set Entity Count.
+     */
+    public void setEntityCount(BigDecimal entityCount) {
+<span class="fc" id="L55">        this.entityCount = entityCount;</span>
+<span class="fc" id="L56">    }</span>
+
+    @Override
+    public String toString() {
+<span class="nc" id="L60">        return &quot;Entity{&quot;</span>
+                + &quot;entityId=&quot; + entityId
+                + &quot;, entityName='&quot; + entityName + '\''
+                + &quot;, entityCount=&quot; + entityCount
+                + '}';
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
