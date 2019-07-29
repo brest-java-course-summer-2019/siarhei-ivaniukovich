@@ -1,6 +1,6 @@
-package com.epam.summer19;
+package com.epam.summer19.dao;
 
-import com.epam.summer19.model.Orders;
+import com.epam.summer19.model.Order;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import java.util.List;
 public class OrderDaoJdbcImplTest {
 
     @Autowired
-    com.epam.summer19.OrderDao orderDao;
+    com.epam.summer19.dao.OrderDao orderDao;
 
     @Test
     public void findAll() {
