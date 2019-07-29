@@ -1,4 +1,4 @@
-package com.epam.summer19;
+package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Item;
 import org.springframework.jdbc.core.RowMapper;

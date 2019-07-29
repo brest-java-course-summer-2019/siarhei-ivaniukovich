@@ -1,9 +1,10 @@
-package com.epam.summer19;
+package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Item;
+
 import java.util.List;
 
-public class ItemDao {
+public interface ItemDao {
 
     Item add(Item item);
 
@@ -12,4 +13,5 @@ public class ItemDao {
     void delete(Integer itemId);
 
     List<Item> findAll();
+
 }

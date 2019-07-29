@@ -20,8 +20,8 @@ public class OrdersListTest {
 
     @Test
     public void getOrderEmployeeId() {
-        ordersList.setOrderEmployeeId(2);
-        Assert.assertTrue(ordersList.getOrderEmployeeId().equals(2));
+        ordersList.setEmployeeId(2);
+        Assert.assertTrue(ordersList.getEmployeeId().equals(2));
     }
 
     @Test

@@ -11,7 +11,7 @@ public class OrdersList {
     /**
      * order maked Employee id
      */
-    private Integer orderEmployeeId;
+    private Integer employeeId;
 
     /**
      * order time
@@ -35,12 +35,12 @@ public class OrdersList {
         this.orderId = orderId;
     }
 
-    public Integer getOrderEmployeeId() {
-        return orderEmployeeId;
+    public Integer getEmployeeId() {
+        return employeeId;
     }
 
-    public void setOrderEmployeeId(Integer orderEmployeeId) {
-        this.orderEmployeeId = orderEmployeeId;
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     public LocalDateTime getOrderTime() {
