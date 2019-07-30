@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS order;
+CREATE TABLE order (
+  order_id INT NOT NULL AUTO_INCREMENT,
+  order_name VARCHAR(255) NOT NULL UNIQUE,
+  PRIMARY KEY (order_id)
+)
