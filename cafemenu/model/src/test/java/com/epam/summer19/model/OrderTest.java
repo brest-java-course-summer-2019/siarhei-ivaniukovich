@@ -3,8 +3,6 @@ package com.epam.summer19.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
-
 
 /**
  * model test for Cafe Menu.
