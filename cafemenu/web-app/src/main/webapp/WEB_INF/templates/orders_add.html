@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>CafeMenu</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="img/cmlogo.png" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'">Main</button>
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'">Orders</button>
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'">Items</butto
+        </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5>Create order</h5>
+    </nav>
+</header>
+
+<section id="order">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       for="field_orderid">Order ID:</label>
+                                <input class="form-control "
+                                       id="field_orderid"
+                                       disabled
+                                       type="number" value="214"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       for="field_employeeid">Employee ID:</label>
+                                <input class="form-control"
+                                       id="field_employeeid"
+                                       type="number" value="0000">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       for="field_datetime">Date / Time:</label>
+                                <input class="form-control"
+                                       id="field_datetime"
+                                       type="datetime-local" value="0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label"
+                                       for="field_status">Status:</label>
+                                <input class="form-control"
+                                       id="field_status"
+                                       disabled
+                                       type="text" value="Open">
+                            </div>
+                        </form>
+                        <div>
+                            <a href="orders_edit.html" class="btn btn-secondary">Create order</a>
+                            <a href="orders_list.html" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

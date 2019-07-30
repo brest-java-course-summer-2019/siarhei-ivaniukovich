@@ -12,6 +12,11 @@
 
 *.iml
 .idea/
+<<<<<<< HEAD
+=======
+out/
+**/target
+>>>>>>> df448397e2f3441b2e423243007e4310b4b89658
 
 # Package Files #
 *.jar
@@ -23,4 +28,8 @@
 *.rar
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+<<<<<<< HEAD
 hs_err_pid*
+=======
+hs_err_pid*
+>>>>>>> df448397e2f3441b2e423243007e4310b4b89658
