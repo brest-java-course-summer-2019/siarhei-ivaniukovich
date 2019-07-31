@@ -3,8 +3,19 @@ package com.epam.summer19.model;
 import java.math.BigDecimal;
 
 public class Item {
+    /**
+     * Item ID
+     */
     private Integer itemId;
+
+    /**
+     * Item name
+     */
     private String itemName;
+
+    /**
+     * Item price
+     */
     private BigDecimal itemPrice;
 
     /**

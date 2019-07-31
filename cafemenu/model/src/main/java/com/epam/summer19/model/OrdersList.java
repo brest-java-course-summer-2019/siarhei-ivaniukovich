@@ -1,7 +1,5 @@
 package com.epam.summer19.model;
 
-import java.time.LocalDateTime;
-
 public class OrdersList {
     /**
      * order id
