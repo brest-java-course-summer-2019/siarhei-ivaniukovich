@@ -7,26 +7,50 @@ public class Item {
     private String itemName;
     private BigDecimal itemPrice;
 
+    /**
+     * Get Item ID
+     * @return
+     */
     public Integer getItemId() {
         return itemId;
     }
 
+    /**
+     * Set Item ID
+     * @param itemId
+     */
     public void setItemId(Integer itemId) {
         this.itemId = itemId;
     }
 
+    /**
+     * Get Item Name
+     * @return
+     */
     public String getItemName() {
         return itemName;
     }
 
+    /**
+     * Set Item Name
+     * @param itemName
+     */
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
+    /**
+     * Get Item Price
+     * @return
+     */
     public BigDecimal getItemPrice() {
         return itemPrice;
     }
 
+    /**
+     * Set Item price
+     * @param itemPrice
+     */
     public void setItemPrice(BigDecimal itemPrice) {
         this.itemPrice = itemPrice;
     }

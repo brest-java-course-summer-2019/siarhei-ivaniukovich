@@ -14,11 +14,6 @@ public class OrdersList {
     private Integer employeeId;
 
     /**
-     * order time
-     */
-    private LocalDateTime orderTime;
-
-    /**
      *  order status param
      */
     private Integer orderStatus;
@@ -41,14 +36,6 @@ public class OrdersList {
 
     public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
-    }
-
-    public LocalDateTime getOrderTime() {
-        return orderTime;
-    }
-
-    public void setOrderTime(LocalDateTime orderTime) {
-        this.orderTime = orderTime;
     }
 
     public Integer getOrderStatus() {

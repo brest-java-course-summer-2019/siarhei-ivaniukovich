@@ -23,7 +23,7 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select ol.order_id, ol.employee_id from orderslist ol order by 2";
+            "select ol.order_id, ol.employee_id from orderslist ol order by 1";
     private final static String ADD_ORDER =
             "insert into orderslist (order_id) values (:orderId)";
     private final static String DELETE_ORDER =

@@ -25,12 +25,6 @@ public class OrdersListTest {
     }
 
     @Test
-    public void getOrderTime() {
-        ordersList.setOrderTime(LocalDateTime.of(2019,7,22,16,05));
-        Assert.assertTrue(ordersList.getOrderTime().equals(LocalDateTime.of(2019,7,22,16,05)));
-    }
-
-    @Test
     public void getOrderStatus() {
         ordersList.setOrderStatus(1);
         Assert.assertTrue(ordersList.getOrderStatus().equals(1));

@@ -20,7 +20,7 @@ public class ItemDaoJdbcImpl implements ItemDao {
     private final static String SELECT_ALL =
             "select o.item_id, o.item_name from item d order by 2";
 
-    private final static String ADD_DEPARTMENT = "insert into item (item_name) values (:itemName)";
+    private final static String ADD_ITEM = "insert into item (item_name) values (:itemName)";
 
     public ItemDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
