@@ -1,5 +1,6 @@
 package com.epam.summer19.dao;
 
+import com.epam.summer19.model.Item;
 import com.epam.summer19.model.Order;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -9,6 +10,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +29,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private final static String UPDATE_ORDER =
             "update order set order_id = :orderId where order_id = :orderId";
     private static final String ORDER_ID = "orderId";
+    private static final String ORDER_ITEMS = "orderItems";
 
     public OrderDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -34,7 +38,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Order add(Order order) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("orderId", order.getOrderId());
+        parameters.addValue(ORDER_ID, order.getOrderId());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(ADD_ORDER, parameters, generatedKeyHolder);
@@ -49,6 +53,10 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 .orElseThrow(() -> new RuntimeException("Failed to update order in DB"));
     }
 
+    private boolean successfullyUpdated(int numRowsUpdated) {
+        return numRowsUpdated > 0;
+    }
+
     @Override
     public void delete(Integer orderId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -59,18 +67,19 @@ public class OrderDaoJdbcImpl implements OrderDao {
     }
 
     @Override
-    public List<Order findAll() {
+    public List<Order> findAll() {
         List<Order> order =
-                namedParameterJdbcTemplate.query(SELECT_ALL, new OrdersListDaoJdbcImpl.OrderRowMapper());
+                namedParameterJdbcTemplate.query(SELECT_ALL, new OrderDaoJdbcImpl.OrderRowMapper());
         return order;
     }
 
     private class OrderRowMapper implements RowMapper<Order> {
-    @Override
-    public List<Order> findAll() {
-        List<Order> orders =
-                namedParameterJdbcTemplate.query(SELECT_ALL, new OrderRowMapper());
-        return orders;
+        @Override
+        public Order mapRow(ResultSet resultSet, int i) throws SQLException {
+            Order order = new Order();
+            order.setOrderId(resultSet.getInt("order_id"));
+            //order.setOrderItems(resultSet.getInt("order_items"));
+            return order;
+        }
     }
-
 }

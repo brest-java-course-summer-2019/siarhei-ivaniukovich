@@ -13,8 +13,7 @@ import java.util.Map;
 public class OrderTest {
 
     Order order = new Order();
-    Map<Integer, Integer> orderItems = new HashMap<>(1);
-    orderItems.put(1,3);
+    Map<Integer, Integer> orderItems = Map.of(1,2);
 
     @Test
     public void getOrderId() {

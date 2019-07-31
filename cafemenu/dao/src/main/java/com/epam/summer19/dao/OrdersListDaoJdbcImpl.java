@@ -45,10 +45,9 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
     @Override
     public OrdersList add(OrdersList orderslist) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue("orderId", orderslist.getOrderId());
-        parameters.addValue("employeeId", orderslist.getEmployeeId());
-        parameters.addValue("orderStatus", orderslist.getOrderStatus());
-        parameters.addValue("orderTime", orderslist.getOrderTime());
+        parameters.addValue(ORDER_ID, orderslist.getOrderId());
+        parameters.addValue(EMPLOYEE_ID, orderslist.getEmployeeId());
+        parameters.addValue(ORDER_STATUS, orderslist.getOrderStatus());
 
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
@@ -64,6 +63,10 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
                 .orElseThrow(() -> new RuntimeException("Failed to update order in DB"));
     }
 
+    private boolean successfullyUpdated(int numRowsUpdated) {
+        return numRowsUpdated > 0;
+    }
+
     @Override
     public void delete(Integer orderId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -76,7 +79,7 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
     @Override
     public List<OrdersList> findAll() {
         List<OrdersList> orderslist =
-                namedParameterJdbcTemplate.query(SELECT_ALL, new OrderRowMapper());
+                namedParameterJdbcTemplate.query(SELECT_ALL, new OrdersListRowMapper());
         return orderslist;
     }
 
@@ -96,7 +99,7 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
-    private class OrderRowMapper implements RowMapper<OrdersList> {
+    private class OrdersListRowMapper implements RowMapper<OrdersList> {
         @Override
         public OrdersList mapRow(ResultSet resultSet, int i) throws SQLException {
             OrdersList orderslist = new OrdersList();
@@ -106,5 +109,4 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
             return orderslist;
         }
     }
-
 }

@@ -8,11 +8,15 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="orderDao" class="com.epam.summer19.OrderDaoJdbcImpl">
+    <bean id="orderDao" class="com.epam.summer19.dao.OrderDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="itemDao" class="com.epam.summer19.ItemDaoJdbcImpl">
+    <bean id="itemDao" class="com.epam.summer19.dao.ItemDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
+    <bean id="ordersListDao" class="com.epam.summer19.dao.OrdersListDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 

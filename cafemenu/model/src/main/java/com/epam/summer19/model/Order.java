@@ -1,6 +1,6 @@
 package com.epam.summer19.model;
 
-import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Order {
@@ -13,7 +13,7 @@ public class Order {
     /**
      * orderItems - MAP of items (item ID, count of this item)
      */
-    private Map<Integer,Integer> orderItems;
+    private Map<Integer, Integer> orderItems = new HashMap<Integer, Integer>();
 
     /**
      * Get Order ID
@@ -40,7 +40,7 @@ public class Order {
     }
 
     /**
-     * Set list of items from order
+     * Set list of items from order MAP<itemId,itemCount>
      * @param orderItems
      */
     public void setOrderItems(Map<Integer, Integer> orderItems) {
