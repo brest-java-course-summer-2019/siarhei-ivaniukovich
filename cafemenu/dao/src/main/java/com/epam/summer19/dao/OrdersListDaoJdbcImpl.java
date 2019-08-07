@@ -23,17 +23,19 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select ol.order_id, ol.employee_id from orderslist ol order by 1";
+            "select ol_order_id, ol_employee_id, ol_order_status from orderslist order by 1";
     private final static String ADD_ORDER =
-            "insert into orderslist (order_id) values (:orderId)";
+            "insert into orderslist (ol_order_id, ol_employee_id, ol_order_status) "
+          + "values (:orderId, :employeeId, :orderStatus)";
     private final static String DELETE_ORDER =
-            "delete from orderslist where order_id = :orderId";
+            "delete from orderslist where ol_order_id = :orderId";
     private final static String UPDATE_ORDER =
-            "update orderslist set order_status = :orderStatus where order_id = :orderId";
+            "update orderslist set ol_order_id = :orderId, ol_employee_id = :employeeId, "
+          + "ol_order_status = :orderStatus where ol_order_id = :orderId";
     private final static String FIND_BY_ORDER_ID =
-            "select order_id, employee_id, order_status from orderslist where order_id = :orderId";
+            "select ol_order_id, ol_employee_id, ol_order_status from orderslist where ol_order_id = :orderId";
     private final static String FIND_BY_EMPLOYEE_ID =
-            "select order_id, employee_id, order_status from orderslist where employee_id = :employeeId";
+            "select ol_order_id, ol_employee_id, ol_order_status from orderslist where ol_employee_id = :employeeId";
     private static final String ORDER_ID = "orderId";
     private static final String EMPLOYEE_ID = "employeeId";
     private static final String ORDER_STATUS = "orderStatus";
@@ -48,7 +50,6 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
         parameters.addValue(ORDER_ID, orderslist.getOrderId());
         parameters.addValue(EMPLOYEE_ID, orderslist.getEmployeeId());
         parameters.addValue(ORDER_STATUS, orderslist.getOrderStatus());
-
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(ADD_ORDER, parameters, generatedKeyHolder);

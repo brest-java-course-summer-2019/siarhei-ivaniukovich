@@ -1,10 +1,11 @@
 package com.epam.summer19.dao;
 
+import com.epam.summer19.model.Item;
 import com.epam.summer19.model.Order;
 import java.util.List;
+import java.util.Optional;
 
 public interface OrderDao {
-
 
     /**
      * Create new order
@@ -31,4 +32,10 @@ public interface OrderDao {
      */
     List<Order> findAll();
 
+    /**
+     * Find order by orderId
+     * @param orderId
+     * @return
+     */
+    Optional<Item> findOrderById(Integer orderId);
 }
