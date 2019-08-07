@@ -16,9 +16,9 @@ INSERT INTO order (order_id, order_item_id, order_item_count) VALUES (3, 4, 4);
 INSERT INTO order (order_id, order_item_id, order_item_count) VALUES (4, 4, 10);
 INSERT INTO order (order_id, order_item_id, order_item_count) VALUES (4, 5, 12);
 
-INSERT INTO order_list (order_id, employee_id, order_status) VALUES (1, 5, 2);
-INSERT INTO order_list (order_id, employee_id, order_status) VALUES (2, 7, 1);
-INSERT INTO order_list (order_id, employee_id, order_status) VALUES (3, 12, 1);
-INSERT INTO order_list (order_id, employee_id, order_status) VALUES (4, 11, 0);
+INSERT INTO orderslist (ol_order_id, ol_employee_id, ol_order_status) VALUES (1, 5, 2);
+INSERT INTO orderslist (ol_order_id, ol_employee_id, ol_order_status) VALUES (2, 7, 1);
+INSERT INTO orderslist (ol_order_id, ol_employee_id, ol_order_status) VALUES (3, 12, 1);
+INSERT INTO orderslist (ol_order_id, ol_employee_id, ol_order_status) VALUES (4, 11, 0);
 
 

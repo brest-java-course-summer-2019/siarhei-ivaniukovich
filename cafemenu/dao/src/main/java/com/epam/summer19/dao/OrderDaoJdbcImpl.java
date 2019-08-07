@@ -21,15 +21,18 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select o.order_id, o.order_name from order o order by 2";
+            "select order_id, order_item_id, order_item_count from order order by 1";
     private final static String ADD_ORDER =
-            "insert into order (order_id) values (:orderId)";
+            "insert into order (order_id, order_item_id, order_item_count) values (:orderId, :itemId, :itemCount)";
     private final static String DELETE_ORDER =
             "delete from order where order_id = :orderId";
     private final static String UPDATE_ORDER =
-            "update order set order_id = :orderId where order_id = :orderId";
+            "update order set order_id = :orderId, order_item_id = :itemId,"
+          + " order_item_count = :itemCount where order_id = :orderId";
     private static final String ORDER_ID = "orderId";
-    private static final String ORDER_ITEMS = "orderItems";
+    //private static final String ORDER_ITEM_ID = "orderItems";
+    //private static final String ORDER_ITEM_COUNT = "orderItems";
+
 
     public OrderDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -37,6 +40,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Order add(Order order) {
+
+        // ADD THERE MAP INTEGRATION !!!!
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(ORDER_ID, order.getOrderId());
 

@@ -16,10 +16,10 @@ CREATE TABLE order (
 
 DROP TABLE IF EXISTS orderslist;
 CREATE TABLE orderslist (
-  order_id INT NOT NULL AUTO_INCREMENT,
-  employee_id INT NOT NULL,
-  order_status INT NOT NULL,
-  PRIMARY KEY (order_id)
-  FOREIGN KEY (order_id) REFERENCES order(order_id)
+  ol_order_id INT NOT NULL AUTO_INCREMENT,
+  ol_employee_id INT NOT NULL,
+  ol_order_status INT NOT NULL,
+  PRIMARY KEY (ol_order_id)
+  FOREIGN KEY (ol_order_id) REFERENCES order(order_id)
 );
 
