@@ -23,19 +23,19 @@ public class OrdersListDaoJdbcImpl implements OrdersListDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select ol_order_id, ol_employee_id, ol_order_status from orderslist order by 1";
+            "select ol_order_id, ol_employee_id, ol_order_status from orderslist_table order by 1";
     private final static String ADD_ORDER =
-            "insert into orderslist (ol_order_id, ol_employee_id, ol_order_status) "
+            "insert into orderslist_table (ol_order_id, ol_employee_id, ol_order_status) "
           + "values (:orderId, :employeeId, :orderStatus)";
     private final static String DELETE_ORDER =
-            "delete from orderslist where ol_order_id = :orderId";
+            "delete from orderslist_table where ol_order_id = :orderId";
     private final static String UPDATE_ORDER =
-            "update orderslist set ol_order_id = :orderId, ol_employee_id = :employeeId, "
+            "update orderslist_table set ol_order_id = :orderId, ol_employee_id = :employeeId, "
           + "ol_order_status = :orderStatus where ol_order_id = :orderId";
     private final static String FIND_BY_ORDER_ID =
-            "select ol_order_id, ol_employee_id, ol_order_status from orderslist where ol_order_id = :orderId";
+            "select ol_order_id, ol_employee_id, ol_order_status from orderslist_table where ol_order_id = :orderId";
     private final static String FIND_BY_EMPLOYEE_ID =
-            "select ol_order_id, ol_employee_id, ol_order_status from orderslist where ol_employee_id = :employeeId";
+            "select ol_order_id, ol_employee_id, ol_order_status from orderslist_table where ol_employee_id = :employeeId";
     private static final String ORDER_ID = "orderId";
     private static final String EMPLOYEE_ID = "employeeId";
     private static final String ORDER_STATUS = "orderStatus";

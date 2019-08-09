@@ -23,18 +23,17 @@ public class ItemDaoJdbcImpl implements ItemDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select item_id, item_name, item_price from item order by 1";
+            "select item_id, item_name, item_price from item_table order by 1";
     private final static String ADD_ITEM =
-            "insert into item (item_id, item_name, item_price) values"
+            "insert into item_table (item_id, item_name, item_price) values"
           + " (:itemId, :itemName, :itemPrice)";
     private final static String DELETE_ITEM =
-            "delete from item where item_id = :itemId";
+            "delete from item_table where item_id = :itemId";
     private final static String UPDATE_ITEM =
-            "update item set item_id = :itemId, item_name = :itemName,"
+            "update item_table set item_id = :itemId, item_name = :itemName,"
           + " item_price = :itemPrice where item_id = :itemId";
-    // FIND BY ITEM ID REALIZE!!!
     private final static String FIND_BY_ITEM_ID =
-            "select item_id, item_name, item_price from item where item_id = :itemId";
+            "select item_id, item_name, item_price from item_table where item_id = :itemId";
     private final static String ITEM_ID = "itemId";
     private final static String ITEM_NAME = "itemName";
     private final static String ITEM_PRICE = "itemPrice";

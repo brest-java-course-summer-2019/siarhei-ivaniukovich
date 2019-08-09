@@ -1,11 +1,13 @@
 package com.epam.summer19.dao;
 
-import com.epam.summer19.model.Item;
 import com.epam.summer19.model.Order;
+import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
@@ -21,17 +23,19 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private final static String SELECT_ALL =
-            "select order_id, order_item_id, order_item_count from order order by 1";
+            "select order_id, order_item_id, order_item_count from order_table order by 1";
     private final static String ADD_ORDER =
-            "insert into order (order_id, order_item_id, order_item_count) values (:orderId, :itemId, :itemCount)";
+            "insert into order_table (order_id, order_item_id, order_item_count) values (:orderId, :itemId, :itemCount)";
     private final static String DELETE_ORDER =
-            "delete from order where order_id = :orderId";
+            "delete from order_table where order_id = :orderId";
     private final static String UPDATE_ORDER =
-            "update order set order_id = :orderId, order_item_id = :itemId,"
+            "update order_table set order_id = :orderId, order_item_id = :itemId,"
           + " order_item_count = :itemCount where order_id = :orderId";
+    private final static String FIND_BY_ORDER_ID =
+            "select order_id, order_item_id, order_item_count from order_table where order_id = :orderId";
     private static final String ORDER_ID = "orderId";
-    //private static final String ORDER_ITEM_ID = "orderItems";
-    //private static final String ORDER_ITEM_COUNT = "orderItems";
+    private static final String ORDER_ITEM_ID = "itemId";
+    private static final String ORDER_ITEM_COUNT = "itemCount";
 
 
     public OrderDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -44,6 +48,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
         // ADD THERE MAP INTEGRATION !!!!
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(ORDER_ID, order.getOrderId());
+        //parameters.addValue(ORDER_ITEM_ID, order.getItemId());
+        //parameters.addValue(ORDER_ITEM_COUNT, order.getItemCount());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(ADD_ORDER, parameters, generatedKeyHolder);
@@ -76,6 +82,14 @@ public class OrderDaoJdbcImpl implements OrderDao {
         List<Order> order =
                 namedParameterJdbcTemplate.query(SELECT_ALL, new OrderDaoJdbcImpl.OrderRowMapper());
         return order;
+    }
+
+    @Override
+    public Optional<Order> findOrderById(Integer orderId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource(ORDER_ID, orderId);
+        List<Order> results = namedParameterJdbcTemplate.query(FIND_BY_ORDER_ID, namedParameters,
+                BeanPropertyRowMapper.newInstance(Order.class));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
     private class OrderRowMapper implements RowMapper<Order> {
