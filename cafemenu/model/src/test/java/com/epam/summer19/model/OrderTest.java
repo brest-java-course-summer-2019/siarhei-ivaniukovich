@@ -25,9 +25,14 @@ public class OrderTest {
     }
 
     @Test
-    public void getOrderItems() {
-        order.setOrderItems(orderItems);
-        Assert.assertTrue(order.getOrderItems().equals(orderItems));
+    public void getOrderEmployeeId() {
+        order.setOrderEmployeeId(2);
+        Assert.assertTrue(order.getOrderEmployeeId().equals(2));
     }
 
+    @Test
+    public void getOrderStatus() {
+        order.setOrderStatus(1);
+        Assert.assertTrue(order.getOrderStatus().equals(1));
+    }
 }

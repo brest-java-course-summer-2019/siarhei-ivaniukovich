@@ -1,6 +1,5 @@
 package com.epam.summer19.service;
 
-import com.epam.summer19.dao.OrdersListDao;
 import com.epam.summer19.model.OrdersList;
 import java.util.List;
 import org.slf4j.Logger;

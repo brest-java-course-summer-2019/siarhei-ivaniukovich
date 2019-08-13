@@ -1,7 +1,6 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Item;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class ItemDaoJdbcImplTest {
     ItemDao itemDao;
 
     @Test
-    void add() {
+    public void add() {
         Item testItem = new Item();
         testItem.setItemId(1);
         testItem.setItemName("Name");
@@ -38,7 +37,7 @@ public class ItemDaoJdbcImplTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         Item testItem = new Item();
         testItem.setItemId(1);
         testItem.setItemName("Name");
@@ -55,7 +54,7 @@ public class ItemDaoJdbcImplTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         Item testItem = new Item();
         testItem.setItemId(1);
         testItem.setItemName("Name");
@@ -68,15 +67,15 @@ public class ItemDaoJdbcImplTest {
     }
 
     @Test
-    void findAll() {
+    public void findAll() {
         List<Item> items = itemDao.findAll();
         assertNotNull(items);
         assertTrue(items.size() > 0);
     }
 
     @Test
-    void findItemById(Integer itemId) {
-        itemId = 1;
+    public void findItemById() {
+        Integer itemId = 1;
         Item testItem = new Item();
         testItem.setItemId(itemId);
         testItem.setItemName("Name");

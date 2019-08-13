@@ -1,8 +1,5 @@
 package com.epam.summer19.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Order {
 
     /**
@@ -11,39 +8,40 @@ public class Order {
     private Integer orderId;
 
     /**
-     * orderItems - MAP of items (item ID, count of this item)
+     * order maked Employee id
      */
-    private Map<Integer, Integer> orderItems = new HashMap<Integer, Integer>();
+    private Integer orderEmployeeId;
+
+    /**
+     *  order status param
+     */
+    private Integer orderStatus;
 
     /**
      * Get Order ID
      * @return
      */
-    public Integer getOrderId() {
-        return orderId;
-    }
+    public Integer getOrderId() { return orderId; }
 
     /**
      * Set Order ID
      * @param orderId
      */
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrderId(Integer orderId) { this.orderId = orderId; }
+
+    public Integer getOrderEmployeeId() {
+        return orderEmployeeId;
     }
 
-    /**
-     * Get list of items from order
-     * @return
-     */
-    public Map<Integer, Integer> getOrderItems() {
-        return orderItems;
+    public void setOrderEmployeeId(Integer orderEmployeeId) {
+        this.orderEmployeeId = orderEmployeeId;
     }
 
-    /**
-     * Set list of items from order MAP<itemId,itemCount>
-     * @param orderItems
-     */
-    public void setOrderItems(Map<Integer, Integer> orderItems) {
-        this.orderItems = orderItems;
+    public Integer getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(Integer orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }
