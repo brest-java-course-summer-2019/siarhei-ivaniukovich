@@ -42,10 +42,14 @@ public class ItemDaoJdbcImpl implements ItemDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
+    private boolean successfullyUpdated(int numRowsUpdated) {
+        return numRowsUpdated > 0;
+    }
+
+
     @Override
     public Item add(Item item) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue(ITEM_ID, item.getItemId());
         parameters.addValue(ITEM_NAME, item.getItemName());
         parameters.addValue(ITEM_PRICE, item.getItemPrice());
 
@@ -60,10 +64,6 @@ public class ItemDaoJdbcImpl implements ItemDao {
         Optional.of(namedParameterJdbcTemplate.update(UPDATE_ITEM, new BeanPropertySqlParameterSource(item)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to update item in DB"));
-    }
-
-    private boolean successfullyUpdated(int numRowsUpdated) {
-        return numRowsUpdated > 0;
     }
 
     @Override
@@ -89,15 +89,5 @@ public class ItemDaoJdbcImpl implements ItemDao {
                 BeanPropertyRowMapper.newInstance(Item.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
-
-    /**private class ItemRowMapper implements RowMapper<Item> {
-        @Override
-        public Item mapRow(ResultSet resultSet, int i) throws SQLException {
-            Item item = new Item();
-            item.setItemId(resultSet.getInt("item_id"));
-            item.setItemName(resultSet.getString("item_name"));
-            return item;
-        }
-    }**/
 
 }

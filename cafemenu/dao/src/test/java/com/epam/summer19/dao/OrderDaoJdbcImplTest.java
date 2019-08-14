@@ -24,10 +24,8 @@ public class OrderDaoJdbcImplTest {
 
     @Test
     public void add() {
-        // REWRITE TEST WHEN MAP INTEGRATION DONE!!!
         Order testOrder = new Order();
         testOrder.setOrderId(1);
-        // MAP!!!
         Order newOrder = orderDao.add(testOrder);
         assertEquals(new Integer(1),newOrder.getOrderId());
     }
@@ -39,7 +37,6 @@ public class OrderDaoJdbcImplTest {
         Order newOrder = orderDao.add(testOrder);
         newOrder.setOrderId(2);
         orderDao.update(newOrder);
-        // MAP!!!
         Order updatedOrder = orderDao.findOrderById(newOrder.getOrderId()).get();
         assertTrue(newOrder.getOrderId().equals(updatedOrder.getOrderId()));
     }

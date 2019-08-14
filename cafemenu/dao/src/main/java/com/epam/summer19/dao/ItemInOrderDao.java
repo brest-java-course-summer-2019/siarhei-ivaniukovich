@@ -21,7 +21,7 @@ public interface ItemInOrderDao {
 
     /**
      * Delete ItemInOrder
-     * @param itemInOrderId
+     * @param iioOrderId, iioItemId
      */
     void delete(Integer iioOrderId, Integer iioItemId);
 
@@ -33,14 +33,14 @@ public interface ItemInOrderDao {
 
     /**
      * Finditem in order by orderId
-     * @param orderId
+     * @param iioOrderId
      * @return
      */
     Optional<ItemInOrder> findIioByOrderId(Integer iioOrderId);
 
     /**
      * Finditem in order by orderId
-     * @param orderId
+     * @param iioOrderId, iioItemId
      * @return
      */
     Optional<ItemInOrder> findIioByOrderItemId(Integer iioOrderId, Integer iioItemId);

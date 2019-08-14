@@ -9,14 +9,18 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:mem:test_db;MODE=MYSQL;DB_CLOSE_DELAY=-1"/>
-        <property name="username" value="user"/>
+        <property name="url" value="jdbc:h2:tcp://localhost/~/test"/>
+        <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>
 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
     <jdbc:initialize-database>
-        <jdbc:script location="create-tables.sql"/>
-        <jdbc:script location="data-script.sql"/>
+        <jdbc:script location="classpath*:create-tables.sql"/>
+        <jdbc:script location="classpath*:data-script.sql"/>
     </jdbc:initialize-database>
 
 </beans>
