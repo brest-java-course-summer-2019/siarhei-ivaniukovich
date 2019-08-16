@@ -36,7 +36,7 @@ public interface ItemInOrderDao {
      * @param iioOrderId
      * @return
      */
-    Optional<ItemInOrder> findIioByOrderId(Integer iioOrderId);
+    List<ItemInOrder> findIioByOrderId(Integer iioOrderId);
 
     /**
      * Finditem in order by orderId

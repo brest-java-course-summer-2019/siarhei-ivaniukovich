@@ -18,7 +18,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     private final static String SELECT_ALL =
             "select iio_order_id, iio_item_id, iio_item_name, iio_item_price, "
-          + "iio_item_count from item_in_order order by 1 2";
+          + "iio_item_count from item_in_order order by 1, 2";
     private final static String ADD_ITEM_IN_ORDER =
             "insert into item_in_order (iio_order_id, iio_item_id, iio_item_name, "
           + "iio_item_price, iio_item_count) values (:iioOrderId, :iioItemId, "
@@ -93,11 +93,11 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
     }
 
     @Override
-    public Optional<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
+    public List<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(IIO_ORDER_ID, iioOrderId);
         List<ItemInOrder> results = namedParameterJdbcTemplate.query(FIND_IIO_BY_ORDER_ID, namedParameters,
                 BeanPropertyRowMapper.newInstance(ItemInOrder.class));
-        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
+        return results;
     }
 
     @Override

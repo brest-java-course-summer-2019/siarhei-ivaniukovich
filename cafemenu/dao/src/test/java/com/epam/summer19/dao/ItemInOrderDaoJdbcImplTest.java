@@ -1,9 +1,13 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.ItemInOrder;
-import com.epam.summer19.model.Order;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,6 +15,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
+@Transactional
+@Rollback
 public class ItemInOrderDaoJdbcImplTest {
 
     private static final Integer IIO_ORDER_ID = 1;
@@ -93,13 +101,9 @@ public class ItemInOrderDaoJdbcImplTest {
         testIio.setIioItemPrice(IIO_ITEM_PRICE);
         testIio.setIioItemCount(IIO_ITEM_COUNT);
         testIio = iioDao.add(testIio);
-        ItemInOrder findIio = iioDao.findIioByOrderId(iioOrderId).get();
-        assertNotNull(findIio);
-        assertEquals(IIO_ORDER_ID, findIio.getIioOrderId());
-        assertEquals(IIO_ITEM_ID, findIio.getIioItemId());
-        assertEquals(IIO_ITEM_NAME, findIio.getIioItemName());
-        assertEquals(IIO_ITEM_PRICE, findIio.getIioItemPrice());
-        assertEquals(IIO_ITEM_COUNT, findIio.getIioItemCount());
+        List<ItemInOrder> findIios = iioDao.findIioByOrderId(iioOrderId);
+        assertNotNull(findIios);;
+        assertTrue(findIios.size() > 0);
     }
 
     @Test
