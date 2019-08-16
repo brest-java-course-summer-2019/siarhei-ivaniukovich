@@ -2,6 +2,6 @@ language: java
 dist: trusty
 jdk:
   - oraclejdk8
-before_script: cd cafemenu/model
+before_script: cd cafemenu
 script:
   - mvn clean test coveralls:report
