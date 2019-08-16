@@ -25,12 +25,12 @@ public class ItemDaoJdbcImpl implements ItemDao {
     private final static String SELECT_ALL =
             "select item_id, item_name, item_price from item_table order by 1";
     private final static String ADD_ITEM =
-            "insert into item_table (item_id, item_name, item_price) values"
+            "insert into item_table (item_name, item_price) values"
           + " (:itemId, :itemName, :itemPrice)";
     private final static String DELETE_ITEM =
             "delete from item_table where item_id = :itemId";
     private final static String UPDATE_ITEM =
-            "update item_table set item_id = :itemId, item_name = :itemName,"
+            "update item_table set item_name = :itemName,"
           + " item_price = :itemPrice where item_id = :itemId";
     private final static String FIND_BY_ITEM_ID =
             "select item_id, item_name, item_price from item_table where item_id = :itemId";

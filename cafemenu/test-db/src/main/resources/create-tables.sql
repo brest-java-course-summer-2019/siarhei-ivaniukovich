@@ -21,6 +21,6 @@ CREATE TABLE item_in_order (
   iio_item_name VARCHAR(255) NOT NULL,
   iio_item_price DECIMAL NOT NULL,
   iio_item_count INT NOT NULL,
-  PRIMARY KEY (iio_item_id, iio_order_id),
+  PRIMARY KEY (iio_order_id, iio_item_id),
   FOREIGN KEY (iio_order_id) REFERENCES order_table(order_id)
 );

@@ -25,12 +25,12 @@ public class OrderDaoJdbcImpl implements OrderDao {
     private final static String SELECT_ALL =
             "select order_id, order_employee_id, order_status from order_table order by 1";
     private final static String ADD_ORDER =
-            "insert into order_table (order_id, order_employee_id, order_status) values"
+            "insert into order_table (order_employee_id, order_status) values"
           + " (:orderId, :orderEmployeeId, :orderStatus)";
     private final static String DELETE_ORDER =
             "delete from order_table where order_id = :orderId";
     private final static String UPDATE_ORDER =
-            "update order_table set order_id = :orderId, order_employee_id = :orderEmployeeId,"
+            "update order_table set order_employee_id = :orderEmployeeId,"
           + " order_status = :orderStatus where order_id = :orderId";
     private final static String FIND_ORDER_BY_ID =
             "select order_id, order_employee_id, order_status from order_table "

@@ -16,7 +16,7 @@ public class ItemInOrderDaoJdbcImplTest {
     private static final Integer IIO_ORDER_ID = 1;
     private static final Integer IIO_ITEM_ID = 2;
     private static final String IIO_ITEM_NAME = "Wrap";
-    private static final BigDecimal IIO_ITEM_PRICE = 3.0;
+    private static final BigDecimal IIO_ITEM_PRICE = new BigDecimal(3.0);
     private static final Integer IIO_ITEM_COUNT = 1;
 
     @Autowired
@@ -35,7 +35,7 @@ public class ItemInOrderDaoJdbcImplTest {
         assertEquals(IIO_ITEM_ID,newIio.getIioItemId());
         assertEquals(IIO_ITEM_NAME,newIio.getIioItemName());
         assertEquals(IIO_ITEM_PRICE,newIio.getIioItemPrice());
-        assertEquals(IIO_ITEM_COUNT,newIio.setIioItemCount(););
+        assertEquals(IIO_ITEM_COUNT,newIio.getIioItemCount());
     }
 
     @Test

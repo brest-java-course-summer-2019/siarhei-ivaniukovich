@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ItemDaoJdbcImplTest {
 
     private static final String WRAP = "Wrap";
-    private static final BigDecimal PRICE = new BigDecimal('5.0');
+    private static final BigDecimal PRICE = new BigDecimal(5.0);
     //private static final String PRICE = "Burger";
 
     @Autowired
@@ -46,7 +46,7 @@ public class ItemDaoJdbcImplTest {
         testItem.setItemPrice(PRICE);
         testItem = itemDao.add(testItem);
         testItem.setItemName("Frie");
-        testItem.setItemPrice(new BigDecimal('6.5'));
+        testItem.setItemPrice(new BigDecimal(6.5));
         itemDao.update(testItem);
         Item updatedItem = itemDao.findItemById(testItem.getItemId()).get();
         assertTrue(testItem.getItemId().equals(updatedItem.getItemId()));
@@ -78,6 +78,6 @@ public class ItemDaoJdbcImplTest {
         Item testItem = itemDao.findItemById(1).get();
         assertNotNull(testItem);
         assertTrue(testItem.getItemId().equals(1));
-        assertEquals(WRAP,testItem.getItemName());
+        assertEquals("Burger",testItem.getItemName());
     }
 }
