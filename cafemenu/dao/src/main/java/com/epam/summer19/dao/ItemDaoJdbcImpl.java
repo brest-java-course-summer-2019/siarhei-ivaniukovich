@@ -26,7 +26,7 @@ public class ItemDaoJdbcImpl implements ItemDao {
             "select item_id, item_name, item_price from item_table order by 1";
     private final static String ADD_ITEM =
             "insert into item_table (item_name, item_price) values"
-          + " (:itemId, :itemName, :itemPrice)";
+          + " (:itemName, :itemPrice)";
     private final static String DELETE_ITEM =
             "delete from item_table where item_id = :itemId";
     private final static String UPDATE_ITEM =
