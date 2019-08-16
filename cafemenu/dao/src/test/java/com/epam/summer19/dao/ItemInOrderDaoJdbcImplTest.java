@@ -102,7 +102,7 @@ public class ItemInOrderDaoJdbcImplTest {
         testIio.setIioItemCount(IIO_ITEM_COUNT);
         testIio = iioDao.add(testIio);
         List<ItemInOrder> findIios = iioDao.findIioByOrderId(iioOrderId);
-        assertNotNull(findIios);;
+        assertNotNull(findIios);
         assertTrue(findIios.size() > 0);
     }
 
