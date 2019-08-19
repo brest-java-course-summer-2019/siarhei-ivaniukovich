@@ -77,7 +77,7 @@ public class OrderServiceImplTest {
         assertEquals(expectedResult, result);
     }
 
-    @Test
+    /*@Test
     public void testFindOrderById() {
         // Setup
         final Integer orderId = 1;
@@ -89,5 +89,5 @@ public class OrderServiceImplTest {
 
         // Verify the results
         assertEquals(expectedResult, result);
-    }
+    }*/
 }

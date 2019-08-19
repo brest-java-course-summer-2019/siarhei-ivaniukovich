@@ -77,7 +77,7 @@ public class ItemServiceImplTest {
         assertEquals(expectedResult, result);
     }
 
-    @Test
+    /*@Test
     public void testFindItemById() {
         // Setup
         final Integer itemId = 0;
@@ -89,5 +89,5 @@ public class ItemServiceImplTest {
 
         // Verify the results
         assertEquals(expectedResult, result);
-    }
+    }*/
 }
