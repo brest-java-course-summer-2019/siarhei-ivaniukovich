@@ -3,7 +3,6 @@ package com.epam.summer19.service;
 import com.epam.summer19.dao.OrderDao;
 import com.epam.summer19.model.Order;
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

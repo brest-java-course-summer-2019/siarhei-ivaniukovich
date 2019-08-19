@@ -13,19 +13,19 @@ MAIN SUMMER19:
  Cafemenu - application for cafe employees to control of making orders (adding/editing items), send them to job queue, check and control process, and closing after pay confirmed.
 
 ## Prerequisites
-- jdk11  
-- maven 3+  
+- jdk11
+- maven 3+
 
 ## Installing  
-`mvn clean install`  
+`mvn clean install`
   
-## Running the tests  
+## Running the tests
 `mvn clean test`
 
 ## Reports
 `mvn site`
 
-## Travis CI build integration:
+## Travis CI build integration
 [https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich)
   
 ---

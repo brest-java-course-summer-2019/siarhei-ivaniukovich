@@ -2,7 +2,6 @@ package com.epam.summer19.service;
 
 import com.epam.summer19.model.Item;
 import java.util.List;
-import java.util.Optional;
 
 public interface ItemService {
 
