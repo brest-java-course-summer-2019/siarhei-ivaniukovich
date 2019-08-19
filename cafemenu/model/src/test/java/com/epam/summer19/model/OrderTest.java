@@ -3,20 +3,12 @@ package com.epam.summer19.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-
 /**
  * model test for Cafe Menu.
  */
 public class OrderTest {
 
-    Order order = new Order();
-    Map<Integer, Integer> orderItems = new HashMap<>();
-    public OrderTest() {
-        orderItems.put(1,2);
-    }
+    private Order order = new Order();
 
     @Test
     public void getOrderId() {

@@ -24,7 +24,6 @@ public class OrderDaoJdbcImplTest {
     private static final Integer EMPLOYEE_ID = 21;
     private static final Integer ORDER_STATUS = 1;
 
-
     @Autowired
     OrderDao orderDao;
 
