@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-
-    <bean id="orderslistDao" class="com.epam.summer19.dao.OrdersListDaoJdbcImpl">
+    <bean id="ItemDao" class="com.epam.summer19.dao.ItemDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
-
-    <bean id="orderslistService" class="com.epam.summer19.service.OrdersListServiceImpl">
-        <constructor-arg ref="orderslistDao"/>
+    <bean id="ItemService" class="com.epam.summer19.service.ItemServiceImpl">
+        <constructor-arg ref="ItemDao"/>
     </bean>
 
-    <bean id="orderslistDao" class="com.epam.summer19.dao.OrderDaoJdbcImpl">
+    <bean id="OrderDao" class="com.epam.summer19.dao.OrderDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
-
-    <bean id="orderslistService" class="com.epam.summer19.service.OrderServiceImpl">
-        <constructor-arg ref="orderDao"/>
+    <bean id="OrderService" class="com.epam.summer19.service.OrderServiceImpl">
+        <constructor-arg ref="OrderDao"/>
     </bean>
 
+    <bean id="ItemInOrderDao" class="com.epam.summer19.dao.ItemInOrderDaoJdbcImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
+    <bean id="ItemInOrderService" class="com.epam.summer19.service.ItemInOrderServiceImpl">
+        <constructor-arg ref="ItemInOrderDao"/>
+    </bean>
 
 </beans>

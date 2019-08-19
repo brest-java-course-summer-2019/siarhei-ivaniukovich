@@ -2,24 +2,39 @@ package com.epam.summer19.service;
 
 import com.epam.summer19.model.Item;
 import java.util.List;
+import java.util.Optional;
 
 public interface ItemService {
 
     /**
-     * Find All Items
+     * Add item
+     * @param item
      * @return
      */
-    List<Item> findAll();
+    void add(Item... items);
 
     /**
-     * Update Items
+     * Update item
      * @param item
      */
     void update(Item item);
 
     /**
-     * Delete Item
+     * Delete item by id
      * @param itemId
      */
     void delete(Integer itemId);
+
+    /**
+     * List all items
+     * @return
+     */
+    List<Item> findAll();
+
+    /**
+     * Find item by itemId
+     * @param itemId
+     * @return
+     */
+    Item findItemById(Integer itemId);
 }

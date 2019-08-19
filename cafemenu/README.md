@@ -5,7 +5,8 @@ DEVREP:
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sergeblr/devrep/blob/master/cafemenu/README.md)
 
 MAIN SUMMER19:
-[![Build Status](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich.svg?branch=master)](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich) [![Coverage Status](https://coveralls.io/repos/github/brest-java-course-summer-2019/siarhei-ivaniukovich/badge.svg?branch=master)](https://coveralls.io/github/brest-java-course-summer-2019/siarhei-ivaniukovich?branch=master)
+[![Build Status](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich.svg?branch=master)](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich)
+[![Coverage Status](https://coveralls.io/repos/github/brest-java-course-summer-2019/siarhei-ivaniukovich/badge.svg?branch=master)](https://coveralls.io/github/brest-java-course-summer-2019/siarhei-ivaniukovich?branch=master)
 
 
 
@@ -16,12 +17,17 @@ MAIN SUMMER19:
 - jdk11  
 - maven 3+  
 
-  
 ## Installing  
 `mvn clean install`  
   
 ## Running the tests  
 `mvn clean test`
+
+## Reports
+`mvn site`
+
+# Travis CI build integration:
+[https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich](https://travis-ci.org/brest-java-course-summer-2019/siarhei-ivaniukovich)
   
 ---
 > documentation - Documentation, HTML, templates
