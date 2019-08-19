@@ -1,7 +1,6 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Item;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,44 +21,44 @@ import static org.junit.jupiter.api.Assertions.*;
 @Rollback
 public class ItemDaoJdbcImplTest {
 
+    private static final String WRAP = "Wrap";
+    private static final BigDecimal PRICE = new BigDecimal(5.0);
+    //private static final String PRICE = "Burger";
+
     @Autowired
     ItemDao itemDao;
 
     @Test
-    void add() {
+    public void add() {
         Item testItem = new Item();
-        testItem.setItemId(1);
-        testItem.setItemName("Name");
-        testItem.setItemPrice(new BigDecimal(5.0));
+        testItem.setItemName(WRAP);
+        testItem.setItemPrice(PRICE);
         Item newItem = itemDao.add(testItem);
-        assertEquals(new Integer(1),newItem.getItemId());
-        assertEquals("Name",newItem.getItemName());
-        assertEquals(new BigDecimal(5.0),newItem.getItemPrice());
+        assertNotNull(newItem.getItemId());
+        assertEquals(WRAP,newItem.getItemName());
+        assertEquals(PRICE,newItem.getItemPrice());
     }
 
     @Test
-    void update() {
+    public void update() {
         Item testItem = new Item();
-        testItem.setItemId(1);
-        testItem.setItemName("Name");
-        testItem.setItemPrice(new BigDecimal(5.0));
-        Item newItem = itemDao.add(testItem);
-        newItem.setItemId(2);
-        newItem.setItemName("Name2");
-        newItem.setItemPrice(new BigDecimal(6.5));
-        itemDao.update(newItem);
-        Item updatedItem = itemDao.findItemById(newItem.getItemId()).get();
-        assertTrue(newItem.getItemId().equals(updatedItem.getItemId()));
-        assertTrue(newItem.getItemName().equals(updatedItem.getItemName()));
-        assertTrue(newItem.getItemPrice().equals(updatedItem.getItemPrice()));
+        testItem.setItemName(WRAP);
+        testItem.setItemPrice(PRICE);
+        testItem = itemDao.add(testItem);
+        testItem.setItemName("Frie");
+        testItem.setItemPrice(new BigDecimal(6.5));
+        itemDao.update(testItem);
+        Item updatedItem = itemDao.findItemById(testItem.getItemId()).get();
+        assertTrue(testItem.getItemId().equals(updatedItem.getItemId()));
+        assertTrue(testItem.getItemName().equals(updatedItem.getItemName()));
+        assertTrue(testItem.getItemPrice().equals(updatedItem.getItemPrice()));
     }
 
     @Test
-    void delete() {
+    public void delete() {
         Item testItem = new Item();
-        testItem.setItemId(1);
-        testItem.setItemName("Name");
-        testItem.setItemPrice(new BigDecimal(5.0));
+        testItem.setItemName(WRAP);
+        testItem.setItemPrice(PRICE);
         testItem = itemDao.add(testItem);
         List<Item> items = itemDao.findAll();
         int sizeBefore = items.size();
@@ -68,25 +67,17 @@ public class ItemDaoJdbcImplTest {
     }
 
     @Test
-    void findAll() {
+    public void findAll() {
         List<Item> items = itemDao.findAll();
         assertNotNull(items);
         assertTrue(items.size() > 0);
     }
 
     @Test
-    void findItemById(Integer itemId) {
-        itemId = 1;
-        Item testItem = new Item();
-        testItem.setItemId(itemId);
-        testItem.setItemName("Name");
-        testItem.setItemPrice(new BigDecimal(5.0));
-        testItem = itemDao.add(testItem);
-        Item findItem = itemDao.findItemById(itemId).get();
-        assertNotNull(findItem);
-        assertTrue(findItem.getItemId().equals(itemId));
-        assertEquals(testItem.getItemId(), findItem.getItemId());
-        assertEquals(testItem.getItemName(), findItem.getItemName());
-        assertEquals(testItem.getItemPrice(), findItem.getItemPrice());
+    public void findItemById() {
+        Item testItem = itemDao.findItemById(1).get();
+        assertNotNull(testItem);
+        assertTrue(testItem.getItemId().equals(1));
+        assertEquals("Burger",testItem.getItemName());
     }
 }

@@ -1,6 +1,5 @@
 package com.epam.summer19.dao;
 
-import com.epam.summer19.model.Item;
 import com.epam.summer19.model.Order;
 import java.util.List;
 import java.util.Optional;
@@ -37,5 +36,5 @@ public interface OrderDao {
      * @param orderId
      * @return
      */
-    Optional<Item> findOrderById(Integer orderId);
+    Optional<Order> findOrderById(Integer orderId);
 }

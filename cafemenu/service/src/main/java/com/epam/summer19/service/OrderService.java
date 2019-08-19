@@ -7,20 +7,34 @@ import java.util.List;
 public interface OrderService {
 
     /**
-     * Find All Orders
+     * Create new order
+     * @param order
      * @return
      */
-    List<Order> findAll();
+    void add(Order... orders);
 
     /**
-     * Update OrdersList
+     * Update order
      * @param order
      */
     void update(Order order);
 
     /**
-     * Delete OrdersList
+     * Delete order
      * @param orderId
      */
     void delete(Integer orderId);
+
+    /**
+     * Get all orders
+     * @return
+     */
+    List<Order> findAll();
+
+    /**
+     * Find order by orderId
+     * @param orderId
+     * @return
+     */
+    Order findOrderById(Integer orderId);
 }
