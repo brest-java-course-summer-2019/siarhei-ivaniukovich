@@ -8,8 +8,8 @@
         </encoder>
     </appender>
 
-    <logger name="com.epam.summer19.service" level="DEBUG" additivity="false">
-        <appender-ref ref="STDOUT" />
+    <logger name="com.epam.summer19" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT" />q1
     </logger>
 
     <!-- By default, the level of the root level is set to DEBUG -->
