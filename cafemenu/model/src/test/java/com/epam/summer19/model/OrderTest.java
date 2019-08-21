@@ -3,6 +3,8 @@ package com.epam.summer19.model;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 /**
  * model test for Cafe Menu.
  */
@@ -20,6 +22,13 @@ public class OrderTest {
     public void getOrderEmployeeId() {
         order.setOrderEmployeeId(2);
         Assert.assertTrue(order.getOrderEmployeeId().equals(2));
+    }
+
+    @Test
+    public void getOrderTime() {
+        LocalDateTime time = LocalDateTime.now();
+        order.setOrderTime(time);
+        Assert.assertTrue(order.getOrderTime().equals(time));
     }
 
     @Test

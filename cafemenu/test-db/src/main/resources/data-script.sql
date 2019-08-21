@@ -4,10 +4,10 @@ INSERT INTO item_table (item_id, item_name, item_price) VALUES (3, 'French fried
 INSERT INTO item_table (item_id, item_name, item_price) VALUES (4, 'Coffee', 1.5);
 INSERT INTO item_table (item_id, item_name, item_price) VALUES (5, 'Tea', 1.0);
 
-INSERT INTO order_table (order_id, order_employee_id, order_status) VALUES (1, 21, 1);
-INSERT INTO order_table (order_id, order_employee_id, order_status) VALUES (2, 21, 1);
-INSERT INTO order_table (order_id, order_employee_id, order_status) VALUES (3, 15, 1);
-INSERT INTO order_table (order_id, order_employee_id, order_status) VALUES (4, 12, 1);
+INSERT INTO order_table (order_id, order_employee_id, order_time, order_status) VALUES (1, 21, 2019-08-15 9:05:05, 1);
+INSERT INTO order_table (order_id, order_employee_id, order_time, order_status) VALUES (2, 21, 2019-08-15 9:08:24, 1);
+INSERT INTO order_table (order_id, order_employee_id, order_time, order_status) VALUES (3, 15, 2019-08-15 10:12:22, 1);
+INSERT INTO order_table (order_id, order_employee_id, order_time, order_status) VALUES (4, 12, 2019-08-16 11:57:42, 1);
 
 INSERT INTO item_in_order (iio_order_id, iio_item_id, iio_item_name, iio_item_price, iio_item_count) VALUES (1, 1, 'Burger', 5.0, 1);
 INSERT INTO item_in_order (iio_order_id, iio_item_id, iio_item_name, iio_item_price, iio_item_count) VALUES (1, 4, 'Coffee', 1.5, 1);
