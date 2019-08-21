@@ -1,7 +1,6 @@
 package com.epam.summer19.model;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class Order {
 

@@ -1,4 +1,4 @@
 /**
- * Cafe Menu package - DAO classes
+ * Cafe Menu package - WEB-APP classes
  */
-package com.epam.summer19.dao;
+package com.epam.summer19.webapp;

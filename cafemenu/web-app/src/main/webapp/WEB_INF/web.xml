@@ -1,5 +1,4 @@
 <web-app>
-
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -23,5 +22,4 @@
         <servlet-name>app</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
 </web-app>

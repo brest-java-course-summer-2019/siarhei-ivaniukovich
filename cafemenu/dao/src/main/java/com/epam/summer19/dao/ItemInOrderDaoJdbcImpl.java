@@ -1,6 +1,7 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.ItemInOrder;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -16,28 +17,23 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private final static String SELECT_ALL =
-            "select iio_order_id, iio_item_id, iio_item_name, iio_item_price, "
-          + "iio_item_count from item_in_order order by 1, 2";
-    private final static String ADD_ITEM_IN_ORDER =
-            "insert into item_in_order (iio_order_id, iio_item_id, iio_item_name, "
-          + "iio_item_price, iio_item_count) values (:iioOrderId, :iioItemId, "
-          + ":iioItemName, :iioItemPrice, :iioItemCount)";
-    private final static String DELETE_ITEM_IN_ORDER =
-            "delete from item_in_order where iio_order_id = :iioOrderId AND "
-          + "iio_item_id = :iioItemId";
-    private final static String UPDATE_ITEM_IN_ORDER =
-            "update item_in_order set iio_order_id = :iioOrderId, iio_item_id = :iioItemId, "
-                    + "iio_item_name = :iioItemName, iio_item_price = :iioItemPrice, "
-                    + "iio_item_count = :iioItemCount where iio_order_id = :iioOrderId AND "
-                    + "iio_item_id = :iioItemId";
-    private final static String FIND_IIO_BY_ORDER_ID =
-            "select iio_order_id, iio_item_id, iio_item_name, iio_item_price, "
-          + "iio_item_count from item_in_order where iio_order_id = :iioOrderId";
-    private final static String FIND_IIO_BY_ORDER_ITEM_ID =
-            "select iio_order_id, iio_item_id, iio_item_name, iio_item_price, "
-          + "iio_item_count from item_in_order where iio_order_id = :iioOrderId AND "
-          + "iio_item_id = :iioItemId";
+    @Value("${iio.findAll}")
+    private String findAllSql;
+
+    @Value("${iio.add}")
+    private String addSql;
+
+    @Value("${iio.delete}")
+    private String deleteSql;
+
+    @Value("${iio.update}")
+    private String updateSql;
+
+    @Value("${iio.findByOrderId}")
+    private String findByOrderIdSql;
+
+    @Value("${iio.findByOrderItemId}")
+    private String findByOrderItemIdSql;
 
     private static final String IIO_ORDER_ID = "iioOrderId";
     private static final String IIO_ITEM_ID = "iioItemId";
@@ -62,15 +58,15 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
         parameters.addValue(IIO_ITEM_PRICE, iteminorder.getIioItemPrice());
         parameters.addValue(IIO_ITEM_COUNT, iteminorder.getIioItemCount());
 
-        namedParameterJdbcTemplate.update(ADD_ITEM_IN_ORDER, parameters);
+        namedParameterJdbcTemplate.update(addSql, parameters);
         return iteminorder;
     }
 
     @Override
     public void update(ItemInOrder iteminorder) {
-        Optional.of(namedParameterJdbcTemplate.update(UPDATE_ITEM_IN_ORDER, new BeanPropertySqlParameterSource(iteminorder)))
+        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(iteminorder)))
                 .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update itemINorder in DB"));
+                .orElseThrow(() -> new RuntimeException("Failed to update ItemInOrder in DB"));
     }
 
     @Override
@@ -78,7 +74,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(IIO_ORDER_ID, iioOrderId);
         mapSqlParameterSource.addValue(IIO_ITEM_ID, iioItemId);
-        Optional.of(namedParameterJdbcTemplate.update(DELETE_ITEM_IN_ORDER, mapSqlParameterSource))
+        Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to delete itemINorder from DB"));
 
@@ -87,7 +83,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
     @Override
     public List<ItemInOrder> findAll() {
         List<ItemInOrder> iteminorderlist =
-                namedParameterJdbcTemplate.query(SELECT_ALL, BeanPropertyRowMapper.newInstance(ItemInOrder.class));
+                namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(ItemInOrder.class));
         return iteminorderlist;
 
     }
@@ -95,7 +91,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
     @Override
     public List<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(IIO_ORDER_ID, iioOrderId);
-        List<ItemInOrder> results = namedParameterJdbcTemplate.query(FIND_IIO_BY_ORDER_ID, namedParameters,
+        List<ItemInOrder> results = namedParameterJdbcTemplate.query(findByOrderIdSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(ItemInOrder.class));
         return results;
     }
@@ -105,7 +101,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(IIO_ORDER_ID, iioOrderId);
         parameters.addValue(IIO_ITEM_ID, iioItemId);
-        List<ItemInOrder> results = namedParameterJdbcTemplate.query(FIND_IIO_BY_ORDER_ITEM_ID, parameters,
+        List<ItemInOrder> results = namedParameterJdbcTemplate.query(findByOrderItemIdSql, parameters,
                 BeanPropertyRowMapper.newInstance(ItemInOrder.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }

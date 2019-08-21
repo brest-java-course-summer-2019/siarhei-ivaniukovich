@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS order_table;
 CREATE TABLE order_table (
   order_id INT NOT NULL AUTO_INCREMENT,
   order_employee_id INT NOT NULL,
-  order_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  order_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   order_status INT NOT NULL,
   PRIMARY KEY (order_id)
 );
