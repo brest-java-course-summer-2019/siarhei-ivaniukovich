@@ -1,16 +1,24 @@
 package com.epam.summer19.service;
 
 import com.epam.summer19.model.Item;
+
 import java.util.List;
 
 public interface ItemService {
+
+    /**
+     * Add multiple items
+     * @param items
+     * @return
+     */
+    void add(Item... items);
 
     /**
      * Add item
      * @param item
      * @return
      */
-    void add(Item... items);
+    Item add(Item item);
 
     /**
      * Update item
