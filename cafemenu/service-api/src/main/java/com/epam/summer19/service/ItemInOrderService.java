@@ -8,7 +8,7 @@ public interface ItemInOrderService {
 
     /**
      * Create new ItemInOrder
-     * @param iteminorder
+     * @param iteminorders
      * @return
      */
     void add(ItemInOrder... iteminorders);

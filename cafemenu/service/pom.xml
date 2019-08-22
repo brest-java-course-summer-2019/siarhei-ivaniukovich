@@ -16,6 +16,10 @@
   <dependencies>
     <dependency>
       <groupId>com.epam.summer19</groupId>
+      <artifactId>service-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.epam.summer19</groupId>
       <artifactId>dao</artifactId>
     </dependency>
     <dependency>
