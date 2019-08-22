@@ -24,7 +24,7 @@ public class ItemInOrderDaoJdbcImplTest {
     private static final Integer IIO_ORDER_ID = 1;
     private static final Integer IIO_ITEM_ID = 2;
     private static final String IIO_ITEM_NAME = "Wrap";
-    private static final BigDecimal IIO_ITEM_PRICE = new BigDecimal(3.0);
+    private static final BigDecimal IIO_ITEM_PRICE = new BigDecimal("3.0");
     private static final Integer IIO_ITEM_COUNT = 1;
 
     @Autowired
@@ -58,7 +58,7 @@ public class ItemInOrderDaoJdbcImplTest {
         testIio.setIioOrderId(new Integer(2));
         testIio.setIioItemId(new Integer(3));
         testIio.setIioItemName("AnotherWrap");
-        testIio.setIioItemPrice(new BigDecimal(4.0));
+        testIio.setIioItemPrice(new BigDecimal("4.0"));
         testIio.setIioItemCount(new Integer(2));
         iioDao.update(testIio);
         ItemInOrder updatedIio = iioDao.findIioByOrderItemId(testIio.getIioOrderId(), testIio.getIioItemId()).get();

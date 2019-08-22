@@ -1,5 +1,7 @@
 package com.epam.summer19.model;
 
+import java.time.LocalDateTime;
+
 public class Order {
 
     /**
@@ -11,6 +13,11 @@ public class Order {
      * order maked Employee id
      */
     private Integer orderEmployeeId;
+
+    /**
+     * Order Time
+     */
+    private LocalDateTime orderTime;
 
     /**
      *  order status param
@@ -36,6 +43,10 @@ public class Order {
     public void setOrderEmployeeId(Integer orderEmployeeId) {
         this.orderEmployeeId = orderEmployeeId;
     }
+
+    public LocalDateTime getOrderTime() { return orderTime; }
+
+    public void setOrderTime(LocalDateTime orderTime) { this.orderTime = orderTime; }
 
     public Integer getOrderStatus() {
         return orderStatus;

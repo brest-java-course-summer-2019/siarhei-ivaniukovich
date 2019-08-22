@@ -1,22 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <title>CafeMenu</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <title>CafeMenu - Items list</title>
 </head>
 <body>
 
 <header>
     <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
         <a class="navbar-brand">
-            <img src="img/cmlogo.png" height="26" width="32" class="d-inline-block">CafeMenu</a>
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
         </a>
         <div class="collapse navbar-collapse">
-            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'">Main</button>
-            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'">Orders</button>
-            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'">Items</butto
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'" th:href="@{/main}">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'" th:href="@{/orders}">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'" th:href="@{/items}">Items</button>
        </div>
     </nav>
     <nav id="headername" class="navbar bg-light text-dark">
@@ -24,11 +33,10 @@
     </nav>
 </header>
 
-
 <section id="items">
     <div class="container-fluid">
         <div>
-            <a href="items_add.html" class="btn btn-secondary">Add new item</a>
+            <a href="items_add.html"  th:href="@{/item_add}" class="btn btn-secondary">Add new item</a>
         </div>
         <div class="row">
             <div class="col">

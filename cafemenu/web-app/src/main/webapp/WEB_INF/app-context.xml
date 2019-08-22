@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xs">
+
+    <!-- Use spring servlet for all requests, including static resources -->
+    <mvc:default-servlet-handler/>
+
+    <!-- Use @MVC annotations -->
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <!-- Component scan for @Controller, @Service... annotations -->
+    <context:component-scan base-package="com.epam.summer19.*"/>
+    <context:property-placeholder location="classpath:application.properties"/>
+    <import resource="classpath*:test-db.xml"/>
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:application.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- CM BEANS NEXT: -->
+    <bean id="ItemService" class="com.epam.summer19.webapp.consumers.ItemRestConsumer">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.items}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+    <bean id="OrderService" class="com.epam.summer19.webapp.consumers.OrderRestConsumer">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.orders}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+    <bean id="ItemInOrderService" class="com.epam.summer19.webapp.consumers.ItemInOrderRestConsumer">
+        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.iios}"/>
+        <constructor-arg index="1" ref="restTemplate"/>
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+        <!--<property name="errorHandler" ref="customResponseErrorHandler"/>-->
+    </bean>
+
+    <!-- Thymeleaf Template Resolver -->
+    <bean id="templateResolver"
+          class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/templates/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML" />
+        <!-- Template cache is true by default. Set to false if you want             -->
+        <!-- templates to be automatically updated when modified.                    -->
+        <property name="cacheable" value="false" />
+    </bean>
+
+    <!-- Thymeleaf Template Engine (Spring5-specific version) -->
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring5.SpringTemplateEngine">
+        <property name="templateResolvers">
+            <set>
+                <ref bean="templateResolver" />
+            </set>
+        </property>
+    </bean>
+
+    <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
+    <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="characterEncoding" value="UTF-8" />
+    </bean>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+          p:basename="/WEB-INF/messages">
+    </bean>
+
+</beans>

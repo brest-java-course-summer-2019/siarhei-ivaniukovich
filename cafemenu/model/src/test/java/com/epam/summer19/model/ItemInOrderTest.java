@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 public class ItemInOrderTest {
-    ItemInOrder iteminorder = new ItemInOrder();
+    private ItemInOrder iteminorder = new ItemInOrder();
 
     @Test
     public void getIioOrderId() {
