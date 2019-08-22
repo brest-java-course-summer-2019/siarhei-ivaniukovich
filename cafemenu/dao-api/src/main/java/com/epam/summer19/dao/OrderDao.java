@@ -1,17 +1,18 @@
-package com.epam.summer19.service;
+package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Order;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface OrderService {
+public interface OrderDao {
 
     /**
      * Create new order
      * @param order
      * @return
      */
-    void add(Order... orders);
+    Order add(Order order);
 
     /**
      * Update order
@@ -36,5 +37,5 @@ public interface OrderService {
      * @param orderId
      * @return
      */
-    Order findOrderById(Integer orderId);
+    Optional<Order> findOrderById(Integer orderId);
 }

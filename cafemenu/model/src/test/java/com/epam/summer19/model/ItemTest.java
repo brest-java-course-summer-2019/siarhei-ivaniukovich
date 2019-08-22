@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  */
 public class ItemTest {
 
-    Item item = new Item();
+    private Item item = new Item();
 
     @Test
     public void getItemId() {

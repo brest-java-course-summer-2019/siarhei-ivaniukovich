@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,18 +20,21 @@ public class ItemDaoJdbcImpl implements ItemDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private final static String SELECT_ALL =
-            "select item_id, item_name, item_price from item_table order by 1";
-    private final static String ADD_ITEM =
-            "insert into item_table (item_name, item_price) values"
-          + " (:itemName, :itemPrice)";
-    private final static String DELETE_ITEM =
-            "delete from item_table where item_id = :itemId";
-    private final static String UPDATE_ITEM =
-            "update item_table set item_name = :itemName,"
-          + " item_price = :itemPrice where item_id = :itemId";
-    private final static String FIND_BY_ITEM_ID =
-            "select item_id, item_name, item_price from item_table where item_id = :itemId";
+    @Value("${item.findAll}")
+    private String findAllSql;
+
+    @Value("${item.add}")
+    private String addSql;
+
+    @Value("${item.delete}")
+    private String deleteSql;
+
+    @Value("${item.update}")
+    private String updateSql;
+
+    @Value("${item.findById}")
+    private String findByIdSql;
+
     private final static String ITEM_ID = "itemId";
     private final static String ITEM_NAME = "itemName";
     private final static String ITEM_PRICE = "itemPrice";
@@ -51,14 +55,14 @@ public class ItemDaoJdbcImpl implements ItemDao {
         parameters.addValue(ITEM_PRICE, item.getItemPrice());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(ADD_ITEM, parameters, generatedKeyHolder);
+        namedParameterJdbcTemplate.update(addSql, parameters, generatedKeyHolder);
         item.setItemId(generatedKeyHolder.getKey().intValue());
         return item;
     }
 
     @Override
     public void update(Item item) {
-        Optional.of(namedParameterJdbcTemplate.update(UPDATE_ITEM, new BeanPropertySqlParameterSource(item)))
+        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(item)))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to update item in DB"));
     }
@@ -67,7 +71,7 @@ public class ItemDaoJdbcImpl implements ItemDao {
     public void delete(Integer itemId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(ITEM_ID, itemId);
-        Optional.of(namedParameterJdbcTemplate.update(DELETE_ITEM, mapSqlParameterSource))
+        Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to delete item from DB"));
     }
@@ -75,14 +79,14 @@ public class ItemDaoJdbcImpl implements ItemDao {
     @Override
     public List<Item> findAll() {
         List<Item> items =
-                namedParameterJdbcTemplate.query(SELECT_ALL, BeanPropertyRowMapper.newInstance(Item.class));
+                namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(Item.class));
         return items;
     }
 
     @Override
     public Optional<Item> findItemById(Integer itemId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(ITEM_ID, itemId);
-        List<Item> results = namedParameterJdbcTemplate.query(FIND_BY_ITEM_ID, namedParameters,
+        List<Item> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Item.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }

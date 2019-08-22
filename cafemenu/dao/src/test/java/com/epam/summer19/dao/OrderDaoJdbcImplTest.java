@@ -23,7 +23,7 @@ public class OrderDaoJdbcImplTest {
 
     private static final Integer EMPLOYEE_ID = 21;
     private static final Integer ORDER_STATUS = 1;
-
+   // private static final LocalDateTime ORDER_TIME = LocalDateTime.parse("2019-08-21T09:22:14");
 
     @Autowired
     OrderDao orderDao;
@@ -36,7 +36,8 @@ public class OrderDaoJdbcImplTest {
         Order newOrder = orderDao.add(testOrder);
         assertNotNull(newOrder.getOrderId());
         assertEquals(new Integer(EMPLOYEE_ID),newOrder.getOrderEmployeeId());
-        assertEquals(new Integer(1),newOrder.getOrderStatus());
+        assertNotNull(newOrder.getOrderTime());
+        assertEquals(new Integer(ORDER_STATUS),newOrder.getOrderStatus());
     }
 
     @Test
@@ -51,6 +52,7 @@ public class OrderDaoJdbcImplTest {
         Order updatedOrder = orderDao.findOrderById(testOrder.getOrderId()).get();
         assertTrue(testOrder.getOrderId().equals(updatedOrder.getOrderId()));
         assertTrue(testOrder.getOrderEmployeeId().equals(updatedOrder.getOrderEmployeeId()));
+        assertTrue(testOrder.getOrderTime().equals(updatedOrder.getOrderTime()));
         assertTrue(testOrder.getOrderStatus().equals(updatedOrder.getOrderStatus()));
     }
 

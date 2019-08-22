@@ -12,7 +12,7 @@
 ## Installing  
 `mvn clean install`
   
-## Running the tests  
+## Running the tests
 `mvn clean test`
 
 ## Reports
@@ -23,3 +23,4 @@
   
 ---
 > documentation - Documentation, HTML, templates
+

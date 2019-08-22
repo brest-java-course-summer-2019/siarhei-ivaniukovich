@@ -28,14 +28,20 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order add(Order order) {
+        return orderdao.add(order);
+    }
+
+
+    @Override
     public void update(Order order) {
-        LOGGER.debug("update({})", order);
+        LOGGER.debug("Order update({})", order);
         orderdao.update(order);
     }
 
     @Override
     public void delete(Integer orderId) {
-        LOGGER.debug("delete({})", orderId);
+        LOGGER.debug("Order delete({})", orderId);
         orderdao.delete(orderId);
     }
 
