@@ -14,7 +14,7 @@
       <module>service</module>
       <module>test-db</module>
       <module>rest-app</module>
-       <!--   <module>web-app</module> -->
+      <module>web-app</module>
    </modules>
 
    <distributionManagement>
