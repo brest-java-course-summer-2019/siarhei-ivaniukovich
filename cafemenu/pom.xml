@@ -11,11 +11,12 @@
    <modules>
       <module>model</module>
       <module>dao</module>
+      <module>dao-api</module>
       <module>service</module>
       <module>service-api</module>
       <module>test-db</module>
       <module>rest-app</module>
-      <!--<module>web-app</module>-->
+       <!--<module>web-app</module>-->
    </modules>
 
    <distributionManagement>
@@ -62,6 +63,11 @@
          <dependency>
             <groupId>com.epam.summer19</groupId>
             <artifactId>dao</artifactId>
+            <version>${project.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>com.epam.summer19</groupId>
+            <artifactId>dao-api</artifactId>
             <version>${project.version}</version>
          </dependency>
          <dependency>
