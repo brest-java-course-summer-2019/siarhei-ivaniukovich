@@ -29,66 +29,62 @@ public class ItemServiceImplMockTest {
     }
 
     @Test
-    public void testAdd() {
-        // Setup
-        final Item items = null;
+    public void testAddSingle() {
+        final Item item = null;
+        final Item expectedResult = null;
         when(mockItemdao.add(null)).thenReturn(null);
-
-        // Run the test
-        itemServiceImplUnderTest.add(items);
-
-        // Verify the results
+        
+        final Item result = itemServiceImplUnderTest.add(item);
+        
+        assertEquals(expectedResult, result);
+    }
+    
+    @Test
+    public void testAddMultiple() {
+        final Item itemone = null;
+        final Item itemtwo = null;
+        when(mockItemdao.add(null)).thenReturn(null);
+        
+        itemServiceImplUnderTest.add(itemone, itemtwo);
     }
 
     @Test
     public void testUpdate() {
-        // Setup
         final Item item = null;
-
-        // Run the test
+        
         itemServiceImplUnderTest.update(item);
 
-        // Verify the results
         verify(mockItemdao).update(null);
     }
 
     @Test
     public void testDelete() {
-        // Setup
         final Integer itemId = 0;
 
-        // Run the test
         itemServiceImplUnderTest.delete(itemId);
 
-        // Verify the results
         verify(mockItemdao).delete(0);
     }
 
     @Test
     public void testFindAll() {
-        // Setup
         final List<Item> expectedResult = Arrays.asList();
         when(mockItemdao.findAll()).thenReturn(Arrays.asList());
-
-        // Run the test
+        
         final List<Item> result = itemServiceImplUnderTest.findAll();
-
-        // Verify the results
+        
         assertEquals(expectedResult, result);
     }
 
     @Test
     public void testFindItemById() {
-        // Setup
         final Integer itemId = 0;
         final Item expectedResult = new Item();
         expectedResult.setItemName("MockItemInOrderName");
         when(mockItemdao.findItemById(0)).thenReturn(Optional.of(expectedResult));
-
-        // Run the test
+        
         final Item result = itemServiceImplUnderTest.findItemById(itemId);
 
-        // Verify the results
         assertEquals(expectedResult, result);
     }
 }

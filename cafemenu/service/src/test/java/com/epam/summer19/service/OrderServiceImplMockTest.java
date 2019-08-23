@@ -30,7 +30,7 @@ public class OrderServiceImplMockTest {
     }
 
     @Test
-    public void testAdd() {
+    public void testAddSingle() {
         // Setup
         final Order orders = null;
         when(mockOrderdao.add(null)).thenReturn(null);
@@ -39,6 +39,15 @@ public class OrderServiceImplMockTest {
         orderServiceImplUnderTest.add(orders);
 
         // Verify the results
+    }
+
+    @Test
+    public void testAddMultiple() {
+        final Order orderone = null;
+        final Order ordertwo = null;
+        when(mockOrderdao.add(null)).thenReturn(null);
+
+        orderServiceImplUnderTest.add(orderone, ordertwo);
     }
 
     @Test
