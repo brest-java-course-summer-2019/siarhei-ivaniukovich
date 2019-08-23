@@ -2,12 +2,14 @@ package com.epam.summer19.service;
 
 import com.epam.summer19.model.Order;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderService {
 
     /**
      * Create new multiple orders
+     *
      * @param orders
      * @return
      */
@@ -15,6 +17,7 @@ public interface OrderService {
 
     /**
      * Create new order
+     *
      * @param order
      * @return
      */
@@ -22,26 +25,39 @@ public interface OrderService {
 
     /**
      * Update order
+     *
      * @param order
      */
     void update(Order order);
 
     /**
      * Delete order
+     *
      * @param orderId
      */
     void delete(Integer orderId);
 
     /**
      * Get all orders
+     *
      * @return
      */
     List<Order> findAll();
 
     /**
      * Find order by orderId
+     *
      * @param orderId
      * @return
      */
     Order findOrderById(Integer orderId);
+
+    /**
+     * Find orders by Date and Time set
+     *
+     * @param startDateTime
+     * @param endDateTime
+     * @return
+     */
+    List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }

@@ -46,14 +46,14 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     private static final String ORDER_ID = "orderId";
     private static final String ORDER_EMPLOYEE_ID = "orderEmployeeId";
-    private static final String ORDER_TIME = "orderTime";
+    //private static final String ORDER_TIME = "orderDateTime";
     private static final String ORDER_STATUS = "orderStatus";
     private static final String ORDER_DATETIME_START = "orderDateTimeStart";
     private static final String ORDER_DATETIME_END = "orderDateTimeEnd";
 
     private static final String DB_ORDER_ID = "order_id";
     private static final String DB_ORDER_EMPLOYEE_ID = "order_employee_id";
-    private static final String DB_ORDER_TIME = "order_time";
+    private static final String DB_ORDER_TIME = "order_datetime";
     private static final String DB_ORDER_STATUS = "order_status";
 
 
@@ -75,7 +75,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(addSql, parameters, generatedKeyHolder);
         order.setOrderId((Integer)generatedKeyHolder.getKeys().get(DB_ORDER_ID));
-        order.setOrderTime(((Timestamp)generatedKeyHolder.getKeys().get(DB_ORDER_TIME)).toLocalDateTime());
+        order.setOrderDateTime(((Timestamp)generatedKeyHolder.getKeys().get(DB_ORDER_TIME)).toLocalDateTime());
 
         return order;
     }
@@ -127,7 +127,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             Order order = new Order();
             order.setOrderId(resultSet.getInt(DB_ORDER_ID));
             order.setOrderEmployeeId(resultSet.getInt(DB_ORDER_EMPLOYEE_ID));
-            order.setOrderTime(resultSet.getTimestamp(DB_ORDER_TIME).toLocalDateTime());
+            order.setOrderDateTime(resultSet.getTimestamp(DB_ORDER_TIME).toLocalDateTime());
             order.setOrderId(resultSet.getInt(DB_ORDER_STATUS));
             return order;
         }

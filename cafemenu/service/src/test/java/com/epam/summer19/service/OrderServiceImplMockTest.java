@@ -6,15 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class OrderServiceImplTest {
+public class OrderServiceImplMockTest {
 
     @Mock
     private OrderDao mockOrderdao;
@@ -76,17 +78,33 @@ public class OrderServiceImplTest {
         assertEquals(expectedResult, result);
     }
 
-    /*@Test
+    @Test
     public void testFindOrderById() {
         // Setup
         final Integer orderId = 1;
-        final Order expectedResult = null;
-        when(mockOrderdao.findOrderById(1)).thenReturn(Optional.empty());
+        final Order expectedResult = new Order();
+        expectedResult.setOrderEmployeeId(22);
+        when(mockOrderdao.findOrderById(1)).thenReturn(Optional.of(expectedResult));
 
         // Run the test
         final Order result = orderServiceImplUnderTest.findOrderById(orderId);
 
         // Verify the results
         assertEquals(expectedResult, result);
-    }*/
+    }
+
+    @Test
+    public void testFindOrdersByDateTime() {
+        // Setup
+        final LocalDateTime startDateTime = LocalDateTime.of(2019, 8, 21, 9, 0, 0);
+        final LocalDateTime endDateTime = LocalDateTime.of(2019, 8, 21, 9, 0, 0);
+        final List<Order> expectedResult = Arrays.asList();
+        when(mockOrderdao.findOrdersByDateTime(LocalDateTime.of(2019, 8, 21, 9, 0, 0), LocalDateTime.of(2017, 1, 1, 0, 0, 0))).thenReturn(Arrays.asList());
+
+        // Run the test
+        final List<Order> result = orderServiceImplUnderTest.findOrdersByDateTime(startDateTime, endDateTime);
+
+        // Verify the results
+        assertEquals(expectedResult, result);
+    }
 }

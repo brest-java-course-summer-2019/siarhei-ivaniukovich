@@ -8,13 +8,14 @@ import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class ItemServiceImplTest {
+public class ItemServiceImplMockTest {
 
     @Mock
     private ItemDao mockItemdao;
@@ -76,17 +77,18 @@ public class ItemServiceImplTest {
         assertEquals(expectedResult, result);
     }
 
-    /*@Test
+    @Test
     public void testFindItemById() {
         // Setup
         final Integer itemId = 0;
-        final Item expectedResult = null;
-        when(mockItemdao.findItemById(0)).thenReturn(Optional.empty());
+        final Item expectedResult = new Item();
+        expectedResult.setItemName("MockItemInOrderName");
+        when(mockItemdao.findItemById(0)).thenReturn(Optional.of(expectedResult));
 
         // Run the test
         final Item result = itemServiceImplUnderTest.findItemById(itemId);
 
         // Verify the results
         assertEquals(expectedResult, result);
-    }*/
+    }
 }

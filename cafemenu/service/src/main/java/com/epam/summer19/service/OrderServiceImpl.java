@@ -2,6 +2,8 @@ package com.epam.summer19.service;
 
 import com.epam.summer19.dao.OrderDao;
 import com.epam.summer19.model.Order;
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -56,6 +58,12 @@ public class OrderServiceImpl implements OrderService {
         LOGGER.debug("Find order by orderId");
         return orderdao.findOrderById(orderId)
                 .orElseThrow(() ->  new RuntimeException("Failed to get orders from DB"));
+    }
+
+    @Override
+    public List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        LOGGER.debug("Find orders between StartDateTime & EndDateTime");
+        return orderdao.findOrdersByDateTime(startDateTime, endDateTime);
     }
 
 }

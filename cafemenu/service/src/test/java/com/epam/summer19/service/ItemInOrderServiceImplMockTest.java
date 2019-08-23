@@ -4,21 +4,24 @@ import com.epam.summer19.dao.ItemInOrderDao;
 import com.epam.summer19.model.ItemInOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-public class ItemInOrderServiceImplTest {
+public class ItemInOrderServiceImplMockTest {
 
     @Mock
     private ItemInOrderDao mockIiodao;
 
+    @InjectMocks
     private ItemInOrderServiceImpl itemInOrderServiceImplUnderTest;
 
     @BeforeEach
@@ -77,7 +80,7 @@ public class ItemInOrderServiceImplTest {
         assertEquals(expectedResult, result);
     }
 
-    /*@Test
+    @Test
     public void testFindIioByOrderId() {
         // Setup
         final Integer iioOrderId = 0;
@@ -96,13 +99,15 @@ public class ItemInOrderServiceImplTest {
         // Setup
         final Integer iioOrderId = 0;
         final Integer iioItemId = 0;
-        final ItemInOrder expectedResult = null;
-        when(mockIiodao.findIioByOrderItemId(0, 0)).thenReturn(Optional.empty());
+        final ItemInOrder expectedResult = new ItemInOrder();
+        expectedResult.setIioItemName("MockItemInOrderName");
+        when(mockIiodao.findIioByOrderItemId(0, 0)).thenReturn(Optional.of(expectedResult));
 
         // Run the test
         final ItemInOrder result = itemInOrderServiceImplUnderTest.findIioByOrderItemId(iioOrderId, iioItemId);
 
         // Verify the results
         assertEquals(expectedResult, result);
-    }*/
+    }
+
 }

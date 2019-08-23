@@ -37,7 +37,7 @@ public class OrderDaoJdbcImplTest {
         Order newOrder = orderDao.add(testOrder);
         assertNotNull(newOrder.getOrderId());
         assertEquals(new Integer(EMPLOYEE_ID),newOrder.getOrderEmployeeId());
-        assertNotNull(newOrder.getOrderTime());
+        assertNotNull(newOrder.getOrderDateTime());
         assertEquals(new Integer(ORDER_STATUS),newOrder.getOrderStatus());
     }
 
@@ -53,7 +53,6 @@ public class OrderDaoJdbcImplTest {
         Order updatedOrder = orderDao.findOrderById(testOrder.getOrderId()).get();
         assertTrue(testOrder.getOrderId().equals(updatedOrder.getOrderId()));
         assertTrue(testOrder.getOrderEmployeeId().equals(updatedOrder.getOrderEmployeeId()));
-        assertTrue(testOrder.getOrderTime().equals(updatedOrder.getOrderTime()));
         assertTrue(testOrder.getOrderStatus().equals(updatedOrder.getOrderStatus()));
     }
 

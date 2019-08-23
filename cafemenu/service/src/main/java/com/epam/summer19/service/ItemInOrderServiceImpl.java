@@ -57,5 +57,4 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
         return iiodao.findIioByOrderItemId(iioOrderId, iioItemId)
                 .orElseThrow(() -> new RuntimeException("Failed to get item from DB"));
    }
-
 }

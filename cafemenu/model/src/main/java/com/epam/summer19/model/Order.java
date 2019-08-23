@@ -17,7 +17,7 @@ public class Order {
     /**
      * Order Time
      */
-    private LocalDateTime orderTime;
+    private LocalDateTime orderDateTime;
 
     /**
      *  order status param
@@ -44,9 +44,9 @@ public class Order {
         this.orderEmployeeId = orderEmployeeId;
     }
 
-    public LocalDateTime getOrderTime() { return orderTime; }
+    public LocalDateTime getOrderDateTime() { return orderDateTime; }
 
-    public void setOrderTime(LocalDateTime orderTime) { this.orderTime = orderTime; }
+    public void setOrderDateTime(LocalDateTime orderDateTime) { this.orderDateTime = orderDateTime; }
 
     public Integer getOrderStatus() {
         return orderStatus;
