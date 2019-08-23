@@ -2,6 +2,7 @@ package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Order;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,4 +39,6 @@ public interface OrderDao {
      * @return
      */
     Optional<Order> findOrderById(Integer orderId);
+
+    List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }

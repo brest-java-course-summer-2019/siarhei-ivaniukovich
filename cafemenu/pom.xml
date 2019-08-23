@@ -16,7 +16,7 @@
       <module>service-api</module>
       <module>test-db</module>
       <module>rest-app</module>
-       <!--<module>web-app</module>-->
+      <module>web-app</module>
    </modules>
 
    <distributionManagement>
@@ -51,6 +51,8 @@
       <org.springframework.version>5.1.8.RELEASE</org.springframework.version>
       <thymeleaf-spring5.version>3.0.11.RELEASE</thymeleaf-spring5.version>
       <jackson-databind.version>2.9.8</jackson-databind.version>
+      <javax.servlet.version>4.0.0</javax.servlet.version>
+      <validation-api.version>2.0.1.Final</validation-api.version>
    </properties>
 
    <dependencyManagement>
@@ -185,8 +187,13 @@
          <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.0</version>
+            <version>${javax.servlet.version}</version>
             <scope>provided</scope>
+         </dependency>
+         <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
          </dependency>
          <dependency>
             <groupId>org.hamcrest</groupId>

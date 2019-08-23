@@ -2,7 +2,7 @@ package com.epam.summer19.webapp;
 
 import com.epam.summer19.model.Item;
 import com.epam.summer19.service.ItemService;
-import com.epam.summer19.validators.ItemValidator;
+import com.epam.summer19.webapp.validators.ItemValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import javax.validation.Valid;
+
 
 /**
  * Item controller
@@ -36,7 +38,7 @@ public class ItemController {
      * @return
      */
     @GetMapping(value = "/items")
-    public final String ListAllItems(Model model) {
+    public final String listAllItems(Model model) {
         LOGGER.debug("ListAllItems findAll({})", model);
         model.addAttribute("items", itemService.findAll());
         return "items";

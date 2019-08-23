@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -89,4 +90,12 @@ public class OrderDaoJdbcImplTest {
         assertEquals(ORDER_STATUS, findOrder.getOrderStatus());
     }
 
+    @Test
+    public void findOrdersByDateTime() {
+        LocalDateTime startDate = LocalDateTime.of(2019,8,15,9,00,01);
+        LocalDateTime endDate = LocalDateTime.of(2019,8,15,10,00,59);
+        List orders = orderDao.findOrdersByDateTime(startDate, endDate);
+        assertNotNull(orders);
+        assertTrue(orders.size() > 0);
+    }
 }

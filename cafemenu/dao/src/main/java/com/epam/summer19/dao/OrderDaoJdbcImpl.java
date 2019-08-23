@@ -2,6 +2,7 @@ package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Order;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cglib.core.Local;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,10 +41,20 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Value("${order.findById}")
     private String findByIdSql;
 
+    @Value("${order.findOrdersByDateTime}")
+    private String findOrdersByDateTimeSql;
+
     private static final String ORDER_ID = "orderId";
     private static final String ORDER_EMPLOYEE_ID = "orderEmployeeId";
-   // private static final String ORDER_TIME = "orderTime";
+    private static final String ORDER_TIME = "orderTime";
     private static final String ORDER_STATUS = "orderStatus";
+    private static final String ORDER_DATETIME_START = "orderDateTimeStart";
+    private static final String ORDER_DATETIME_END = "orderDateTimeEnd";
+
+    private static final String DB_ORDER_ID = "order_id";
+    private static final String DB_ORDER_EMPLOYEE_ID = "order_employee_id";
+    private static final String DB_ORDER_TIME = "order_time";
+    private static final String DB_ORDER_STATUS = "order_status";
 
 
     public OrderDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -62,8 +74,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(addSql, parameters, generatedKeyHolder);
-        order.setOrderId((Integer)generatedKeyHolder.getKeys().get("order_id"));
-        order.setOrderTime(((Timestamp)generatedKeyHolder.getKeys().get("order_time")).toLocalDateTime());
+        order.setOrderId((Integer)generatedKeyHolder.getKeys().get(DB_ORDER_ID));
+        order.setOrderTime(((Timestamp)generatedKeyHolder.getKeys().get(DB_ORDER_TIME)).toLocalDateTime());
 
         return order;
     }
@@ -99,14 +111,24 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
+    @Override
+    public List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue(ORDER_DATETIME_START, startDateTime);
+        mapSqlParameterSource.addValue(ORDER_DATETIME_END, endDateTime);
+        List<Order> results = namedParameterJdbcTemplate.query(findOrdersByDateTimeSql, mapSqlParameterSource,
+                BeanPropertyRowMapper.newInstance(Order.class));
+        return results;
+    }
+
     private class OrderRowMapper implements RowMapper<Order> {
         @Override
         public Order mapRow(ResultSet resultSet, int i) throws SQLException {
             Order order = new Order();
-            order.setOrderId(resultSet.getInt("order_id"));
-            order.setOrderEmployeeId(resultSet.getInt("order_employee_id"));
-           // order.setOrderTime(resultSet.getTimestamp("order_time"));
-            order.setOrderId(resultSet.getInt("order_status"));
+            order.setOrderId(resultSet.getInt(DB_ORDER_ID));
+            order.setOrderEmployeeId(resultSet.getInt(DB_ORDER_EMPLOYEE_ID));
+            order.setOrderTime(resultSet.getTimestamp(DB_ORDER_TIME).toLocalDateTime());
+            order.setOrderId(resultSet.getInt(DB_ORDER_STATUS));
             return order;
         }
     }
