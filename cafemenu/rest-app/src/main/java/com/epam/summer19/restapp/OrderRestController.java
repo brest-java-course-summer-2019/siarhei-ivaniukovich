@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -46,11 +45,10 @@ public class OrderRestController {
     }
 
     @PostMapping()
-    public ResponseEntity<Order> add(@RequestBody Order order) {
+    public void add(@RequestBody Order order) {
 
         LOGGER.debug("add order({})", order);
-        Order result = service.add(order);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        service.add(order);
     }
 
 }

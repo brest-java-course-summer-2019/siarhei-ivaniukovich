@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -46,11 +45,10 @@ public class ItemRestController {
     }
 
     @PostMapping()
-    public ResponseEntity<Item> add(@RequestBody Item item) {
+    public void add(@RequestBody Item item) {
 
         LOGGER.debug("add item({})", item);
-        Item result = service.add(item);
-        return new ResponseEntity<>(result, HttpStatus.CREATED);
+        service.add(item);
     }
 
 }
