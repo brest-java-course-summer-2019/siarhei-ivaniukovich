@@ -17,7 +17,7 @@
     <mvc:default-servlet-handler/>
 
     <!-- Use @MVC annotations -->
-    <mvc:annotation-driven/>
+    <mvc:annotationorderStatus.negative-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     <!-- Component scan for @Controller, @Service... annotations -->
     <context:component-scan base-package="com.epam.summer19.*"/>

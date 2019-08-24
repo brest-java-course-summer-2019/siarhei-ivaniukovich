@@ -18,7 +18,7 @@ public interface ItemService {
      * @param item
      * @return
      */
-    Item add(Item item);
+    void add(Item item);
 
     /**
      * Update item

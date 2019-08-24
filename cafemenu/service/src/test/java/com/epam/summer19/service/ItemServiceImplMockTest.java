@@ -31,21 +31,21 @@ public class ItemServiceImplMockTest {
     @Test
     public void testAddSingle() {
         final Item item = null;
-        final Item expectedResult = null;
         when(mockItemdao.add(null)).thenReturn(null);
         
-        final Item result = itemServiceImplUnderTest.add(item);
-        
-        assertEquals(expectedResult, result);
+        itemServiceImplUnderTest.add(item);
+
+        verify(mockItemdao).add(item);
     }
     
     @Test
     public void testAddMultiple() {
         final Item itemone = null;
-        final Item itemtwo = null;
         when(mockItemdao.add(null)).thenReturn(null);
         
-        itemServiceImplUnderTest.add(itemone, itemtwo);
+        itemServiceImplUnderTest.add(itemone);
+
+        verify(mockItemdao).add(itemone);
     }
 
     @Test

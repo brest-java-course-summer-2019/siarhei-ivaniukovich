@@ -31,82 +31,75 @@ public class ItemInOrderServiceImplMockTest {
     }
 
     @Test
-    public void testAdd() {
-        // Setup
-        final ItemInOrder iteminorders = null;
+    public void testAddSingle() {
+        final ItemInOrder iteminorder = null;
+        when(mockIiodao.add(null)).thenReturn(null);
+        
+        itemInOrderServiceImplUnderTest.add(iteminorder);
+
+        verify(mockIiodao).add(iteminorder);
+    }
+
+    @Test
+    public void testAddMultiple() {
+        final ItemInOrder iioone = null;
         when(mockIiodao.add(null)).thenReturn(null);
 
-        // Run the test
-        itemInOrderServiceImplUnderTest.add(iteminorders);
+        itemInOrderServiceImplUnderTest.add(iioone);
 
-        // Verify the results
+        verify(mockIiodao).add(iioone);
     }
 
     @Test
     public void testUpdate() {
-        // Setup
         final ItemInOrder iteminorder = null;
 
-        // Run the test
         itemInOrderServiceImplUnderTest.update(iteminorder);
 
-        // Verify the results
         verify(mockIiodao).update(null);
     }
 
     @Test
     public void testDelete() {
-        // Setup
         final Integer iioOrderId = 0;
         final Integer iioItemId = 0;
 
-        // Run the test
         itemInOrderServiceImplUnderTest.delete(iioOrderId, iioItemId);
 
-        // Verify the results
         verify(mockIiodao).delete(0, 0);
     }
 
     @Test
     public void testFindAll() {
-        // Setup
         final List<ItemInOrder> expectedResult = Arrays.asList();
         when(mockIiodao.findAll()).thenReturn(Arrays.asList());
 
-        // Run the test
         final List<ItemInOrder> result = itemInOrderServiceImplUnderTest.findAll();
-
-        // Verify the results
+        
         assertEquals(expectedResult, result);
     }
 
     @Test
     public void testFindIioByOrderId() {
-        // Setup
         final Integer iioOrderId = 0;
         final List<ItemInOrder> expectedResult = Arrays.asList();
         when(mockIiodao.findIioByOrderId(0)).thenReturn(Arrays.asList());
 
-        // Run the test
         final List<ItemInOrder> result = itemInOrderServiceImplUnderTest.findIioByOrderId(iioOrderId);
 
-        // Verify the results
         assertEquals(expectedResult, result);
     }
 
     @Test
     public void testFindIioByOrderItemId() {
-        // Setup
         final Integer iioOrderId = 0;
         final Integer iioItemId = 0;
         final ItemInOrder expectedResult = new ItemInOrder();
         expectedResult.setIioItemName("MockItemInOrderName");
         when(mockIiodao.findIioByOrderItemId(0, 0)).thenReturn(Optional.of(expectedResult));
 
-        // Run the test
         final ItemInOrder result = itemInOrderServiceImplUnderTest.findIioByOrderItemId(iioOrderId, iioItemId);
 
-        // Verify the results
         assertEquals(expectedResult, result);
     }
 

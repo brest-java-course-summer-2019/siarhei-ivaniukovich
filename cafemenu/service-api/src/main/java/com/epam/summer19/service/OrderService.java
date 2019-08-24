@@ -21,7 +21,7 @@ public interface OrderService {
      * @param order
      * @return
      */
-    Order add(Order order);
+    void add(Order order);
 
     /**
      * Update order

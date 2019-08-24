@@ -28,6 +28,12 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
     }
 
     @Override
+    public void add(ItemInOrder iteminorder) {
+        LOGGER.debug("Single IntemInOrder add({})", iteminorder);
+        iiodao.add(iteminorder);
+    }
+
+    @Override
     public void update(ItemInOrder iteminorder) {
         LOGGER.debug("update({})", iteminorder);
         iiodao.update(iteminorder);

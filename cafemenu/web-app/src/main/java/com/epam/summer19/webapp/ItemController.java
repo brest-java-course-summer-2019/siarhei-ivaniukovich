@@ -65,7 +65,7 @@ public class ItemController {
      * @return
      */
     @PostMapping(value = "/item")
-    public String addItem(@Valid Item item, BindingResult result) {
+    public final String addItem(@Valid Item item, BindingResult result) {
         LOGGER.debug("addItem({}, {})", item, result);
         itemValidator.validate(item, result);
         if (result.hasErrors()) {
@@ -115,7 +115,7 @@ public class ItemController {
      * @return
      */
     @GetMapping(value = "/item/{id}/delete")
-    public final String deleteItemById(@PathVariable Integer id, Model model) {
+    public final String deleteItem(@PathVariable Integer id, Model model) {
         LOGGER.debug("delete({},{})", id, model);
         itemService.delete(id);
         return "redirect:/items";

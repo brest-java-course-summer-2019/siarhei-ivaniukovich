@@ -7,11 +7,19 @@ import java.util.List;
 public interface ItemInOrderService {
 
     /**
-     * Create new ItemInOrder
+     * Create new multiple ItemInOrder
      * @param iteminorders
      * @return
      */
     void add(ItemInOrder... iteminorders);
+
+    /**
+     * Create new single ItemInOrder
+     * @param iteminorder
+     * @return
+     */
+    void add(ItemInOrder iteminorder);
+
 
     /**
      * Update ItemInOrder
