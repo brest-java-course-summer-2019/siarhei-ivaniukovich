@@ -1,28 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <title>CafeMenu</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#head').load("ihead.html");
+        $('#header').load("iheader.html");
+        $('#footer').load("ifooter.html");
+    })
+</script>
+<div id="head"></div>
 </head>
 <body>
-
-<header>
-    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
-        <a class="navbar-brand">
-            <img src="img/cmlogo.png" height="26" width="32" class="d-inline-block">CafeMenu</a>
-        </a>
-        <div class="collapse navbar-collapse">
-            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'">Main</button>
-            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'">Orders</button>
-            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'">Items</button>
-       </div>
-    </nav>
-    <nav id="headername" class="navbar bg-light text-dark">
-        <h5>Orders list</h5>
-    </nav>
-</header>
+<header><div id="header"></div>
+234</header>
 
 <section id="main">
     <div class="container-fluid">
@@ -32,10 +23,7 @@
         </div>
     </div>
 </section>
-
-<footer class="container-fluid font-italic">
-    <p>© 2019</p>
-</footer>
-
+<div id="footer"></div>
 </body>
+
 </html>
