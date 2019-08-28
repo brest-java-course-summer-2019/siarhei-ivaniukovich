@@ -16,7 +16,7 @@
       <module>service-api</module>
       <module>test-db</module>
       <module>rest-app</module>
-      <module>web-app</module>
+     <!-- <module>web-app</module>-->
    </modules>
 
    <distributionManagement>
@@ -415,6 +415,21 @@
          <plugin>
             <groupId>org.eluder.coveralls</groupId>
             <artifactId>coveralls-maven-plugin</artifactId>
+         </plugin>
+         <!-- Embedded Jetty HTTP Server for testing war application -->
+         <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.4.19.v20190610</version>
+            <configuration>
+               <scanIntervalSeconds>10</scanIntervalSeconds>
+               <webApp>
+                  <contextPath>/</contextPath>
+               </webApp>
+               <httpConnector>
+                  <port>8081</port>
+               </httpConnector>
+            </configuration>
          </plugin>
       </plugins>
    </build>

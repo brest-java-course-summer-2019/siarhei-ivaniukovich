@@ -18,37 +18,35 @@ public class ItemRestController {
     @Autowired
     private ItemService service;
 
+    @PostMapping(value = "/item")
+    public void add(@RequestBody Item item) {
+        LOGGER.debug("REST Add item({})", item);
+        service.add(item);
+    }
+
+    @PutMapping(value = "/items/{id}")
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public void update(@PathVariable("id") int id, @RequestBody Item item) {
+        LOGGER.debug("REST Update item({})", item);
+        service.update(item);
+    }
+
+    @DeleteMapping(value = "/items/{id}")
+    public void delete(@PathVariable("id") int id) {
+        LOGGER.debug("REST Delete item ({})", id);
+        service.delete(id);
+    }
+
     @GetMapping(value = "/items")
     public Collection<Item> findAll() {
-        LOGGER.debug("List all items");
+        LOGGER.debug("REST List all items");
         return service.findAll();
     }
 
     @GetMapping(value = "/items/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Item findItemById(@PathVariable Integer id) {
-        LOGGER.debug("find item by itemId({})", id);
+        LOGGER.debug("REST Find item by itemId({})", id);
         return service.findItemById(id);
     }
-
-    @PutMapping()
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@RequestBody Item item) {
-        LOGGER.debug("update item ({})", item);
-        service.update(item);
-    }
-
-    @DeleteMapping(value = "/items/{id}")
-    public void delete(@PathVariable("id") int id) {
-        LOGGER.debug("delete item ({})", id);
-        service.delete(id);
-    }
-
-    @PostMapping()
-    public void add(@RequestBody Item item) {
-
-        LOGGER.debug("add item({})", item);
-        service.add(item);
-    }
-
 }

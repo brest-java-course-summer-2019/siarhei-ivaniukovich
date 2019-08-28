@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>com.epam.summer19</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>service-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -88,7 +88,7 @@
                     <artifactId>jetty-maven-plugin</artifactId>
                     <configuration>
                         <httpConnector>
-                            <port>8088</port>
+                            <port>8083</port>
                         </httpConnector>
                     </configuration>
                 </plugin>

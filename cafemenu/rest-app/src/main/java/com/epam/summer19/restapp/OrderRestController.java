@@ -18,37 +18,36 @@ public class OrderRestController {
     @Autowired
     private OrderService service;
 
+    @PostMapping(value = "/order")
+    public void add(@RequestBody Order order) {
+        LOGGER.debug("REST Add order({})", order);
+        service.add(order);
+    }
+
+    @PutMapping(value = "/orders/{id}")
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public void update(@PathVariable("id") int id, @RequestBody Order order) {
+        LOGGER.debug("REST Update order({})", order);
+        service.update(order);
+    }
+
+    @DeleteMapping(value = "/orders/{id}")
+    public void delete(@PathVariable("id") int id) {
+        LOGGER.debug("REST Delete order ({})", id);
+        service.delete(id);
+    }
+
     @GetMapping(value = "/orders")
     public Collection<Order> findAll() {
-        LOGGER.debug("List all orders");
+        LOGGER.debug("REST List all orders");
         return service.findAll();
     }
 
     @GetMapping(value = "/orders/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Order findOrderById(@PathVariable Integer id) {
-        LOGGER.debug("find order by orderId({})", id);
+        LOGGER.debug("REST Find order by orderId({})", id);
         return service.findOrderById(id);
-    }
-
-    @PutMapping()
-    @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@RequestBody Order order) {
-        LOGGER.debug("update order ({})", order);
-        service.update(order);
-    }
-
-    @DeleteMapping(value = "/orders/{id}")
-    public void delete(@PathVariable("id") int id) {
-        LOGGER.debug("delete order ({})", id);
-        service.delete(id);
-    }
-
-    @PostMapping()
-    public void add(@RequestBody Order order) {
-
-        LOGGER.debug("add order({})", order);
-        service.add(order);
     }
 
 }
