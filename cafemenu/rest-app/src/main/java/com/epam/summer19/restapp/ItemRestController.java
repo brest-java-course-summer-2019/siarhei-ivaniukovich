@@ -16,37 +16,37 @@ public class ItemRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemRestController.class);
 
     @Autowired
-    private ItemService service;
+    private ItemService itemService;
 
     @PostMapping(value = "/item")
     public void add(@RequestBody Item item) {
         LOGGER.debug("REST Add item({})", item);
-        service.add(item);
+        itemService.add(item);
     }
 
     @PutMapping(value = "/items/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@PathVariable("id") int id, @RequestBody Item item) {
         LOGGER.debug("REST Update item({})", item);
-        service.update(item);
+        itemService.update(item);
     }
 
     @DeleteMapping(value = "/items/{id}")
     public void delete(@PathVariable("id") int id) {
         LOGGER.debug("REST Delete item ({})", id);
-        service.delete(id);
+        itemService.delete(id);
     }
 
     @GetMapping(value = "/items")
     public Collection<Item> findAll() {
         LOGGER.debug("REST List all items");
-        return service.findAll();
+        return itemService.findAll();
     }
 
     @GetMapping(value = "/items/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Item findItemById(@PathVariable Integer id) {
+    public Item findItemById(@PathVariable("id") Integer id) {
         LOGGER.debug("REST Find item by itemId({})", id);
-        return service.findItemById(id);
+        return itemService.findItemById(id);
     }
 }

@@ -27,7 +27,7 @@ public class ItemInOrderController {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
     @Autowired
-    private ItemInOrderService iioService;
+    private ItemInOrderService itemInOrderService;
 
     @Autowired
     ItemInOrderValidator iioValidator;
@@ -40,7 +40,7 @@ public class ItemInOrderController {
     @GetMapping(value = "/iios")
     public final String listAllItemInOrders(Model model) {
         LOGGER.debug("ListAllItemInOrders findAll({})", model);
-        model.addAttribute("iios", iioService.findAll());
+        model.addAttribute("iios", itemInOrderService.findAll());
         return "iios";
     }
 
@@ -71,7 +71,7 @@ public class ItemInOrderController {
         if (result.hasErrors()) {
             return "iio";
         } else {
-            this.iioService.add(iio);
+            this.itemInOrderService.add(iio);
             return "redirect:/iios";
         }
     }
@@ -85,7 +85,7 @@ public class ItemInOrderController {
     @GetMapping(value = "/iio/{orderId}/{itemId}")
     public final String gotoEditItemInOrderPage(@PathVariable Integer orderId, Integer itemId, Model model) {
         LOGGER.debug("gotoEditItemInOrderPage({},{},{})", orderId, itemId, model);
-        ItemInOrder iio = iioService.findIioByOrderItemId(orderId, itemId);
+        ItemInOrder iio = itemInOrderService.findIioByOrderItemId(orderId, itemId);
         model.addAttribute("iio", iio);
         return "iio";
     }
@@ -103,7 +103,7 @@ public class ItemInOrderController {
         if (result.hasErrors()) {
             return "iio";
         } else {
-            this.iioService.update(iio);
+            this.itemInOrderService.update(iio);
         }
         return "redirect:/iios";
     }
@@ -117,7 +117,7 @@ public class ItemInOrderController {
     @GetMapping(value = "/iio/orderId/itemId/delete")
     public final String deleteItemInOrderById(@PathVariable Integer orderId, Integer itemId, Model model) {
         LOGGER.debug("delete({},{},{})", orderId, itemId, model);
-        iioService.delete(orderId, itemId);
+        itemInOrderService.delete(orderId, itemId);
         return "redirect:/iios";
     }
 

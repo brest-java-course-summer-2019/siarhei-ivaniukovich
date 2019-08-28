@@ -90,9 +90,14 @@
          </dependency>
          <dependency>
             <groupId>com.epam.summer19</groupId>
-            <artifactId>web-app</artifactId>
+            <artifactId>rest-app</artifactId>
             <version>${project.version}</version>
          </dependency>
+         <!--<dependency>
+            <groupId>com.epam.summer19</groupId>
+            <artifactId>web-app</artifactId>
+            <version>${project.version}</version>
+         </dependency>-->
          <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>

@@ -15,9 +15,10 @@
         http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
     <mvc:annotation-driven/>
-    <mvc:default-servlet-handler/>
-    <context:component-scan base-package="com.epam.summer19"/>
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <!--<mvc:default-servlet-handler/>-->
+    <context:component-scan base-package="com.epam.summer19.*"/>
+   <!-- <mvc:resources mapping="/resources/**" location="/resources/"/>-->
+    <import resource="classpath*:test-db.xml"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
@@ -34,9 +35,9 @@
         <property name="password" value=""/>
     </bean>
 
-    <jdbc:initialize-database>
+    <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="classpath:create-tables.sql"/>
-        <jdbc:script location="classpath:data-scripts.sql"/>
+        <jdbc:script location="classpath:data-script.sql"/>
     </jdbc:initialize-database>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -47,7 +48,8 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="itemDao" class="com.epam.summer19.dao.ItemDaoJdbcImpl">
+
+   <bean id="itemDao" class="com.epam.summer19.dao.ItemDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
     <bean id="itemService" class="com.epam.summer19.service.ItemServiceImpl">

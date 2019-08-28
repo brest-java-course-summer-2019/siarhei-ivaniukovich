@@ -16,38 +16,38 @@ public class OrderRestController {
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderRestController.class);
 
     @Autowired
-    private OrderService service;
+    private OrderService orderService;
 
     @PostMapping(value = "/order")
     public void add(@RequestBody Order order) {
         LOGGER.debug("REST Add order({})", order);
-        service.add(order);
+        orderService.add(order);
     }
 
     @PutMapping(value = "/orders/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@PathVariable("id") int id, @RequestBody Order order) {
         LOGGER.debug("REST Update order({})", order);
-        service.update(order);
+        orderService.update(order);
     }
 
     @DeleteMapping(value = "/orders/{id}")
     public void delete(@PathVariable("id") int id) {
         LOGGER.debug("REST Delete order ({})", id);
-        service.delete(id);
+        orderService.delete(id);
     }
 
     @GetMapping(value = "/orders")
     public Collection<Order> findAll() {
         LOGGER.debug("REST List all orders");
-        return service.findAll();
+        return orderService.findAll();
     }
 
     @GetMapping(value = "/orders/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Order findOrderById(@PathVariable Integer id) {
+    public Order findOrderById(@PathVariable("id") Integer id) {
         LOGGER.debug("REST Find order by orderId({})", id);
-        return service.findOrderById(id);
+        return orderService.findOrderById(id);
     }
 
 }
