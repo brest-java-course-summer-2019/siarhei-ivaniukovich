@@ -26,7 +26,7 @@ public class OrderRestController {
 
     @PutMapping(value = "/orders/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@PathVariable("id") int id, @RequestBody Order order) {
+    public void update(@RequestBody Order order) {
         LOGGER.debug("REST Update order({})", order);
         orderService.update(order);
     }

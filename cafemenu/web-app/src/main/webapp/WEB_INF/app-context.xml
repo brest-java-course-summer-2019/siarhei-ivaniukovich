@@ -30,7 +30,7 @@
         </property>
     </bean>-->
 
-    <!-- CM BEANS NEXT: -->
+    <!-- CM BEANS NEXT:
     <bean id="ItemService" class="com.epam.summer19.webapp.consumers.ItemRestConsumer">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.items}"/>
         <constructor-arg index="1" ref="restTemplate"/>
@@ -42,7 +42,7 @@
     <bean id="ItemInOrderService" class="com.epam.summer19.webapp.consumers.ItemInOrderRestConsumer">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.iios}"/>
         <constructor-arg index="1" ref="restTemplate"/>
-    </bean>
+    </bean>-->
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
         <property name="messageConverters">

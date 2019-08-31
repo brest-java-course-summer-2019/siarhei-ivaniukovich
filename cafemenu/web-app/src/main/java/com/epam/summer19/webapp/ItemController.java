@@ -18,7 +18,7 @@ import javax.validation.Valid;
 /**
  * Item controller
  */
-@Controller
+//@Controller
 public class ItemController {
 
     /**

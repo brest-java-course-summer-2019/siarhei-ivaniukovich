@@ -18,7 +18,7 @@ import javax.validation.Valid;
 /**
  * Order controller
  */
-@Controller
+//@Controller
 public class OrderController {
 
     /**

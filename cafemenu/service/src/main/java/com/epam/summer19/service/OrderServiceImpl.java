@@ -16,54 +16,54 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderServiceImpl implements OrderService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
-    private OrderDao orderdao;
+    private OrderDao orderDao;
     
-    public OrderServiceImpl(OrderDao orderdao) {
-        this.orderdao = orderdao;
+    public OrderServiceImpl(OrderDao orderDao) {
+        this.orderDao = orderDao;
     }
 
     @Override
     public void add(Order... orders) {
         for(Order order : orders) {
-            orderdao.add(order);
+            orderDao.add(order);
         }
     }
 
     @Override
     public void add(Order order) {
-        orderdao.add(order);
+        orderDao.add(order);
     }
 
 
     @Override
     public void update(Order order) {
         LOGGER.debug("Order update({})", order);
-        orderdao.update(order);
+        orderDao.update(order);
     }
 
     @Override
     public void delete(Integer orderId) {
         LOGGER.debug("Order delete({})", orderId);
-        orderdao.delete(orderId);
+        orderDao.delete(orderId);
     }
 
     @Override
     public List<Order> findAll() {
         LOGGER.debug("Find all Orders");
-        return orderdao.findAll();
+        return orderDao.findAll();
     }
 
     @Override
     public Order findOrderById(Integer orderId) {
         LOGGER.debug("Find order by orderId");
-        return orderdao.findOrderById(orderId)
+        return orderDao.findOrderById(orderId)
                 .orElseThrow(() ->  new RuntimeException("Failed to get orders from DB"));
     }
 
     @Override
     public List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         LOGGER.debug("Find orders between StartDateTime & EndDateTime");
-        return orderdao.findOrdersByDateTime(startDateTime, endDateTime);
+        return orderDao.findOrdersByDateTime(startDateTime, endDateTime);
     }
 
 }

@@ -18,6 +18,9 @@ public class ItemRestController {
     @Autowired
     private ItemService itemService;
 
+    /**
+     * curl -H "Content-Type: application/json" -X POST -d '{"itemName":"Something","itemPrice":"8.8"}' -v http://localhost:8082/item
+     */
     @PostMapping(value = "/item")
     public void add(@RequestBody Item item) {
         LOGGER.debug("REST Add item({})", item);
@@ -26,7 +29,7 @@ public class ItemRestController {
 
     @PutMapping(value = "/items/{id}")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
-    public void update(@PathVariable("id") int id, @RequestBody Item item) {
+    public void update(@RequestBody Item item) {
         LOGGER.debug("REST Update item({})", item);
         itemService.update(item);
     }
