@@ -1,4 +1,4 @@
-/**package com.epam.summer19.restapp;
+package com.epam.summer19.restapp;
 
 import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.service.ItemInOrderService;
@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,7 +56,7 @@ public class ItemInOrderRestControllerTest {
 
     @AfterEach
     public void afterReset() {
-        /** Mockito.verifyNoMoreInteractions(iteminorderService);
+        /** Mockito.verifyNoMoreInteractions(iteminorderService);**/
         Mockito.reset(iteminorderService);
     }
 
@@ -65,7 +66,7 @@ public class ItemInOrderRestControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/iteminorder")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(createItemInOrder(1,2)))
+                        .content(objectMapper.writeValueAsString(createItemInOrder(2,2,"Item2",new BigDecimal("3.2"),3)))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
         ;
@@ -75,7 +76,7 @@ public class ItemInOrderRestControllerTest {
 
     @Test
     public void testUpdateItemInOrder() throws Exception {
-        ItemInOrder iteminorder = createItemInOrder(2,4);
+        ItemInOrder iteminorder = createItemInOrder(2,2,"Item2",new BigDecimal("3.2"),3);
         String json = new ObjectMapper().writeValueAsString(iteminorder);
 
         mockMvc.perform(put("/iteminorder")
@@ -89,25 +90,33 @@ public class ItemInOrderRestControllerTest {
 
     @Test
     public void testDeleteItemInOrder() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/iteminorders/4"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/iteminorders/1/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.verify(iteminorderService, Mockito.times(1)).delete(any());
+        Mockito.verify(iteminorderService, Mockito.times(1)).delete(any(),any());
     }
 
 
     @Test
     public void testItemInOrderFindAll() throws Exception {
-        Mockito.when(iteminorderService.findAll()).thenReturn(Arrays.asList(createItemInOrder(1,2), createItemInOrder(2,3)));
+        Mockito.when(iteminorderService.findAll()).thenReturn(Arrays.asList(
+                createItemInOrder(2,2,"Item2",new BigDecimal("3.2"),3),
+                createItemInOrder(3,4,"Item4",new BigDecimal("4.2"),4)));
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/iteminorders")
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iteminorderName", Matchers.is("ItemInOrder2")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iteminorderPrice", Matchers.is(2.2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iteminorderName", Matchers.is("ItemInOrder3")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iteminorderPrice", Matchers.is(2.2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioOrderId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemName", Matchers.is("Item2")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemPrice", Matchers.is(3.2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemCount", Matchers.is(3)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iioOrderId", Matchers.is(3)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iioItemId", Matchers.is(4)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iioItemName", Matchers.is("Item4")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iioItemPrice", Matchers.is(4.2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].iioItemCount", Matchers.is(4)))
         ;
         Mockito.verify(iteminorderService).findAll();
     }
@@ -115,27 +124,28 @@ public class ItemInOrderRestControllerTest {
     @Test
     public void testIioFindByOrderId() throws Exception {
         Mockito.when(iteminorderService.findIioByOrderId(2))
-                .thenReturn(createItemInOrder(2,2,"Item",new BigDecimal("2.2"),2));
+                .thenReturn(new ArrayList<ItemInOrder>() {{add(createItemInOrder(2,2,
+                        "Item",new BigDecimal("2.2"),2));}});
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/iteminorders/2")
+            MockMvcRequestBuilders.get("/iteminorders/2")
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.iioOrderId", Matchers.is(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.iioItemId", Matchers.is(2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.iioItemName", Matchers.is("Item")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.iioItemPrice", Matchers.is(2.2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.iioItemCount", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioOrderId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemName", Matchers.is("Item")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemPrice", Matchers.is(2.2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].iioItemCount", Matchers.is(2)))
         ;
         Mockito.verify(iteminorderService, Mockito.times(1)).findIioByOrderId(2);
     }
 
     @Test
     public void testIioFindByOrderItemId() throws Exception {
-        Mockito.when(iteminorderService.findIioByOrderId(2))
+        Mockito.when(iteminorderService.findIioByOrderItemId(2,2))
                 .thenReturn(createItemInOrder(2,2,"Item",new BigDecimal("2.2"),2));
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/iteminorders/2")
+                MockMvcRequestBuilders.get("/iteminorders/2/2")
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -145,7 +155,7 @@ public class ItemInOrderRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.iioItemPrice", Matchers.is(2.2)))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.iioItemCount", Matchers.is(2)))
         ;
-        Mockito.verify(iteminorderService, Mockito.times(1)).findIioByOrderId(2);
+        Mockito.verify(iteminorderService, Mockito.times(1)).findIioByOrderItemId(2,2);
     }
 
     private ItemInOrder createItemInOrder(int iioOrderId, int iioItemId,
@@ -159,4 +169,4 @@ public class ItemInOrderRestControllerTest {
         return iteminorder;
     }
 
-}**/
+}
