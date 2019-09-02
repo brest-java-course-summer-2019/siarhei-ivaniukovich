@@ -31,14 +31,14 @@
 ---
 
 **Server local run (rest-app & web-app)**  
-`mvn jetty:run`
-*for rest-app see CURL examples:
+`mvn jetty:run`  
+*for rest-app see CURL examples:  
 `http://localhost/cafemenurest`
 
 **Tomcat deploying**  
-Install & Configure Tomcat9
-Copy *.war file to webapp folder
-Open in browser `http://localhost:8082/rest-app` OR `web-app` at the end
+* Install & Configure Tomcat9  
+* Copy *.war file to webapp folder  
+* Open in browser `http://localhost:8082/rest-app` OR `web-app` at the end
 
 ***
 
