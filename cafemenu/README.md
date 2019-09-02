@@ -1,5 +1,5 @@
-#### CafeMenu ```devrep```
----
+### CafeMenu ```devrep```
+
 >Builds: 
 [![Build Status](https://travis-ci.org/sergeblr/devrep.svg?branch=master)](https://travis-ci.org/sergeblr/devrep)
 [![Coverage Status](https://coveralls.io/repos/github/sergeblr/devrep/badge.svg?branch=master)](https://coveralls.io/github/sergeblr/devrep?branch=master)
@@ -11,31 +11,31 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sergeblr/devrep/blob/master/cafemenu/README.md)
 
 
-## CafeMenu project
+### Project description
  Cafemenu - application for cafe employees to control of making orders (adding/editing items), send them to job queue, check and control process, and closing after pay confirmed.
 
 #### Prerequisites
 - jdk11
 - maven 3+
 
-#### Installing  
-`mvn clean install`
+***
+**Installing**  
+ `mvn clean install`
 
-#### Running the tests
-`mvn clean test`
+**Running the tests**
+ `mvn clean test`
 
-#### Reports
+**Reports**
 `mvn site`
 
 ---
 
-#### Server local run (*rest-app & web-app)
+**Server local run (*rest-app & web-app)**
 `mvn jetty:run`
-
 *for rest-app see CURL examples:
 `http://localhost/cafemenurest`
 
-#### Tomcat deploying
+**Tomcat deploying**
 Install & Configure Tomcat9
 Copy *.war file to webapp folder
 Open in browser `http://localhost:8082/rest-app` OR `web-app` at the end
