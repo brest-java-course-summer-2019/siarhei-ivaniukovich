@@ -2,6 +2,7 @@ exclude_paths:
 - 'delivery_cost/**'
 - 'cafemenu/documentation/**'
 - 'cafemenu/web-app/src/main/webapp/resources/**'
+- '*.md'
 
 
 
