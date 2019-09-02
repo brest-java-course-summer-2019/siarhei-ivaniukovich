@@ -14,7 +14,7 @@
 ### Project description
  Cafemenu - application for cafe employees to control of making orders (adding/editing items), send them to job queue, check and control process, and closing after pay confirmed.
 
-#### Prerequisites
+### Prerequisites
 - jdk11
 - maven 3+
 
@@ -22,20 +22,20 @@
 **Installing**  
  `mvn clean install`
 
-**Running the tests**
+**Running the tests**  
  `mvn clean test`
 
-**Reports**
+**Reports**  
 `mvn site`
 
 ---
 
-**Server local run (*rest-app & web-app)**
+**Server local run (rest-app & web-app)**  
 `mvn jetty:run`
 *for rest-app see CURL examples:
 `http://localhost/cafemenurest`
 
-**Tomcat deploying**
+**Tomcat deploying**  
 Install & Configure Tomcat9
 Copy *.war file to webapp folder
 Open in browser `http://localhost:8082/rest-app` OR `web-app` at the end
