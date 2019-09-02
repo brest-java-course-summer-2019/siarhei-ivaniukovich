@@ -21,6 +21,7 @@
         <property name="locations">
             <list>
                 <value>classpath:sql.properties</value>
+                <value>classpath:restreadme.properties</value>
             </list>
         </property>
     </bean>

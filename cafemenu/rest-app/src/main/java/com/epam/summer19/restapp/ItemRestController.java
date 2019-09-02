@@ -27,7 +27,7 @@ public class ItemRestController {
         itemService.add(item);
     }
 
-    @PutMapping(value = "/items/{id}")
+    @PutMapping(value = "/item")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Item item) {
         LOGGER.debug("REST Update item({})", item);

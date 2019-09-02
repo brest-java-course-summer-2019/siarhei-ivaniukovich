@@ -30,7 +30,7 @@ public class ItemInOrderRestController {
     /** UPDATE (EDIT)
      *  curl -H "Content-Type: application/json" -X PUT -d '{"iioOrderId":"4","iioItemId":"2","iioItemName":"Nuggets","iioItemPrice":"3.0","iioItemCount":"5"}' -v http://localhost:8082/iteminorders/4
      *  */
-    @PutMapping(value = "/iteminorders/{orderId}/{itemId}")
+    @PutMapping(value = "/iteminorder")
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody ItemInOrder itemInOrder) {
         LOGGER.debug("REST Update iteminorder({})", itemInOrder);
@@ -59,7 +59,7 @@ public class ItemInOrderRestController {
 
     @GetMapping(value = "/iteminorders/{orderId}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Collection<ItemInOrder> findOrderById(@PathVariable("orderId") Integer orderId) {
+    public Collection<ItemInOrder> findItemInOrderByOrderId(@PathVariable("orderId") Integer orderId) {
         LOGGER.debug("REST Find iteminorder by orderId({})", orderId);
         Collection<ItemInOrder> result = itemInOrderService.findIioByOrderId(orderId);
         return result;

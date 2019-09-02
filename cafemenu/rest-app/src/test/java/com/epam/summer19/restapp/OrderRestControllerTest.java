@@ -21,7 +21,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -71,11 +75,11 @@ public class OrderRestControllerTest {
     }
 
     @Test
-    public void testUpdateOrder() throws Exception {
+    public void testOrderUpdate() throws Exception {
         Order order = createOrder(2,4);
         String json = new ObjectMapper().writeValueAsString(order);
 
-        mockMvc.perform(put("/orders/2")
+        mockMvc.perform(put("/order")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)
@@ -85,7 +89,7 @@ public class OrderRestControllerTest {
     }
 
     @Test
-    public void testDeleteOrder() throws Exception {
+    public void testOrderDelete() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/orders/4"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
@@ -110,7 +114,7 @@ public class OrderRestControllerTest {
     }
 
     @Test
-    public void testOrderFindById() throws Exception {
+    public void testOrderFindByOrderId() throws Exception {
         Mockito.when(orderService.findOrderById(1)).thenReturn(createOrder(1,5));
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/orders/1")
@@ -121,6 +125,26 @@ public class OrderRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.orderEmployeeId", Matchers.is(5)))
         ;
         Mockito.verify(orderService, Mockito.times(1)).findOrderById(1);
+    }
+
+    @Test
+    public void testOrderFindByDateTime() throws Exception {
+        Mockito.when(orderService.findOrdersByDateTime(
+                LocalDateTime.parse("2019-08-15_09:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
+                LocalDateTime.parse("2019-08-15_10:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+                )).thenReturn(new ArrayList<Order>() {{add(createOrder(2,6));}});
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/orders/2019-08-15_09:05:00/2019-08-15_10:05:00")
+                        .accept(MediaType.APPLICATION_JSON_UTF8)
+        ).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].orderId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].orderEmployeeId", Matchers.is(6)))
+        ;
+        Mockito.verify(orderService, Mockito.times(1)).findOrdersByDateTime(
+                LocalDateTime.parse("2019-08-15_09:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
+                LocalDateTime.parse("2019-08-15_10:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+        );
     }
 
     private Order createOrder(int orderId, int orderEmployeeId) {

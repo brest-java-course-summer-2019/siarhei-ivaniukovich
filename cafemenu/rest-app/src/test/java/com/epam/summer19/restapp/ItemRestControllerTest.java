@@ -78,7 +78,7 @@ public class ItemRestControllerTest {
         Item item = createItem(2,4);
         String json = new ObjectMapper().writeValueAsString(item);
 
-        mockMvc.perform(put("/items/2")
+        mockMvc.perform(put("/item")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)

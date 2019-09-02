@@ -26,6 +26,9 @@ MAIN SUMMER19:
 ## Running the tests
 `mvn clean test`
 
+## Rest-app test local cmds:
+
+
 ## Reports
 `mvn site`
 
