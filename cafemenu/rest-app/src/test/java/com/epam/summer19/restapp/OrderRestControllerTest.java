@@ -1,7 +1,7 @@
 package com.epam.summer19.restapp;
 
-import com.epam.summer19.model.Item;
-import com.epam.summer19.service.ItemService;
+import com.epam.summer19.model.Order;
+import com.epam.summer19.service.OrderService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
@@ -12,7 +12,6 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -24,21 +23,19 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath:rest-spring-test.xml"})
-public class ItemRestControllerTest {
+public class OrderRestControllerTest {
 
     @Autowired
-    private ItemRestController itemController;
+    private OrderRestController orderController;
 
     @Autowired
-    private ItemService itemService;
+    private OrderService orderService;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -47,7 +44,7 @@ public class ItemRestControllerTest {
 
     @BeforeEach
     public void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(itemController)
+        mockMvc = MockMvcBuilders.standaloneSetup(orderController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter())
                 .alwaysDo(MockMvcResultHandlers.print())
                 .build();
@@ -55,83 +52,82 @@ public class ItemRestControllerTest {
 
     @AfterEach
     public void afterReset() {
-        /** Mockito.verifyNoMoreInteractions(itemService); **/
-        Mockito.reset(itemService);
+        /** Mockito.verifyNoMoreInteractions(orderService); **/
+        Mockito.reset(orderService);
     }
 
 
     @Test
-    public void testItemAdd() throws Exception {
+    public void testOrderAdd() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/item")
+                MockMvcRequestBuilders.post("/order")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
-                        .content(objectMapper.writeValueAsString(createItem(1,2)))
+                        .content(objectMapper.writeValueAsString(createOrder(1,2)))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isOk())
         ;
 
-        Mockito.verify(itemService, Mockito.times(1)).add(any(Item.class));
+        Mockito.verify(orderService, Mockito.times(1)).add(any(Order.class));
     }
 
     @Test
-    public void testUpdateItem() throws Exception {
-        Item item = createItem(2,4);
-        String json = new ObjectMapper().writeValueAsString(item);
+    public void testUpdateOrder() throws Exception {
+        Order order = createOrder(2,4);
+        String json = new ObjectMapper().writeValueAsString(order);
 
-        mockMvc.perform(put("/items/2")
+        mockMvc.perform(put("/orders/2")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)
         ).andExpect(status().isAccepted());
 
-        Mockito.verify(itemService, Mockito.times(1)).update(any());
+        Mockito.verify(orderService, Mockito.times(1)).update(any());
     }
 
     @Test
-    public void testDeleteItem() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.delete("/items/4"))
+    public void testDeleteOrder() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/orders/4"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        Mockito.verify(itemService, Mockito.times(1)).delete(any());
+        Mockito.verify(orderService, Mockito.times(1)).delete(any());
     }
 
 
     @Test
-    public void testItemFindAll() throws Exception {
-        Mockito.when(itemService.findAll()).thenReturn(Arrays.asList(createItem(1,2), createItem(2,3)));
+    public void testOrderFindAll() throws Exception {
+        Mockito.when(orderService.findAll()).thenReturn(Arrays.asList(createOrder(1,2), createOrder(2,3)));
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/items")
+                MockMvcRequestBuilders.get("/orders")
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].itemName", Matchers.is("Item2")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].itemPrice", Matchers.is(2.2)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].itemName", Matchers.is("Item3")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$[1].itemPrice", Matchers.is(2.2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].orderId", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].orderEmployeeId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].orderId", Matchers.is(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].orderEmployeeId", Matchers.is(3)))
         ;
-        Mockito.verify(itemService).findAll();
+        Mockito.verify(orderService).findAll();
     }
 
     @Test
-    public void testItemFindById() throws Exception {
-        Mockito.when(itemService.findItemById(1)).thenReturn(createItem(1,5));
+    public void testOrderFindById() throws Exception {
+        Mockito.when(orderService.findOrderById(1)).thenReturn(createOrder(1,5));
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/items/1")
+                MockMvcRequestBuilders.get("/orders/1")
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.itemName", Matchers.is("Item5")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.itemPrice", Matchers.is(2.2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.orderId", Matchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.orderEmployeeId", Matchers.is(5)))
         ;
-        Mockito.verify(itemService, Mockito.times(1)).findItemById(1);
+        Mockito.verify(orderService, Mockito.times(1)).findOrderById(1);
     }
 
-    private Item createItem(int itemId, int namePostfix) {
-        Item item = new Item();
-        item.setItemId(itemId);
-        item.setItemName("Item" + namePostfix);
-        item.setItemPrice(new BigDecimal("2.2"));
-        return item;
+    private Order createOrder(int orderId, int orderEmployeeId) {
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setOrderEmployeeId(orderEmployeeId);
+        return order;
     }
 
 }

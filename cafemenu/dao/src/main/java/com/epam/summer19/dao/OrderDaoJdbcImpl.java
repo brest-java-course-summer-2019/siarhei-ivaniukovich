@@ -45,7 +45,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     private static final String ORDER_ID = "orderId";
     private static final String ORDER_EMPLOYEE_ID = "orderEmployeeId";
-    //private static final String ORDER_TIME = "orderDateTime";
+    private static final String ORDER_DATETIME = "orderDateTime";
     private static final String ORDER_STATUS = "orderStatus";
     private static final String ORDER_DATETIME_START = "orderDateTimeStart";
     private static final String ORDER_DATETIME_END = "orderDateTimeEnd";
@@ -106,7 +106,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public Optional<Order> findOrderById(Integer orderId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(ORDER_ID, orderId);
         List<Order> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
-                BeanPropertyRowMapper.newInstance(Order.class));
+                new OrderDaoJdbcImpl.OrderRowMapper());
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }
 
@@ -116,9 +116,10 @@ public class OrderDaoJdbcImpl implements OrderDao {
         mapSqlParameterSource.addValue(ORDER_DATETIME_START, startDateTime);
         mapSqlParameterSource.addValue(ORDER_DATETIME_END, endDateTime);
         List<Order> results = namedParameterJdbcTemplate.query(findOrdersByDateTimeSql, mapSqlParameterSource,
-                BeanPropertyRowMapper.newInstance(Order.class));
+                new OrderDaoJdbcImpl.OrderRowMapper());
         return results;
     }
+    /** BeanPropertyRowMapper.newInstance(Order.class) **/
 
     private class OrderRowMapper implements RowMapper<Order> {
         @Override
@@ -127,7 +128,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             order.setOrderId(resultSet.getInt(DB_ORDER_ID));
             order.setOrderEmployeeId(resultSet.getInt(DB_ORDER_EMPLOYEE_ID));
             order.setOrderDateTime(resultSet.getTimestamp(DB_ORDER_TIME).toLocalDateTime());
-            order.setOrderId(resultSet.getInt(DB_ORDER_STATUS));
+            order.setOrderStatus(resultSet.getInt(DB_ORDER_STATUS));
             return order;
         }
     }

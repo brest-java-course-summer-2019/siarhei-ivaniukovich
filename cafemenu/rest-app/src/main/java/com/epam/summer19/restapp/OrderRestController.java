@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Locale;
 
 @RestController
 public class OrderRestController {
@@ -48,6 +51,18 @@ public class OrderRestController {
     public Order findOrderById(@PathVariable("id") Integer id) {
         LOGGER.debug("REST Find order by orderId({})", id);
         return orderService.findOrderById(id);
+    }
+
+    @GetMapping(value = "/orders/{startDateTime}/{endDateTime}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Collection<Order> findOrdersByDateTime(
+            @PathVariable("startDateTime") String startDateTime,
+            @PathVariable("endDateTime") String endDateTime) {
+        LOGGER.debug("REST Find orders between {} and {}", startDateTime, endDateTime);
+        return orderService.findOrdersByDateTime(
+                LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
+                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+        );
     }
 
 }
