@@ -1,5 +1,6 @@
 package com.epam.summer19.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Order {
@@ -25,6 +26,11 @@ public class Order {
     private Integer orderStatus;
 
     /**
+     * order summary price
+     */
+    private BigDecimal summaryPrice;
+
+    /**
      * Get Order ID
      * @return
      */
@@ -48,11 +54,15 @@ public class Order {
 
     public void setOrderDateTime(LocalDateTime orderDateTime) { this.orderDateTime = orderDateTime; }
 
-    public Integer getOrderStatus() {
-        return orderStatus;
-    }
+    public Integer getOrderStatus() { return orderStatus; }
 
     public void setOrderStatus(Integer orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    public BigDecimal getSummaryPrice() {
+        return summaryPrice;
+    }
+
+    public void setSummaryPrice(BigDecimal summaryPrice) { this.summaryPrice = summaryPrice; }
 }

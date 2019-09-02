@@ -3,7 +3,6 @@ package com.epam.summer19.dao;
 import com.epam.summer19.model.Order;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -45,14 +44,13 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     private static final String ORDER_ID = "orderId";
     private static final String ORDER_EMPLOYEE_ID = "orderEmployeeId";
-    private static final String ORDER_DATETIME = "orderDateTime";
     private static final String ORDER_STATUS = "orderStatus";
     private static final String ORDER_DATETIME_START = "orderDateTimeStart";
     private static final String ORDER_DATETIME_END = "orderDateTimeEnd";
 
     private static final String DB_ORDER_ID = "order_id";
     private static final String DB_ORDER_EMPLOYEE_ID = "order_employee_id";
-    private static final String DB_ORDER_TIME = "order_datetime";
+    private static final String DB_ORDER_TIME = "order_date_time";
     private static final String DB_ORDER_STATUS = "order_status";
 
 
