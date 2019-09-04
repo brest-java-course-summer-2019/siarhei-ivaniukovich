@@ -123,14 +123,11 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public void calcSummaryOrderPrice(Integer orderId) {
-        MapSqlParameterSource parameters = new MapSqlParameterSource();
-        parameters.addValue(ORDER_ID, orderId);
-        namedParameterJdbcTemplate.update(summaryPriceUpdateSql, parameters);
-
-    /**    Optional.of(namedParameterJdbcTemplate.update(summaryPriceUpdateSql, parameters))
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue(ORDER_ID, orderId);
+        Optional.of(namedParameterJdbcTemplate.update(summaryPriceUpdateSql, mapSqlParameterSource))
                 .filter(this::successfullyUpdated)
                 .orElseThrow(() -> new RuntimeException("Failed to calc summaryOrderPrice in DB"));
-    **/
      }
 
     /** BeanPropertyRowMapper.newInstance(Order.class) **/

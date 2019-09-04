@@ -57,6 +57,11 @@ public class ItemInOrderRestController {
         return itemInOrderService.findAll();
     }
 
+    /**
+     * Find iio by orderId
+     * @param orderId
+     * @return
+     */
     @GetMapping(value = "/iteminorders/{orderId}")
     @ResponseStatus(value = HttpStatus.OK)
     public Collection<ItemInOrder> findItemInOrderByOrderId(@PathVariable("orderId") Integer orderId) {
@@ -65,6 +70,12 @@ public class ItemInOrderRestController {
         return result;
     }
 
+    /**
+     * Find iio by orderItemId
+     * @param orderId
+     * @param itemId
+     * @return
+     */
     @GetMapping(value = "/iteminorders/{orderId}/{itemId}")
     @ResponseStatus(value = HttpStatus.OK)
     public ItemInOrder findItemInOrderByOrderItemId(
