@@ -1,5 +1,6 @@
 package com.epam.summer19.dao;
 
+import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.model.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class OrderDaoJdbcImplTest {
 
     @Autowired
     OrderDao orderDao;
+
+    @Autowired
+    ItemInOrderDao itemInOrderDao;
 
     @Test
     public void add() {
@@ -96,5 +101,25 @@ public class OrderDaoJdbcImplTest {
         List orders = orderDao.findOrdersByDateTime(startDate, endDate);
         assertNotNull(orders);
         assertTrue(orders.size() > 0);
+    }
+
+    @Test
+    public void calcSummaryOrderPrice() {
+        Order testOrder = new Order();
+        ItemInOrder iio = new ItemInOrder();
+        testOrder.setOrderEmployeeId(EMPLOYEE_ID);
+        testOrder.setOrderStatus(ORDER_STATUS);
+        testOrder = orderDao.add(testOrder);
+        iio.setIioOrderId(testOrder.getOrderId());
+        iio.setIioItemId(2);
+        iio.setIioItemName("Item");
+        iio.setIioItemPrice(new BigDecimal("1.0"));
+        iio.setIioItemCount(2);
+        itemInOrderDao.add(iio);
+        orderDao.calcSummaryOrderPrice(testOrder.getOrderId());
+        Order resultOrder = orderDao.findOrderById(testOrder.getOrderId()).get();
+
+        //assertNotNull(resultOrder.getSummaryPrice());
+        //assertTrue(resultOrder.getSummaryPrice().equals(2.0));
     }
 }

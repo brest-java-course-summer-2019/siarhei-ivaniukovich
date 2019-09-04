@@ -42,6 +42,9 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Value("${order.findOrdersByDateTime}")
     private String findOrdersByDateTimeSql;
 
+    @Value("${order.summaryPriceUpdate}")
+    private String summaryPriceUpdateSql;
+
     private static final String ORDER_ID = "orderId";
     private static final String ORDER_EMPLOYEE_ID = "orderEmployeeId";
     private static final String ORDER_STATUS = "orderStatus";
@@ -117,6 +120,19 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 new OrderDaoJdbcImpl.OrderRowMapper());
         return results;
     }
+
+    @Override
+    public void calcSummaryOrderPrice(Integer orderId) {
+        MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue(ORDER_ID, orderId);
+        namedParameterJdbcTemplate.update(summaryPriceUpdateSql, parameters);
+
+    /**    Optional.of(namedParameterJdbcTemplate.update(summaryPriceUpdateSql, parameters))
+                .filter(this::successfullyUpdated)
+                .orElseThrow(() -> new RuntimeException("Failed to calc summaryOrderPrice in DB"));
+    **/
+     }
+
     /** BeanPropertyRowMapper.newInstance(Order.class) **/
 
     private class OrderRowMapper implements RowMapper<Order> {

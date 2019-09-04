@@ -26,3 +26,25 @@ CREATE TABLE item_in_order (
   PRIMARY KEY (iio_order_id, iio_item_id),
   FOREIGN KEY (iio_order_id) REFERENCES order_table(order_id) ON DELETE CASCADE
 );
+
+
+
+
+
+
+/* //// AUTO SUM PRICE on INS/UPD/DEL - Not supported in H2...
+CREATE TRIGGER summary_price_update
+ON item_in_order
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+ UPDATE order_table
+    SET order_table.order_summary_price = (SELECT SUM(iio_item_price)
+                                            FROM item_in_order
+                                            WHERE item_in_order.iio_order_id = order_table.order_id)
+    FROM order_table
+    ON order_table.order_id = item_in_order.iio_order_id;
+END;
+*/
+
+

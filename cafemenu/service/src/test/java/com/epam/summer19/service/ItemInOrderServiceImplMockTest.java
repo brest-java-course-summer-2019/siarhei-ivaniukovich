@@ -1,19 +1,22 @@
 package com.epam.summer19.service;
 
 import com.epam.summer19.dao.ItemInOrderDao;
+import com.epam.summer19.dao.OrderDao;
 import com.epam.summer19.model.ItemInOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class ItemInOrderServiceImplMockTest {
@@ -21,52 +24,45 @@ public class ItemInOrderServiceImplMockTest {
     @Mock
     private ItemInOrderDao mockIiodao;
 
+    @Mock
+    private OrderDao mockOrderdao;
+
     @InjectMocks
     private ItemInOrderServiceImpl itemInOrderServiceImplUnderTest;
 
     @BeforeEach
     public void setUp() {
         initMocks(this);
-        itemInOrderServiceImplUnderTest = new ItemInOrderServiceImpl(mockIiodao);
+        itemInOrderServiceImplUnderTest = new ItemInOrderServiceImpl(mockIiodao, mockOrderdao);
     }
 
     @Test
     public void testAddSingle() {
-        final ItemInOrder iteminorder = null;
-        when(mockIiodao.add(null)).thenReturn(null);
-        
-        itemInOrderServiceImplUnderTest.add(iteminorder);
-
-        verify(mockIiodao).add(iteminorder);
+        doNothing().when(mockOrderdao).calcSummaryOrderPrice(anyInt());
+        itemInOrderServiceImplUnderTest.add(createIio(1,2,"Item1"));
+        verify(mockIiodao).add(any());
     }
 
     @Test
     public void testAddMultiple() {
-        final ItemInOrder iioone = null;
-        when(mockIiodao.add(null)).thenReturn(null);
-
-        itemInOrderServiceImplUnderTest.add(iioone);
-
-        verify(mockIiodao).add(iioone);
+        itemInOrderServiceImplUnderTest.add(createIio(1,3,"Item2"), createIio(1,4,"Item22"));
+        verify(mockIiodao, atLeast(2)).add(any());
     }
 
     @Test
     public void testUpdate() {
-        final ItemInOrder iteminorder = null;
-
-        itemInOrderServiceImplUnderTest.update(iteminorder);
-
-        verify(mockIiodao).update(null);
+        doNothing().when(mockOrderdao).calcSummaryOrderPrice(anyInt());
+        itemInOrderServiceImplUnderTest.update(createIio(1,2,"Item3"));
+        verify(mockIiodao).update(any());
     }
 
     @Test
     public void testDelete() {
-        final Integer iioOrderId = 0;
-        final Integer iioItemId = 0;
-
+        doNothing().when(mockOrderdao).calcSummaryOrderPrice(anyInt());
+        final Integer iioOrderId = 1;
+        final Integer iioItemId = 2;
         itemInOrderServiceImplUnderTest.delete(iioOrderId, iioItemId);
-
-        verify(mockIiodao).delete(0, 0);
+        verify(mockIiodao).delete(1, 2);
     }
 
     @Test
@@ -101,6 +97,17 @@ public class ItemInOrderServiceImplMockTest {
         final ItemInOrder result = itemInOrderServiceImplUnderTest.findIioByOrderItemId(iioOrderId, iioItemId);
 
         assertEquals(expectedResult, result);
+    }
+
+    private static ItemInOrder createIio(Integer orderId, Integer itemId, String itemName) {
+        ItemInOrder iteminorder = new ItemInOrder();
+        iteminorder.setIioOrderId(orderId);
+        iteminorder.setIioItemId(itemId);
+        iteminorder.setIioItemName(itemName);
+        iteminorder.setIioItemPrice(new BigDecimal("1.0"));
+        iteminorder.setIioItemCount(1);
+
+        return iteminorder;
     }
 
 }
