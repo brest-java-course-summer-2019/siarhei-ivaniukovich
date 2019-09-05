@@ -43,7 +43,7 @@ public class VersionControllerTest {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/version")
         ).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("\"" + VERSION + "\""));
+                .andExpect(MockMvcResultMatchers.content().string(containsString("version")));
     }
 
     /**
@@ -56,5 +56,17 @@ public class VersionControllerTest {
                 MockMvcRequestBuilders.get("/cafemenurest")
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(containsString("restReadme")));
+    }
+
+    /**
+     *
+     * @throws Exception
+     */
+    @Test
+    public void index() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/")
+        ).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(containsString("index")));
     }
 }

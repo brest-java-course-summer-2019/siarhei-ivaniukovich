@@ -5,28 +5,33 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Home MVC + cmd readme
+ * Home MVC + cmd readme + index
  */
 @RestController
 public class VersionController {
 
-    private final static String CMVERSION = "1.0.0";
-
     @Value("${restReadme}")
-    private String restReadme;
+    private String restReadmeStr;
 
-    /**
-     * Version.
-     *
-     * @return app version
-     */
+    @Value("${version}")
+    private String versionStr;
+
+    @Value("${index}")
+    private String indexStr;
+
+
     @GetMapping(value = "/version")
     public String version() {
-        return CMVERSION;
+        return versionStr;
     }
 
     @GetMapping(value = "/cafemenurest")
     public String restReadme() {
-        return restReadme;
+        return restReadmeStr;
+    }
+
+    @GetMapping(value = "/")
+    public String index() {
+        return indexStr;
     }
 }

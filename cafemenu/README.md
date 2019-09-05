@@ -12,15 +12,25 @@
 
 
 ### Project description
- Cafemenu - application for cafe employees to control of making orders (adding/editing items), send them to job queue, check and control process, and closing after pay confirmed.
+ Cafemenu - application for cafe employees to control of making orders (adding/editing items), filter them by date&time, editing and summarize by items price inside & item quantity.
 
 ### Prerequisites
 - jdk11
 - maven 3+
+- install tomcat9
 
 ***
 **Installing**  
+ - Download project from github:
+ URL: `https://github.com/brest-java-course-summer-2019/siarhei-ivaniukovich.git`
+ - Run at root of unpacked project folder:
  `mvn clean install`
+ 
+ **Running app**
+ - Using pluign jetty:
+   - inside /cafemenu/rest-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082/cafemenurest` for API examples
+   - inside /cafemenu/web-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082` for web startpage
+  
 
 **Running the tests**  
  `mvn clean test`
