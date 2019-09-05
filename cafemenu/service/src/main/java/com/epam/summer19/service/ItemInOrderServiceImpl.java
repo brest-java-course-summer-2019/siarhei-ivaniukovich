@@ -1,7 +1,6 @@
 package com.epam.summer19.service;
 
 import com.epam.summer19.dao.ItemInOrderDao;
-import com.epam.summer19.dao.OrderDao;
 import com.epam.summer19.model.ItemInOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +15,9 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemInOrderServiceImpl.class);
     private ItemInOrderDao itemInOrderDao;
-    private OrderDao orderDao;
 
-    public ItemInOrderServiceImpl(ItemInOrderDao itemInOrderDao, OrderDao orderDao) {
+    public ItemInOrderServiceImpl(ItemInOrderDao itemInOrderDao) {
         this.itemInOrderDao = itemInOrderDao;
-        this.orderDao = orderDao;
     }
 
     @Override
@@ -35,24 +32,18 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
     public void add(ItemInOrder iteminorder) {
         LOGGER.debug("Single ItemInOrder add({})", iteminorder);
         itemInOrderDao.add(iteminorder);
-        LOGGER.debug("Single ItemInOrder add({}) - orderDao.calcSummaryOrderPrice({})", iteminorder, iteminorder.getIioOrderId());
-        orderDao.calcSummaryOrderPrice(iteminorder.getIioOrderId());
     }
 
     @Override
     public void update(ItemInOrder iteminorder) {
         LOGGER.debug("ItemInOrder update({})", iteminorder);
         itemInOrderDao.update(iteminorder);
-        LOGGER.debug("ItemInOrder update({}) - orderDao.calcSummaryOrderPrice({})", iteminorder, iteminorder.getIioOrderId());
-        orderDao.calcSummaryOrderPrice(iteminorder.getIioOrderId());
     }
 
     @Override
     public void delete(Integer iioOrderId, Integer iioItemId) {
         LOGGER.debug("ItemInOrder delete({})", iioOrderId+','+iioItemId);
         itemInOrderDao.delete(iioOrderId, iioItemId);
-        LOGGER.debug("ItemInOrder delete({}) - orderDao.calcSummaryOrderPrice({})", iioOrderId+','+iioItemId, iioOrderId);
-        orderDao.calcSummaryOrderPrice(iioOrderId);
     }
 
     @Override

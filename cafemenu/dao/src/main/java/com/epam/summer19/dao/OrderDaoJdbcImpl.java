@@ -1,8 +1,10 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Order;
+import com.epam.summer19.dto.OrderDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -42,19 +44,17 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Value("${order.findOrdersByDateTime}")
     private String findOrdersByDateTimeSql;
 
-    @Value("${order.summaryPriceUpdate}")
-    private String summaryPriceUpdateSql;
+    @Value("${orderDTO.findAllWithSum}")
+    private String findAllDTOSql;
 
     private static final String ORDER_ID = "orderId";
     private static final String ORDER_EMPLOYEE_ID = "orderEmployeeId";
-    private static final String ORDER_STATUS = "orderStatus";
     private static final String ORDER_DATETIME_START = "orderDateTimeStart";
     private static final String ORDER_DATETIME_END = "orderDateTimeEnd";
 
     private static final String DB_ORDER_ID = "order_id";
-    private static final String DB_ORDER_EMPLOYEE_ID = "order_employee_id";
+    private static final String DB_ORDER_EMPLOYEE_ID = "employee_id";
     private static final String DB_ORDER_TIME = "order_date_time";
-    private static final String DB_ORDER_STATUS = "order_status";
 
 
     public OrderDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -70,7 +70,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(ORDER_EMPLOYEE_ID, order.getOrderEmployeeId());
-        parameters.addValue(ORDER_STATUS, order.getOrderStatus());
 
         KeyHolder generatedKeyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(addSql, parameters, generatedKeyHolder);
@@ -104,6 +103,13 @@ public class OrderDaoJdbcImpl implements OrderDao {
     }
 
     @Override
+    public List<OrderDTO> findAllDTO() {
+        List<OrderDTO> orderDTO =
+                namedParameterJdbcTemplate.query(findAllDTOSql, BeanPropertyRowMapper.newInstance(OrderDTO.class));
+        return orderDTO;
+    }
+
+    @Override
     public Optional<Order> findOrderById(Integer orderId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(ORDER_ID, orderId);
         List<Order> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
@@ -121,16 +127,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return results;
     }
 
-    @Override
-    public void calcSummaryOrderPrice(Integer orderId) {
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue(ORDER_ID, orderId);
-        Optional.of(namedParameterJdbcTemplate.update(summaryPriceUpdateSql, mapSqlParameterSource))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to calc summaryOrderPrice in DB"));
-     }
-
-    /** BeanPropertyRowMapper.newInstance(Order.class) **/
 
     private class OrderRowMapper implements RowMapper<Order> {
         @Override
@@ -139,7 +135,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
             order.setOrderId(resultSet.getInt(DB_ORDER_ID));
             order.setOrderEmployeeId(resultSet.getInt(DB_ORDER_EMPLOYEE_ID));
             order.setOrderDateTime(resultSet.getTimestamp(DB_ORDER_TIME).toLocalDateTime());
-            order.setOrderStatus(resultSet.getInt(DB_ORDER_STATUS));
             return order;
         }
     }

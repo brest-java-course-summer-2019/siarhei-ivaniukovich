@@ -1,6 +1,7 @@
 package com.epam.summer19.service;
 
 import com.epam.summer19.dao.OrderDao;
+import com.epam.summer19.dto.OrderDTO;
 import com.epam.summer19.model.Order;
 
 import java.time.LocalDateTime;
@@ -51,6 +52,12 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAll() {
         LOGGER.debug("Find all Orders");
         return orderDao.findAll();
+    }
+
+    @Override
+    public List<OrderDTO> findAllDTO() {
+        LOGGER.debug("Find all Orders DTO");
+        return orderDao.findAllDTO();
     }
 
     @Override

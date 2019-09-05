@@ -1,7 +1,6 @@
 package com.epam.summer19.service;
 
 import com.epam.summer19.dao.ItemInOrderDao;
-import com.epam.summer19.dao.OrderDao;
 import com.epam.summer19.model.ItemInOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -24,21 +22,17 @@ public class ItemInOrderServiceImplMockTest {
     @Mock
     private ItemInOrderDao mockIiodao;
 
-    @Mock
-    private OrderDao mockOrderdao;
-
     @InjectMocks
     private ItemInOrderServiceImpl itemInOrderServiceImplUnderTest;
 
     @BeforeEach
     public void setUp() {
         initMocks(this);
-        itemInOrderServiceImplUnderTest = new ItemInOrderServiceImpl(mockIiodao, mockOrderdao);
+        itemInOrderServiceImplUnderTest = new ItemInOrderServiceImpl(mockIiodao);
     }
 
     @Test
     public void testAddSingle() {
-        doNothing().when(mockOrderdao).calcSummaryOrderPrice(anyInt());
         itemInOrderServiceImplUnderTest.add(createIio(1,2,"Item1"));
         verify(mockIiodao).add(any());
     }
@@ -51,14 +45,12 @@ public class ItemInOrderServiceImplMockTest {
 
     @Test
     public void testUpdate() {
-        doNothing().when(mockOrderdao).calcSummaryOrderPrice(anyInt());
         itemInOrderServiceImplUnderTest.update(createIio(1,2,"Item3"));
         verify(mockIiodao).update(any());
     }
 
     @Test
     public void testDelete() {
-        doNothing().when(mockOrderdao).calcSummaryOrderPrice(anyInt());
         final Integer iioOrderId = 1;
         final Integer iioItemId = 2;
         itemInOrderServiceImplUnderTest.delete(iioOrderId, iioItemId);

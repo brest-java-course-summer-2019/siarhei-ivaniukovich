@@ -1,4 +1,4 @@
-package com.epam.summer19.model;
+package com.epam.summer19.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

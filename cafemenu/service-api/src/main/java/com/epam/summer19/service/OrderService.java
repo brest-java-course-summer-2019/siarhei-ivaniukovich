@@ -1,5 +1,6 @@
 package com.epam.summer19.service;
 
+import com.epam.summer19.dto.OrderDTO;
 import com.epam.summer19.model.Order;
 
 import java.time.LocalDateTime;
@@ -43,6 +44,13 @@ public interface OrderService {
      * @return
      */
     List<Order> findAll();
+
+    /**
+     * Get all orders DTO
+     *
+     * @return
+     */
+    List<OrderDTO> findAllDTO();
 
     /**
      * Find order by orderId

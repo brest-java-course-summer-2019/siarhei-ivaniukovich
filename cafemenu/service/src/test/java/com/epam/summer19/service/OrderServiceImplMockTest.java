@@ -1,6 +1,7 @@
 package com.epam.summer19.service;
 
 import com.epam.summer19.dao.OrderDao;
+import com.epam.summer19.dto.OrderDTO;
 import com.epam.summer19.model.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,16 @@ public class OrderServiceImplMockTest {
         when(mockOrderdao.findAll()).thenReturn(Arrays.asList());
 
         final List<Order> result = orderServiceImplUnderTest.findAll();
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void testFindAllDTO() {
+        final List<OrderDTO> expectedResult = Arrays.asList();
+        when(mockOrderdao.findAllDTO()).thenReturn(Arrays.asList());
+
+        final List<OrderDTO> result = orderServiceImplUnderTest.findAllDTO();
 
         assertEquals(expectedResult, result);
     }

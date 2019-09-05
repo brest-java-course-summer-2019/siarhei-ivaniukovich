@@ -3,7 +3,6 @@ package com.epam.summer19.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -32,15 +31,4 @@ public class OrderTest {
         Assert.assertTrue(order.getOrderDateTime().equals(datetime));
     }
 
-    @Test
-    public void getOrderStatus() {
-        order.setOrderStatus(1);
-        Assert.assertTrue(order.getOrderStatus().equals(1));
-    }
-
-    @Test
-    public void getSummaryPrice() {
-        order.setSummaryPrice(new BigDecimal("25.0"));
-        Assert.assertTrue(order.getSummaryPrice().compareTo(new BigDecimal("25.0")) == 0);
-    }
 }

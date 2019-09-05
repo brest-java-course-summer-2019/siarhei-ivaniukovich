@@ -1,5 +1,6 @@
 package com.epam.summer19.restapp;
 
+import com.epam.summer19.dto.OrderDTO;
 import com.epam.summer19.model.Order;
 import com.epam.summer19.service.OrderService;
 import org.slf4j.Logger;
@@ -62,6 +63,12 @@ public class OrderRestController {
                 LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
                 LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
         );
+    }
+
+    @GetMapping(value = "/ordersdto")
+    public Collection<OrderDTO> findAllDTO() {
+        LOGGER.debug("REST List all orders");
+        return orderService.findAllDTO();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Order;
+import com.epam.summer19.dto.OrderDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,6 +35,12 @@ public interface OrderDao {
     List<Order> findAll();
 
     /**
+     * Get all orders DTOs (summary price+items)
+     * @return
+     */
+    List<OrderDTO> findAllDTO();
+
+    /**
      * Find order by orderId
      * @param orderId
      * @return
@@ -41,6 +48,4 @@ public interface OrderDao {
     Optional<Order> findOrderById(Integer orderId);
 
     List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
-
-    void calcSummaryOrderPrice(Integer orderId);
 }

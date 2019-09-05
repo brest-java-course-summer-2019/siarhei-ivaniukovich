@@ -1,5 +1,6 @@
-package com.epam.summer19.model;
+package com.epam.summer19.dto;
 
+import com.epam.summer19.dto.OrderDTO;
 import org.junit.Assert;
 import org.junit.Test;
 

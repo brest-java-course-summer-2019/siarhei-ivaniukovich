@@ -1,4 +1,4 @@
     /**
      * Cafe Menu package - model classes
      */
-package com.epam.summer19.model;
+package com.epam.summer19.dto;
