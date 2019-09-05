@@ -46,6 +46,12 @@ public class OrderRestController {
         return orderService.findAll();
     }
 
+    @GetMapping(value = "/ordersdto")
+    public Collection<OrderDTO> findAllDTO() {
+        LOGGER.debug("REST List all orders DTO");
+        return orderService.findAllDTO();
+    }
+
     @GetMapping(value = "/orders/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Order findOrderById(@PathVariable("id") Integer id) {
@@ -64,11 +70,4 @@ public class OrderRestController {
                 LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
         );
     }
-
-    @GetMapping(value = "/ordersdto")
-    public Collection<OrderDTO> findAllDTO() {
-        LOGGER.debug("REST List all orders");
-        return orderService.findAllDTO();
-    }
-
 }
