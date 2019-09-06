@@ -6,11 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -30,8 +32,8 @@ public class ItemServiceImplMockTest {
 
     @Test
     public void testAddSingle() {
-        final Item item = null;
-        when(mockItemdao.add(null)).thenReturn(null);
+        final Item item = createItem(2);
+        when(mockItemdao.add(any(Item.class))).thenReturn(item);
         
         itemServiceImplUnderTest.add(item);
 
@@ -40,10 +42,11 @@ public class ItemServiceImplMockTest {
     
     @Test
     public void testAddMultiple() {
-        final Item itemone = null;
-        when(mockItemdao.add(null)).thenReturn(null);
-        
-        itemServiceImplUnderTest.add(itemone);
+        final Item itemone = createItem(3);
+        final Item itemtwo = createItem(4);
+        when(mockItemdao.add(any(Item.class))).thenReturn(itemone);
+
+        itemServiceImplUnderTest.add(itemone, itemtwo);
 
         verify(mockItemdao).add(itemone);
     }
@@ -80,11 +83,20 @@ public class ItemServiceImplMockTest {
     public void testFindItemById() {
         final Integer itemId = 0;
         final Item expectedResult = new Item();
-        expectedResult.setItemName("MockItemInOrderName");
+        expectedResult.setItemName("MockItemName");
         when(mockItemdao.findItemById(0)).thenReturn(Optional.of(expectedResult));
         
         final Item result = itemServiceImplUnderTest.findItemById(itemId);
 
         assertEquals(expectedResult, result);
     }
+
+    private static Item createItem(Integer itemId) {
+        Item item = new Item();
+        item.setItemId(itemId);
+        item.setItemName("Item"+itemId);
+        item.setItemPrice(new BigDecimal(itemId+0.5));
+        return item;
+    }
+    
 }

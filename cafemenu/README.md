@@ -17,20 +17,24 @@
 ### Prerequisites
 - jdk11
 - maven 3+
-- install tomcat9
+- tomcat9
 
 ***
 **Installing**  
- - Download project from github:
+ - Download project from github
  URL: `https://github.com/brest-java-course-summer-2019/siarhei-ivaniukovich.git`
- - Run at root of unpacked project folder:
+ - Run at root of unpacked project folder to build project:
  `mvn clean install`
  
- **Running app**
- - Using pluign jetty:
+**Running app**
+ - Using plugin jetty:
    - inside /cafemenu/rest-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082/cafemenurest` for API examples
    - inside /cafemenu/web-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082` for web startpage
-  
+ 
+ - Using server tomcat9:
+   - Install, configure & run tomcat 9 server: `https://www.howtoforge.com/tutorial/ubuntu-apache-tomcat/`
+   - deploy *.WARs via web-page of tomcat
+   - open CafeMenu web-app via browser with web-page name as WARs name deployed
 
 **Running the tests**  
  `mvn clean test`
@@ -40,15 +44,10 @@
 
 ---
 
-**Server local run (rest-app & web-app)**  
-`mvn jetty:run`  
-*for rest-app see CURL examples:  
-`http://localhost/cafemenurest`
-
-**Tomcat deploying**  
-* Install & Configure Tomcat9  
-* Copy *.war file to webapp folder  
-* Open in browser `http://localhost:8082/rest-app` OR `web-app` at the end
+**External server**
+ For testing available (based on buddy.works autopack & deploy to own server):
+   - rest-app`http://***.***.***.71:8089/cafemenu-restapp/`
+   - web-app`http://***.***.***.71:8089/cafemenu-webapp/`
 
 ***
 

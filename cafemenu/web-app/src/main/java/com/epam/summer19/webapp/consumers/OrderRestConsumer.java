@@ -1,5 +1,6 @@
 package com.epam.summer19.webapp.consumers;
 
+import com.epam.summer19.dto.OrderDTO;
 import com.epam.summer19.model.Order;
 import com.epam.summer19.service.OrderService;
 import com.epam.summer19.webapp.OrderController;
@@ -42,8 +43,15 @@ public class OrderRestConsumer implements OrderService {
     @Override
     public List<Order> findAll() {
         LOGGER.debug("findAll()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/all", List.class);
+        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/all_", List.class);
         return (List<Order>) responseEntity.getBody();
+    }
+
+    @Override
+    public List<OrderDTO> findAllDTO() {
+        LOGGER.debug("findAllDTO()");
+        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/all", List.class);
+        return (List<OrderDTO>) responseEntity.getBody();
     }
 
     /**
@@ -113,4 +121,5 @@ public class OrderRestConsumer implements OrderService {
         ResponseEntity responseEntity = restTemplate.getForEntity(url + "/" + startDateTime + "/" + endDateTime, List.class);
         return (List<Order>) responseEntity.getBody();
     }
+
 }

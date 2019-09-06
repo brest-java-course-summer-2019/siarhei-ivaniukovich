@@ -6,13 +6,14 @@ import com.epam.summer19.webapp.validators.OrderValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -37,10 +38,22 @@ public class OrderController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/orders")
+    @GetMapping(value = "/orders_")
     public final String listAllOrders(Model model) {
         LOGGER.debug("ListAllOrders findAll({})", model);
         model.addAttribute("orders", orderService.findAll());
+        return "orders_";
+    }
+
+    /**
+     * List all ordersDTO page with price SUM & items count
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/orders")
+    public final String listAllOrdersDTO(Model model) {
+        LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
+        model.addAttribute("orders", orderService.findAllDTO());
         return "orders";
     }
 
@@ -56,6 +69,24 @@ public class OrderController {
         model.addAttribute("isNew", true);
         model.addAttribute("order", order);
         return "order";
+    }
+
+    /**
+     * List all orders page filtered between START and END date&time
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/orders/{startDateTime}/{endDateTime}")
+    public final String listAllOrdersByDateTime(
+            @PathVariable("startDateTime") String startDateTime,
+            @PathVariable("endDateTime") String endDateTime, Model model) {
+        LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
+        model.addAttribute("isNew", false);
+        model.addAttribute("orders", orderService.findOrdersByDateTime(
+                LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
+                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+        ));
+        return "orders";
     }
 
     /**
