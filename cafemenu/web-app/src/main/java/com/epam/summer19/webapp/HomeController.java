@@ -27,5 +27,11 @@ public class HomeController {
         return "redirect:/main";
     }
 
+    @GetMapping(value = "/index")
+    public final String defaultIndexPageRedirect() {
+        LOGGER.debug("defaultPageRedirect()");
+        return "redirect:/index";
+    }
+
 }
 

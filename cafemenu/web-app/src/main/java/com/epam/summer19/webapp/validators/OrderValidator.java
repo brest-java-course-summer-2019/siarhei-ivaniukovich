@@ -17,9 +17,7 @@ public class OrderValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-
         ValidationUtils.rejectIfEmpty(errors, "orderEmployeeId", "orderEmployeeId.empty");
-        ValidationUtils.rejectIfEmpty(errors, "orderStatus", "orderStatus.empty");
         Order order = (Order) target;
 
         if (order.getOrderEmployeeId() != null && order.getOrderEmployeeId().intValue() < 0) {

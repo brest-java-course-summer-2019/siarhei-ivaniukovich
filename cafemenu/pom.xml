@@ -50,7 +50,8 @@
       <jacoco.bundle.coveredratio.minimum>0%</jacoco.bundle.coveredratio.minimum>
       <org.springframework.version>5.1.8.RELEASE</org.springframework.version>
       <thymeleaf-spring5.version>3.0.11.RELEASE</thymeleaf-spring5.version>
-      <jackson-databind.version>2.9.8</jackson-databind.version>
+      <jackson-databind.version>2.9.9</jackson-databind.version>
+      <slf4j-api.version>1.7.25</slf4j-api.version>
       <javax.servlet.version>4.0.0</javax.servlet.version>
       <validation-api.version>2.0.1.Final</validation-api.version>
    </properties>
@@ -87,7 +88,7 @@
             <artifactId>test-db</artifactId>
             <version>${project.version}</version>
          </dependency>
-         <!--<dependency>
+         <dependency>
             <groupId>com.epam.summer19</groupId>
             <artifactId>rest-app</artifactId>
             <version>${project.version}</version>
@@ -96,7 +97,7 @@
             <groupId>com.epam.summer19</groupId>
             <artifactId>web-app</artifactId>
             <version>${project.version}</version>
-         </dependency>-->
+         </dependency>
          <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -148,7 +149,7 @@
          <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+            <version>${slf4j-api.version}</version>
          </dependency>
          <dependency>
             <groupId>ch.qos.logback</groupId>
