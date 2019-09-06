@@ -28,13 +28,13 @@
  
 **Running app**
  - Using plugin jetty:
-   - inside /cafemenu/rest-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082/cafemenurest` for API examples
-   - inside /cafemenu/web-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082` for web startpage
+   - inside /cafemenu/rest-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082/cafemenurest` for REST API examples
+   - inside /cafemenu/web-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8083` for WEB startpage
  
  - Using server tomcat9:
    - Install, configure & run tomcat 9 server: `https://www.howtoforge.com/tutorial/ubuntu-apache-tomcat/`
-   - deploy *.WARs via web-page of tomcat
-   - open CafeMenu web-app via browser with web-page name as WARs name deployed
+   - deploy *.WARs via tomcat web-interface to server
+   - open CafeMenu web-app via browser at address as WARs named
 
 **Running the tests**  
  `mvn clean test`
