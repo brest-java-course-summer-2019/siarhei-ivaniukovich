@@ -51,7 +51,8 @@
       <org.springframework.version>5.1.8.RELEASE</org.springframework.version>
       <thymeleaf-spring5.version>3.0.11.RELEASE</thymeleaf-spring5.version>
       <jackson-databind.version>2.9.9</jackson-databind.version>
-      <slf4j-api.version>1.7.25</slf4j-api.version>
+      <slf4j-api.version>1.7.28</slf4j-api.version>
+      <slf4j-simple.version>1.7.28</slf4j-simple.version>
       <javax.servlet.version>4.0.0</javax.servlet.version>
       <validation-api.version>2.0.1.Final</validation-api.version>
    </properties>
@@ -150,6 +151,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
          </dependency>
          <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -440,11 +446,14 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
-            <configuration>
-               <linkXref>true</linkXref>
-               <sourceEncoding>utf-8</sourceEncoding>
-               <minimumTokens>100</minimumTokens>
-            </configuration>
+            <reportSets>
+               <reportSet>
+                  <reports>
+                     <report>pmd</report>
+                     <report>cpd</report>
+                  </reports>
+               </reportSet>
+            </reportSets>
          </plugin>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>

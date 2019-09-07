@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.epam.summer19.dao" level="DEBUG" additivity="false">
+    <logger name="com.epam.courses.paycom.dao" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT" />
     </logger>
 
