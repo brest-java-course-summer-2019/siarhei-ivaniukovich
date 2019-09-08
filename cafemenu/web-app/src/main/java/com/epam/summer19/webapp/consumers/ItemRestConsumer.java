@@ -15,13 +15,8 @@ import java.util.List;
  */
 public class ItemRestConsumer implements ItemService {
 
-    /**
-     * Logger.
-     */
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
-
     private String url;
-
     private RestTemplate restTemplate;
 
     /**
@@ -40,7 +35,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public List<Item> findAll() {
-        LOGGER.debug("findAll()");
+        LOGGER.debug("Items findAll()");
         ResponseEntity responseEntity = restTemplate.getForEntity(url + "/all", List.class);
         return (List<Item>) responseEntity.getBody();
     }

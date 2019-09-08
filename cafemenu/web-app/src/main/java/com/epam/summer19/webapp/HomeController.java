@@ -11,26 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    /**
-     * Logger.
-     */
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
-    /**
-     * Redirect to default page -> main.html
-     *
-     * @return redirect path
-     */
     @GetMapping(value = "/")
-    public final String defaultPageRedirect() {
+    public String defaultPageRedirect() {
         LOGGER.debug("defaultPageRedirect()");
-        return "redirect:/main";
-    }
-
-    @GetMapping(value = "/index")
-    public final String defaultIndexPageRedirect() {
-        LOGGER.debug("defaultPageRedirect()");
-        return "redirect:/index";
+        return "redirect:main";
     }
 
 }

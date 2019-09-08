@@ -21,7 +21,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Controller
 public class OrderController {
-
     /**
      * Logger
      */
@@ -32,30 +31,6 @@ public class OrderController {
 
     @Autowired
     OrderValidator orderValidator;
-
-    /**
-     * List all orders page
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/orders_")
-    public final String listAllOrders(Model model) {
-        LOGGER.debug("ListAllOrders findAll({})", model);
-        model.addAttribute("orders", orderService.findAll());
-        return "orders_";
-    }
-
-    /**
-     * List all ordersDTO page with price SUM & items count
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/orders")
-    public final String listAllOrdersDTO(Model model) {
-        LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
-        model.addAttribute("orders", orderService.findAllDTO());
-        return "orders";
-    }
 
     /**
      * GOTO Order add page
@@ -71,23 +46,7 @@ public class OrderController {
         return "order";
     }
 
-    /**
-     * List all orders page filtered between START and END date&time
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/orders/{startDateTime}/{endDateTime}")
-    public final String listAllOrdersByDateTime(
-            @PathVariable("startDateTime") String startDateTime,
-            @PathVariable("endDateTime") String endDateTime, Model model) {
-        LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
-        model.addAttribute("isNew", false);
-        model.addAttribute("orders", orderService.findOrdersByDateTime(
-                LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
-                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
-        ));
-        return "orders";
-    }
+
 
     /**
      * Add order
@@ -103,8 +62,8 @@ public class OrderController {
             return "order";
         } else {
             this.orderService.add(order);
-            return "redirect:/orders";
         }
+        return "redirect:/orders";
     }
 
     /**
@@ -151,4 +110,47 @@ public class OrderController {
         orderService.delete(id);
         return "redirect:/orders";
     }
+
+    /**
+     * List all orders page
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/orders_")
+    public final String listAllOrders(Model model) {
+        LOGGER.debug("ListAllOrders findAll({})", model);
+        model.addAttribute("orders_", orderService.findAll());
+        return "orders_";
+    }
+
+    /**
+     * List all ordersDTO page with price SUM & items count
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/orders")
+    public final String listAllOrdersDTO(Model model) {
+        LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
+        model.addAttribute("orders", orderService.findAllDTO());
+        return "orders";
+    }
+
+    /**
+     * List all orders page filtered between START and END date&time
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/orders/{startDateTime}/{endDateTime}")
+    public final String listAllOrdersByDateTime(
+            @PathVariable("startDateTime") String startDateTime,
+            @PathVariable("endDateTime") String endDateTime, Model model) {
+        LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
+        model.addAttribute("isNew", false);
+        model.addAttribute("orders", orderService.findOrdersByDateTime(
+                LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
+                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+        ));
+        return "orders";
+    }
+
 }

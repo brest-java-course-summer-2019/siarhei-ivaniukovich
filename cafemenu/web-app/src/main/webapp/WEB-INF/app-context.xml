@@ -14,13 +14,8 @@
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-    <context:component-scan base-package="com.epam.summer19"/>
+    <context:component-scan base-package="com.epam.summer19*"/>
     <context:property-placeholder location="classpath:application.properties"/>
-
-    <!--<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <co nstructor-arg name="dataSource" ref="dataSource"/>
-    </bean>-->
-
 
     <bean id="itemService" class="com.epam.summer19.webapp.consumers.ItemRestConsumer">
         <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.items}"/>
@@ -43,25 +38,17 @@
         </property>
     </bean>
 
+    <bean id="converter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
-        <!--<property name="errorHandler" ref="customResponseErrorHandler"/>-->
+        <property name="messageConverters" ref="converter"/>
     </bean>
-
-    <!--    <context:property-placeholder location="classpath:application.properties"/>-->
-
     <!-- Thymeleaf Template Resolver -->
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/templates/" />
         <property name="suffix" value=".html" />
+        <property name="characterEncoding" value="UTF-8"/>
         <property name="templateMode" value="HTML" />
-        <!-- Template cache is true by default. Set to false if you want             -->
-        <!-- templates to be automatically updated when modified.                    -->
         <property name="cacheable" value="false" />
     </bean>
 
@@ -70,28 +57,19 @@
           class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolvers">
             <set>
-                <ref bean="templateResolver"/>
+                <ref bean="templateResolver" />
             </set>
         </property>
     </bean>
 
-    <!-- Thymeleaf View Resolver - implementation of Spring's ViewResolver interface -->
     <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
-        <property name="templateEngine" ref="templateEngine"/>
-        <property name="characterEncoding" value="UTF-8"/>
+        <property name="templateEngine" ref="templateEngine" />
+        <property name="characterEncoding" value="UTF-8" />
     </bean>
 
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
           p:basename="/WEB-INF/messages">
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
-
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!-- view name resolved using bean of type InternalResourceViewResolver (declared in mvc-view-config.xml) -->
-        <property name="defaultErrorView" value="exception"/>
-        <!-- results into 'WEB-INF/jsp/exception.jsp' -->
-        <property name="warnLogCategory" value="warn"/>
-        <!-- needed otherwise exceptions won't be logged anywhere -->
-    </bean>
-
 </beans>

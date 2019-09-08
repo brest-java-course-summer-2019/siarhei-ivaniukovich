@@ -1,93 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div id="head"></div>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#head').load("ihead.html");
-            $('#header').load("iheader.html");
-            $('#footer').load("ifooter.html");
-        })
-    </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet" href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/js/bootstrap.min.js"
+          th:href="@{/resources/static/js/bootstrap.min.js}">
+    <title>CafeMenu</title>
 </head>
 <body>
-<div style="height:60px" id="header"></div>
-<nav id="headername" class="navbar bg-light text-dark">
-    <h5>Cafemenu Orders list</h5>
-</nav>
-
-<section id="orders">
-    <div class="container-fluid">
-        <div>
-            <a href="orders_add.html" class="btn btn-secondary">New order</a>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <table class="table table-striped text-left">
-                        <thead class="thead-light">
-                        <tr>
-                            <th width="10%">Order ID</th>
-                            <th width="25%">Employee ID</th>
-                            <th width="25%">Date/Time</th>
-                            <th width="10%">Status</th>
-                            <th width="30%"></th>
-                        </tr>
-                        </thead>
-                        <!-- Next lines for demo:-->
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>1985</td>
-                            <td>14:39 25.06.19</td>
-                            <td>Closed</td>
-                            <td>
-                                <a href="orders_edit.html" class="btn btn-sm btn-secondary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>1985</td>
-                            <td>14:52 25.06.19</td>
-                            <td>Closed</td>
-                            <td>
-                                <a href="orders_edit.html" class="btn btn-sm btn-secondary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1991</td>
-                            <td>15:34 26.06.19</td>
-                            <td>Open</td>
-                            <td>
-                                <a href="orders_edit.html" class="btn btn-sm btn-secondary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>1985</td>
-                            <td>15:42 26.06.19</td>
-                            <td>Open</td>
-                            <td>
-                                <a href="orders_edit.html" class="btn btn-sm btn-secondary">Edit</a>
-                                <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer class="container-fluid font-italic">
-    <p>© 2019</p>
-</footer>
-
+123
 </body>
 </html>

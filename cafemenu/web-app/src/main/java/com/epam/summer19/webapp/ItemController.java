@@ -40,6 +40,7 @@ public class ItemController {
     @GetMapping(value = "/items")
     public final String listAllItems(Model model) {
         LOGGER.debug("ListAllItems findAll({})", model);
+
         model.addAttribute("items", itemService.findAll());
         return "items";
     }
@@ -104,8 +105,9 @@ public class ItemController {
             return "item";
         } else {
             this.itemService.update(item);
+            return "redirect:/items";
         }
-        return "redirect:/items";
+
     }
 
     /**
