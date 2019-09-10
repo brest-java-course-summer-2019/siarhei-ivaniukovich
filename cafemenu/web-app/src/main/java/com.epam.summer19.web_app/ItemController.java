@@ -1,8 +1,8 @@
-package com.epam.summer19.webapp;
+package com.epam.summer19.web_app;
 
 import com.epam.summer19.model.Item;
 import com.epam.summer19.service.ItemService;
-import com.epam.summer19.webapp.validators.ItemValidator;
+import com.epam.summer19.web_app.validators.ItemValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ItemController {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemController.class);
 
     @Autowired
     private ItemService itemService;
@@ -39,8 +39,7 @@ public class ItemController {
      */
     @GetMapping(value = "/items")
     public final String listAllItems(Model model) {
-        LOGGER.debug("ListAllItems findAll({})", model);
-
+        LOGGER.debug("ItemController: ListAllItems findAll({})", model);
         model.addAttribute("items", itemService.findAll());
         return "items";
     }
@@ -52,7 +51,7 @@ public class ItemController {
      */
     @GetMapping(value = "/item")
     public final String gotoAddItemPage(Model model) {
-        LOGGER.debug("gotoAddItemPage({})", model);
+        LOGGER.debug("ItemController: gotoAddItemPage({})", model);
         Item item = new Item();
         model.addAttribute("isNew", true);
         model.addAttribute("item", item);
@@ -66,8 +65,8 @@ public class ItemController {
      * @return
      */
     @PostMapping(value = "/item")
-    public final String addItem(@Valid Item item, BindingResult result) {
-        LOGGER.debug("addItem({}, {})", item, result);
+    public String addItem(@Valid Item item, BindingResult result) {
+        LOGGER.debug("ItemController: addItem({}, {})", item, result);
         itemValidator.validate(item, result);
         if (result.hasErrors()) {
             return "item";
@@ -85,8 +84,9 @@ public class ItemController {
      */
     @GetMapping(value = "/item/{id}")
     public final String gotoEditItemPage(@PathVariable Integer id, Model model) {
-        LOGGER.debug("gotoEditItemPage({},{})", id, model);
+        LOGGER.debug("ItemController: gotoEditItemPage({},{})", id, model);
         Item item = itemService.findItemById(id);
+        model.addAttribute("isNew", false);
         model.addAttribute("item", item);
         return "item";
     }
@@ -98,8 +98,8 @@ public class ItemController {
      * @return
      */
     @PostMapping(value = "/item/{id}")
-    public final String updateItem(@Valid Item item, BindingResult result) {
-        LOGGER.debug("updateItem({})", item);
+    public String updateItem(@Valid Item item, BindingResult result) {
+        LOGGER.debug("ItemController: updateItem({})", item);
         itemValidator.validate(item, result);
         if (result.hasErrors()) {
             return "item";
@@ -116,9 +116,9 @@ public class ItemController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/item/{id}/delete")
+    @GetMapping(value = "/items/{id}/delete")
     public final String deleteItem(@PathVariable Integer id, Model model) {
-        LOGGER.debug("delete({},{})", id, model);
+        LOGGER.debug("ItemController: delete({},{})", id, model);
         itemService.delete(id);
         return "redirect:/items";
     }

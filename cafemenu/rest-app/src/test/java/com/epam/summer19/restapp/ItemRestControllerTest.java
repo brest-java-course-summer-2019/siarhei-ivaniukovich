@@ -60,7 +60,7 @@ public class ItemRestControllerTest {
     @Test
     public void testItemAdd() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/item")
+                MockMvcRequestBuilders.post("/items")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(createItem(1,2)))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
@@ -75,7 +75,7 @@ public class ItemRestControllerTest {
         Item item = createItem(2,4);
         String json = new ObjectMapper().writeValueAsString(item);
 
-        mockMvc.perform(put("/item")
+        mockMvc.perform(put("/items")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)

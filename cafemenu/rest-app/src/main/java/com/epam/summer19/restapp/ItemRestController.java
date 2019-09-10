@@ -19,15 +19,15 @@ public class ItemRestController {
     private ItemService itemService;
 
     /**
-     * curl -H "Content-Type: application/json" -X POST -d '{"itemName":"Something","itemPrice":"8.8"}' -v http://localhost:8082/item
+     * curl -H "Content-Type: application/json" -X POST -d '{"itemName":"Something","itemPrice":"8.8"}' ##NOTNEEDED: -v http://localhost:8082/item
      */
-    @PostMapping(value = "/item")
+    @PostMapping(value = "/items")              /** value = "/item" **/
     public void add(@RequestBody Item item) {
         LOGGER.debug("REST Add item({})", item);
         itemService.add(item);
     }
 
-    @PutMapping(value = "/item")
+    @PutMapping(value = "/items")               /** value = "/item" **/
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Item item) {
         LOGGER.debug("REST Update item({})", item);

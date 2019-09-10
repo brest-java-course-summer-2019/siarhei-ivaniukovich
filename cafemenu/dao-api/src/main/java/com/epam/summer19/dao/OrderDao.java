@@ -47,5 +47,5 @@ public interface OrderDao {
      */
     Optional<Order> findOrderById(Integer orderId);
 
-    List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
+    List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }

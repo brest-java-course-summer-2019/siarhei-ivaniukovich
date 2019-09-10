@@ -1,4 +1,4 @@
-package com.epam.summer19.webapp;
+package com.epam.summer19.web_app;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,13 @@ public class HomeController {
     @GetMapping(value = "/")
     public String defaultPageRedirect() {
         LOGGER.debug("defaultPageRedirect()");
-        return "redirect:main";
+        return "redirect:mainpage";
+    }
+
+    @GetMapping(value = "/mainpage")
+    public String mainPage() {
+        LOGGER.debug("defaultPageRedirect()");
+        return "mainpage";
     }
 
 }

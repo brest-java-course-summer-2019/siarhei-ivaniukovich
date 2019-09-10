@@ -91,10 +91,10 @@ public class OrderDaoJdbcImplTest {
     }
 
     @Test
-    public void findOrdersByDateTime() {
+    public void findOrdersDTOByDateTime() {
         LocalDateTime startDate = LocalDateTime.of(2019,8,15,9,00,01);
         LocalDateTime endDate = LocalDateTime.of(2019,8,15,10,00,59);
-        List orders = orderDao.findOrdersByDateTime(startDate, endDate);
+        List orders = orderDao.findOrdersDTOByDateTime(startDate, endDate);
         assertNotNull(orders);
         assertTrue(orders.size() > 0);
     }

@@ -1,5 +1,7 @@
 package com.epam.summer19.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -18,6 +20,7 @@ public class OrderDTO {
     /**
      * Order Time
      */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime orderDateTime;
 
     /**

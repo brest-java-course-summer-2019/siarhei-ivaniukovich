@@ -1,4 +1,4 @@
 /**
  * Cafe Menu package - WEB-APP classes
  */
-package com.epam.summer19.webapp.validators;
+package com.epam.summer19.web_app;

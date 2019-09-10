@@ -67,5 +67,5 @@ public interface OrderService {
      * @param endDateTime
      * @return
      */
-    List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
+    List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }

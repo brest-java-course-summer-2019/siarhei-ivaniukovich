@@ -41,8 +41,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Value("${order.findById}")
     private String findByIdSql;
 
-    @Value("${order.findOrdersByDateTime}")
-    private String findOrdersByDateTimeSql;
+    @Value("${order.findOrdersDTOByDateTime}")
+    private String findOrdersDTOByDateTimeSql;
 
     @Value("${orderDTO.findAllWithSum}")
     private String findAllDTOSql;
@@ -118,12 +118,12 @@ public class OrderDaoJdbcImpl implements OrderDao {
     }
 
     @Override
-    public List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+    public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(ORDER_DATETIME_START, startDateTime);
         mapSqlParameterSource.addValue(ORDER_DATETIME_END, endDateTime);
-        List<Order> results = namedParameterJdbcTemplate.query(findOrdersByDateTimeSql, mapSqlParameterSource,
-                new OrderDaoJdbcImpl.OrderRowMapper());
+        List<OrderDTO> results = namedParameterJdbcTemplate.query(findOrdersDTOByDateTimeSql, mapSqlParameterSource,
+                BeanPropertyRowMapper.newInstance(OrderDTO.class));
         return results;
     }
 

@@ -1,8 +1,8 @@
-package com.epam.summer19.webapp.consumers;
+package com.epam.summer19.web_app.consumers;
 
 import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.service.ItemInOrderService;
-import com.epam.summer19.webapp.ItemInOrderController;
+import com.epam.summer19.web_app.ItemInOrderController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -85,7 +85,7 @@ public class ItemInOrderRestConsumer implements ItemInOrderService {
     @Override
     public void delete(Integer iioOrderId, Integer iioItemId) {
         LOGGER.debug("delete({}{})", iioOrderId, iioItemId);
-        restTemplate.delete(url + "/iio/" + iioOrderId + "/" + iioItemId);
+        restTemplate.delete(url + "/" + iioOrderId + "/" + iioItemId);
     }
 
     /**

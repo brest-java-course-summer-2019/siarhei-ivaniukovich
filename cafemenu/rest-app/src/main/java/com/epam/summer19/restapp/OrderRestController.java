@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
+
 @RestController
 public class OrderRestController {
 
@@ -21,13 +22,14 @@ public class OrderRestController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping(value = "/order")
+    @PostMapping(value = "/orders")              /** value = "/order" **/
     public void add(@RequestBody Order order) {
         LOGGER.debug("REST Add order({})", order);
         orderService.add(order);
     }
 
-    @PutMapping(value = "/order")
+
+    @PutMapping(value = "/orders")               /** value = "/order" **/
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Order order) {
         LOGGER.debug("REST Update order({})", order);
@@ -59,13 +61,13 @@ public class OrderRestController {
         return orderService.findOrderById(id);
     }
 
-    @GetMapping(value = "/orders/{startDateTime}/{endDateTime}")
+    @GetMapping(value = "/ordersdto/{startDateTime}/{endDateTime}")
     @ResponseStatus(value = HttpStatus.OK)
-    public Collection<Order> findOrdersByDateTime(
+    public Collection<OrderDTO> findOrdersDTOByDateTime(
             @PathVariable("startDateTime") String startDateTime,
             @PathVariable("endDateTime") String endDateTime) {
         LOGGER.debug("REST Find orders between {} and {}", startDateTime, endDateTime);
-        return orderService.findOrdersByDateTime(
+        return orderService.findOrdersDTOByDateTime(
                 LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
                 LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
         );

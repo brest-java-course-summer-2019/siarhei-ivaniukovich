@@ -1,8 +1,8 @@
-package com.epam.summer19.webapp.consumers;
+package com.epam.summer19.web_app.consumers;
 
 import com.epam.summer19.model.Item;
 import com.epam.summer19.service.ItemService;
-import com.epam.summer19.webapp.ItemController;
+import com.epam.summer19.web_app.ItemController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +35,8 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public List<Item> findAll() {
-        LOGGER.debug("Items findAll()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/all", List.class);
+        LOGGER.debug("ItemRestConsumer findAll()");
+        ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
         return (List<Item>) responseEntity.getBody();
     }
 
@@ -80,7 +80,7 @@ public class ItemRestConsumer implements ItemService {
     @Override
     public void delete(Integer itemId) {
         LOGGER.debug("delete({})", itemId);
-        restTemplate.delete(url + "/item/" + itemId);
+        restTemplate.delete(url + "/" + itemId);
     }
 
     /**

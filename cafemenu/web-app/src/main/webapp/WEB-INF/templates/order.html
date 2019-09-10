@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <title>CafeMenu - Orders list</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
+        </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5 th:object="${order}" th:text="${isNew} ? 'New order' : 'Edit order #'+${order.orderId}">Order #00</h5>
+    </nav>
+</header>
+
+<section id="order">
+    <div class="container-fluid">
+        <div>
+             <span data-toggle="modal" data-target="#itemsModal">
+                <a href="#" class="btn btn-secondary">Add item to order</a>
+             </span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Employee ID form START -->
+                        <form id="orderForm"
+                              th:object="${order}"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <p>Please fix errors below:</p>
+                            </div>
+                            <input id="field_orderId"
+                            type="hidden"
+                            th:field="*{orderId}"/>
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_orderEmployeeId">Employee ID:</label>
+                                <input class="form-control "
+                                       id="field_orderEmployeeId"
+                                       type="text" value=""
+                                       th:class="${#fields.hasErrors('orderEmployeeId')} ? 'form-control is-invalid' : 'form-control'"
+                                       th:field="*{orderEmployeeId}"/>
+                                <div th:if="${#fields.hasErrors('orderEmployeeId')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{orderEmployeeId}">[errors]</div>
+                            </div>
+                        </form>
+                        <!-- Employee ID form END -->
+
+                        <!-- ItemInOrder list START -->
+                        <table class="table table-striped text-left">
+                            <thead>
+                            <tr class="text-left">
+                                <th width="4%">ID</th>
+                                <th width="30%">Item name</th>
+                                <th width="10%">Price $</th>
+                                <th width="10%">Quantity</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <!-- ItemInOrder - fill itemInOrders list with Remove button: -->
+                            <tbody>
+                            <tr th:each="iteminorder : ${iteminorders}">
+                                <td th:text="${iteminorder.iioItemId}">IioItemId</td>
+                                <td th:text="${iteminorder.iioItemName}">IioItemName</td>
+                                <td th:text="${iteminorder.iioItemPrice}">0.00</td>
+                                <td th:text="${iteminorder.iioItemCount}">0</td>
+                                <td>
+                                    <span data-toggle="modal" data-target="#deleteDialog"
+                                          th:attr="data-id1=${iteminorder.iioOrderId}, data-id2=${iteminorder.iioItemId}">
+                                        <a href="#" class="btn btn-sm btn-danger">Remove</a>
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!-- ItemInOrder list END -->
+
+                        <!-- Buttons Create/Edit & cancel START -->
+                        <div>
+                            <a href="ordersdto.html" class="btn btn-secondary"
+                               th:text="${isNew} ? 'Create new order' : 'Save & return to orders'"
+                               th:href="@{/orders}"
+                               th:onclick="@{document.forms['orderForm'].submit(); return false;}">Create/Edit order</a>
+                            <a th:hidden="!${isNew}" th:href="@{/ordersdto}" href="ordersdto.html" class="btn btn-danger">Cancel</a>
+                        </div>
+                        <!-- BUTTONS Create/Edit & cancel END -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Central Modal Medium Success -->
+<div class="modal fade" id="itemsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-success" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <p class="heading lead">Items</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+                <div class="text-center">
+                        123
+                </div>
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal"
+                   th:href="@{/order/} + ${order.orderId}">Close</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+
+<!-- Confirm item removal from order -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Delete item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm item removal from order
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Central Modal Medium Success-->
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
+
+<!-- SCRIPT for delete IIO below: -->
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Confirm item removal: "' + target.data('id1') + '"')
+        document.getElementById('deleteUrl').href = '../iteminorders/' + target.data('id1') + '/' + target.data('id2') + '/delete';
+    })
+</script>
+
+</body>
+</html>

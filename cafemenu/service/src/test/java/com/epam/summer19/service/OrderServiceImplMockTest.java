@@ -100,13 +100,13 @@ public class OrderServiceImplMockTest {
     }
 
     @Test
-    public void testFindOrdersByDateTime() {
+    public void testFindOrdersDTOByDateTime() {
                 final LocalDateTime startDateTime = LocalDateTime.of(2019, 8, 21, 9, 0, 0);
         final LocalDateTime endDateTime = LocalDateTime.of(2019, 8, 21, 9, 0, 0);
-        final List<Order> expectedResult = Arrays.asList();
-        when(mockOrderdao.findOrdersByDateTime(LocalDateTime.of(2019, 8, 21, 9, 0, 0), LocalDateTime.of(2017, 1, 1, 0, 0, 0))).thenReturn(Arrays.asList());
+        final List<OrderDTO> expectedResult = Arrays.asList();
+        when(mockOrderdao.findOrdersDTOByDateTime(LocalDateTime.of(2019, 8, 21, 9, 0, 0), LocalDateTime.of(2017, 1, 1, 0, 0, 0))).thenReturn(Arrays.asList());
 
-        final List<Order> result = orderServiceImplUnderTest.findOrdersByDateTime(startDateTime, endDateTime);
+        final List<OrderDTO> result = orderServiceImplUnderTest.findOrdersDTOByDateTime(startDateTime, endDateTime);
 
         assertEquals(expectedResult, result);
     }

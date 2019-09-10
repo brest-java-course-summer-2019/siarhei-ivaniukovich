@@ -61,7 +61,7 @@ public class ItemInOrderRestControllerTest {
     @Test
     public void testItemInOrderAdd() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/iteminorder")
+                MockMvcRequestBuilders.post("/iteminorders")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(createItemInOrder(2,2,"Item2",new BigDecimal("3.2"),3)))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
@@ -76,7 +76,7 @@ public class ItemInOrderRestControllerTest {
         ItemInOrder iteminorder = createItemInOrder(2,2,"Item2",new BigDecimal("3.2"),3);
         String json = new ObjectMapper().writeValueAsString(iteminorder);
 
-        mockMvc.perform(put("/iteminorder")
+        mockMvc.perform(put("/iteminorders")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)

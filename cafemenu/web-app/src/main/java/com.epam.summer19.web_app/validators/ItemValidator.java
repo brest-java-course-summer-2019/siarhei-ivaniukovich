@@ -1,4 +1,4 @@
-package com.epam.summer19.webapp.validators;
+package com.epam.summer19.web_app.validators;
 
 import com.epam.summer19.model.Item;
 import org.springframework.stereotype.Component;

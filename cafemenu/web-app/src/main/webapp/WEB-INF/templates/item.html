@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <title>CafeMenu - Items list</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/main}+'\''">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
+        </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5 th:object="${item}" th:text="${isNew} ? 'New item' : 'Edit item #'+${item.itemId}+': \''+${item.itemName}+'\''">Item #00</h5>
+    </nav>
+</header>
+
+<section id="item">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="itemForm"
+                              th:object="${item}"
+                              th:action="@{${#httpServletRequest.servletPath}}"
+                              th:method="@{post}">
+                            <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                                <p>Please fix errors below:</p>
+                            </div>
+                            <input id="field_itemId"
+                            type="hidden"
+                            th:field="*{itemId}"/>
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_itemName">Item name:</label>
+                                <input class="form-control "
+                                       id="field_itemName"
+                                       type="text" value=""
+                                       th:class="${#fields.hasErrors('itemName')} ? 'form-control is-invalid' : 'form-control'"
+                                       th:field="*{itemName}"/>
+                                <div th:if="${#fields.hasErrors('itemName')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{itemName}">[errors]</div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-control-label" for="field_itemprice">Item price:</label>
+                                <input class="form-control"
+                                       id="field_itemprice"
+                                       type="number" value="0.00"
+                                       th:class="${#fields.hasErrors('itemPrice')} ? 'form-control is-invalid' : 'form-control'"
+                                       th:field="*{itemPrice}"/>
+                                <div th:if="${#fields.hasErrors('itemPrice')}"
+                                     class="invalid-feedback"
+                                     th:errors="*{itemPrice}">[errors]</div>
+                            </div>
+                        </form>
+                        <div>
+                            <a href="items.html" class="btn btn-secondary"
+                               th:text="${isNew} ? 'Create new item' : 'Save edited item'"
+                               th:href="@{/items}"
+                               th:onclick="@{document.forms['itemForm'].submit(); return false;}">Create/Edit item</a>
+                            <a th:href="@{/items}" href="items.html" class="btn btn-danger">Cancel</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
+
+
+</body>
+</html>

@@ -21,7 +21,7 @@ public class ItemInOrderRestController {
     /** ADD
      *  curl -H "Content-Type: application/json" -X POST -d '{"iioOrderId":"4","iioItemId":"1","iioItemName":"Burger","iioItemPrice":"5.0","iioItemCount":"2"}' -v http://localhost:8082/iteminorder
      *  */
-    @PostMapping(value = "/iteminorder")
+    @PostMapping(value = "/iteminorders")              /** value = "/iteminorder" **/
     public void add(@RequestBody ItemInOrder itemInOrder) {
         LOGGER.debug("REST Add iteminorder({})", itemInOrder);
         itemInOrderService.add(itemInOrder);
@@ -30,7 +30,7 @@ public class ItemInOrderRestController {
     /** UPDATE (EDIT)
      *  curl -H "Content-Type: application/json" -X PUT -d '{"iioOrderId":"4","iioItemId":"2","iioItemName":"Nuggets","iioItemPrice":"3.0","iioItemCount":"5"}' -v http://localhost:8082/iteminorders/4
      *  */
-    @PutMapping(value = "/iteminorder")
+    @PutMapping(value = "/iteminorders")               /** value = "/iteminorder" **/
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody ItemInOrder itemInOrder) {
         LOGGER.debug("REST Update iteminorder({})", itemInOrder);

@@ -1,8 +1,10 @@
-package com.epam.summer19.webapp;
+package com.epam.summer19.web_app;
 
+import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.model.Order;
+import com.epam.summer19.service.ItemInOrderService;
 import com.epam.summer19.service.OrderService;
-import com.epam.summer19.webapp.validators.OrderValidator;
+import com.epam.summer19.web_app.validators.OrderValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Order controller
@@ -24,13 +27,40 @@ public class OrderController {
     /**
      * Logger
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private OrderService orderService;
 
     @Autowired
+    private ItemInOrderService itemInOrderService;
+
+    @Autowired
     OrderValidator orderValidator;
+
+    /**
+     * List all orders page
+     * @param model
+     * @return
+     *
+    @GetMapping(value = "/orders_")
+    public final String listAllOrders(Model model) {
+        LOGGER.debug("ListAllOrders findAll({})", model);
+        model.addAttribute("orders_", orderService.findAll());
+        return "orders_";
+    }*/
+
+    /**
+     * List all ordersDTO page with price SUM & items count
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/ordersdto")
+    public final String listAllOrdersDTO(Model model) {
+        LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
+        model.addAttribute("ordersdto", orderService.findAllDTO());
+        return "ordersdto";
+    }
 
     /**
      * GOTO Order add page
@@ -46,8 +76,6 @@ public class OrderController {
         return "order";
     }
 
-
-
     /**
      * Add order
      * @param order
@@ -62,8 +90,9 @@ public class OrderController {
             return "order";
         } else {
             this.orderService.add(order);
+            return "redirect:/ordersdto";
         }
-        return "redirect:/orders";
+
     }
 
     /**
@@ -76,6 +105,9 @@ public class OrderController {
     public final String gotoEditOrderPage(@PathVariable Integer id, Model model) {
         LOGGER.debug("gotoEditOrderPage({},{})", id, model);
         Order order = orderService.findOrderById(id);
+        List<ItemInOrder> iteminorders = itemInOrderService.findIioByOrderId(id);
+        model.addAttribute("isNew", false);
+        model.addAttribute("iteminorders", iteminorders);
         model.addAttribute("order", order);
         return "order";
     }
@@ -95,7 +127,7 @@ public class OrderController {
         } else {
             this.orderService.update(order);
         }
-        return "redirect:/orders";
+        return "redirect:/ordersdto";
     }
 
     /**
@@ -104,35 +136,11 @@ public class OrderController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/order/{id}/delete")
+    @GetMapping(value = "/orders/{id}/delete")
     public final String deleteOrder(@PathVariable Integer id, Model model) {
         LOGGER.debug("delete({},{})", id, model);
         orderService.delete(id);
-        return "redirect:/orders";
-    }
-
-    /**
-     * List all orders page
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/orders_")
-    public final String listAllOrders(Model model) {
-        LOGGER.debug("ListAllOrders findAll({})", model);
-        model.addAttribute("orders_", orderService.findAll());
-        return "orders_";
-    }
-
-    /**
-     * List all ordersDTO page with price SUM & items count
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/orders")
-    public final String listAllOrdersDTO(Model model) {
-        LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
-        model.addAttribute("orders", orderService.findAllDTO());
-        return "orders";
+        return "redirect:/ordersdto";
     }
 
     /**
@@ -140,17 +148,17 @@ public class OrderController {
      * @param model
      * @return
      */
-    @GetMapping(value = "/orders/{startDateTime}/{endDateTime}")
-    public final String listAllOrdersByDateTime(
+    @GetMapping(value = "/ordersdto/{startDateTime}/{endDateTime}")
+    public final String listAllOrdersDTOByDateTime(
             @PathVariable("startDateTime") String startDateTime,
             @PathVariable("endDateTime") String endDateTime, Model model) {
         LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
         model.addAttribute("isNew", false);
-        model.addAttribute("orders", orderService.findOrdersByDateTime(
+        model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
                 LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
                 LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
         ));
-        return "orders";
+        return "ordersdto";
     }
 
 }

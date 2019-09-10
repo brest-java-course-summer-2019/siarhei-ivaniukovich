@@ -68,9 +68,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> findOrdersByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        LOGGER.debug("Find orders between dates {} and {}", startDateTime, endDateTime);
-        return orderDao.findOrdersByDateTime(startDateTime, endDateTime);
+    public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        LOGGER.debug("Find ordersDTO between dates {} and {}", startDateTime, endDateTime);
+        return orderDao.findOrdersDTOByDateTime(startDateTime, endDateTime);
     }
 
 }
