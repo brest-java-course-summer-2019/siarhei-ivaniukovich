@@ -1,8 +1,10 @@
 package com.epam.summer19.web_app;
 
+import com.epam.summer19.model.Item;
 import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.model.Order;
 import com.epam.summer19.service.ItemInOrderService;
+import com.epam.summer19.service.ItemService;
 import com.epam.summer19.service.OrderService;
 import com.epam.summer19.web_app.validators.OrderValidator;
 import org.slf4j.Logger;
@@ -34,6 +36,9 @@ public class OrderController {
 
     @Autowired
     private ItemInOrderService itemInOrderService;
+
+    @Autowired
+    private ItemService itemService;
 
     @Autowired
     OrderValidator orderValidator;
@@ -70,6 +75,17 @@ public class OrderController {
     @GetMapping(value = "/order")
     public final String gotoAddOrderPage(Model model) {
         LOGGER.debug("gotoAddOrderPage({})", model);
+        /**Order order = new Order();
+        order.setOrderEmployeeId(1);
+        orderService.add(order);
+        List<ItemInOrder> iteminorders = itemInOrderService.findIioByOrderId(id);
+        List<Item> items =  itemService.findAll();
+        ItemInOrder iteminorderin = new ItemInOrder();
+        model.addAttribute("isNew", false);
+        model.addAttribute("iteminorders", iteminorders);
+        model.addAttribute("iteminorderin", iteminorderin);
+        model.addAttribute("items", items);
+        model.addAttribute("order", order);**/
         Order order = new Order();
         model.addAttribute("isNew", true);
         model.addAttribute("order", order);
@@ -106,8 +122,12 @@ public class OrderController {
         LOGGER.debug("gotoEditOrderPage({},{})", id, model);
         Order order = orderService.findOrderById(id);
         List<ItemInOrder> iteminorders = itemInOrderService.findIioByOrderId(id);
+        List<Item> items =  itemService.findAll();
+        ItemInOrder iteminorderin = new ItemInOrder();
         model.addAttribute("isNew", false);
         model.addAttribute("iteminorders", iteminorders);
+        model.addAttribute("iteminorderin", iteminorderin);
+        model.addAttribute("items", items);
         model.addAttribute("order", order);
         return "order";
     }

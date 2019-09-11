@@ -34,12 +34,8 @@
 </header>
 
 <section id="order">
+    <br>
     <div class="container-fluid">
-        <div>
-             <span data-toggle="modal" data-target="#itemsModal">
-                <a href="#" class="btn btn-secondary">Add item to order</a>
-             </span>
-        </div>
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -68,28 +64,34 @@
                             </div>
                         </form>
                         <!-- Employee ID form END -->
-
+                        <div>
+                        <span th:hidden="${isNew}" data-toggle="modal" data-target="#itemsModal">
+                            <a href="#" class="btn btn-secondary">Add item to order</a>
+                            <h6></h6>
+                        </span>
+                        </div>
                         <!-- ItemInOrder list START -->
-                        <table class="table table-striped text-left">
-                            <thead>
-                            <tr class="text-left">
-                                <th width="4%">ID</th>
+                        <table th:hidden="${isNew}" class="table table-striped text-left">
+                            <thead class="thead-light">
+                            <tr>
+                                <th width="4%" class="text-center">ID</th>
                                 <th width="30%">Item name</th>
-                                <th width="10%">Price $</th>
-                                <th width="10%">Quantity</th>
+                                <th width="10%" class="text-center">Price $</th>
+                                <th width="10%" class="text-center">Quantity</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <!-- ItemInOrder - fill itemInOrders list with Remove button: -->
                             <tbody>
                             <tr th:each="iteminorder : ${iteminorders}">
-                                <td th:text="${iteminorder.iioItemId}">IioItemId</td>
+                                <td class="text-center" th:text="${iteminorder.iioItemId}">IioItemId</td>
                                 <td th:text="${iteminorder.iioItemName}">IioItemName</td>
-                                <td th:text="${iteminorder.iioItemPrice}">0.00</td>
-                                <td th:text="${iteminorder.iioItemCount}">0</td>
+                                <td class="text-center" th:text="${iteminorder.iioItemPrice}">0.00</td>
+                                <td class="text-center" th:text="${iteminorder.iioItemCount}">0</td>
                                 <td>
                                     <span data-toggle="modal" data-target="#deleteDialog"
-                                          th:attr="data-id1=${iteminorder.iioOrderId}, data-id2=${iteminorder.iioItemId}">
+                                          th:attr="data-id1=${iteminorder.iioOrderId}, data-id2=${iteminorder.iioItemId},
+                                          data-id2name=${iteminorder.iioItemName}">
                                         <a href="#" class="btn btn-sm btn-danger">Remove</a>
                                     </span>
                                 </td>
@@ -100,9 +102,8 @@
 
                         <!-- Buttons Create/Edit & cancel START -->
                         <div>
-                            <a href="ordersdto.html" class="btn btn-secondary"
+                            <a href="ordersdto.html" class="btn btn-success"
                                th:text="${isNew} ? 'Create new order' : 'Save & return to orders'"
-                               th:href="@{/orders}"
                                th:onclick="@{document.forms['orderForm'].submit(); return false;}">Create/Edit order</a>
                             <a th:hidden="!${isNew}" th:href="@{/ordersdto}" href="ordersdto.html" class="btn btn-danger">Cancel</a>
                         </div>
@@ -115,25 +116,61 @@
     </div>
 </section>
 
-<!-- Central Modal Medium Success -->
+<!-- Item select MODAL window -->
 <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-notify modal-success" role="document">
-        <!--Content-->
+    <div class="modal-dialog modal-lg modal-notify modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <!--Header-->
             <div class="modal-header">
-                <p class="heading lead">Items</p>
-
+                <p class="heading lead">Select items to be added:</p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" class="white-text">&times;</span>
+                    <a th:href="@{/order/} + ${order.orderId}">
+                        <span aria-hidden="true" class="white-text">&times;</span>
+                    </a>
                 </button>
             </div>
 
-            <!--Body-->
+            <!-- Items list BODY -->
             <div class="modal-body">
                 <div class="text-center">
-                        123
+                    <table class="table table-striped text-left">
+                        <thead>
+                        <tr class="text-left">
+                            <th width="5%">ID</th>
+                            <th width="40%">Item</th>
+                            <th width="20%">Price $</th>
+                            <th width="20%">Quantity</th>
+                            <th width="15%"></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="item,stat : ${items}">
+                            <td th:text="${item.itemId}">ItemId</td>
+                            <td th:text="${item.itemName}">ItemName</td>
+                            <td th:text="${item.itemPrice}">0.00</td>
+                            <form id="iteminorderinForm" th:id="'iioForm' + __${stat.index}__"
+                                  th:object="${iteminorderin}"
+                                  th:action="'../iteminorder'"
+                                  th:method="@{post}">
+                                <td>
+                                    <input type="number" value="1" min="1" max="10000" step="1" onkeypress="return isNumberKey(event)" name="iioItemCount"/>
+                                </td>
+                                <td>
+                                        <input id="orderId" type="hidden" th:value="${order.orderId}" name="iioOrderId"/>
+                                        <input id="itemId" type="hidden" th:value="${item.itemId}" name="iioItemId"/>
+                                        <input id="itemName" type="hidden" th:value="${item.itemName}" name="iioItemName"/>
+                                        <input id="itemPrice" type="hidden" th:value="${item.itemPrice}" name="iioItemPrice"/>
+                                </td>
+                            </form>
+                            <td>
+                                    <a class="btn btn-sm btn-success"
+                                    th:href="@{/order/} + ${order.orderId}"
+                                    th:onclick="@{document.forms['iioForm' + __${stat.index}__].submit(); return false;}">Add</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
@@ -180,16 +217,26 @@
 
 </html>
 
-<!-- SCRIPT for delete IIO below: -->
+<!-- SCRIPT for delete IIO: -->
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Confirm item removal: "' + target.data('id1') + '"')
+        $(this).find('.modal-body').text('Confirm item removal: ' + target.data('id2name'))
         document.getElementById('deleteUrl').href = '../iteminorders/' + target.data('id1') + '/' + target.data('id2') + '/delete';
     })
+</script>
+
+<!-- SCRIPT for quantity input of items (iteminorder) -->
+<script>
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
 </script>
 
 </body>

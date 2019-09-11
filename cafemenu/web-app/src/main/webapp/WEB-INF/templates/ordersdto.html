@@ -35,18 +35,20 @@
 
 <section id="orders">
     <div class="container-fluid">
+        <br>
         <div>
             <a href="order.html" th:href="@{/order}" class="btn btn-secondary">Add new order</a>&nbsp;
-            <a href="#filterdatetime" class="btn btn-secondary" data-toggle="collapse">Filter by date&time</a>
+            <a href="#filterdatetime" class="btn btn-info" data-toggle="collapse">Filter by date&time</a>
         </div>
+        <h6></h6>
         <div class="row">
             <div class="col">
                 <div class="card">
                     <table class="table table-striped text-left">
-                        <thead>
+                        <thead class="thead-light">
                         <tr class="text-left">
-                            <th width="4%">ID</th>
-                            <th width="4%">Emp ID</th>
+                            <th width="6%">ID</th>
+                            <th width="6%">Emp ID</th>
                             <th width="15%">Order Date&Time</th>
                             <th width="10%">Total price</th>
                             <th width="10%">Items quantity</th>
@@ -141,7 +143,7 @@
     })
     $('#deleteDialog').on('show.bs.modal', function (event) {
         var target = $(event.relatedTarget)
-        $(this).find('.modal-body').text('Confirm order delete: "' + target.data('id') + '"')
+        $(this).find('.modal-body').text('Confirm order delete: ' + target.data('id'))
         document.getElementById('deleteUrl').href = '/orders/' + target.data('id') + '/delete';
     })
 </script>

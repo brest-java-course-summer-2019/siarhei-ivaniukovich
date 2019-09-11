@@ -73,9 +73,8 @@
                             </div>
                         </form>
                         <div>
-                            <a href="items.html" class="btn btn-secondary"
+                            <a href="items.html" class="btn btn-success"
                                th:text="${isNew} ? 'Create new item' : 'Save edited item'"
-                               th:href="@{/items}"
                                th:onclick="@{document.forms['itemForm'].submit(); return false;}">Create/Edit item</a>
                             <a th:href="@{/items}" href="items.html" class="btn btn-danger">Cancel</a>
                         </div>

@@ -71,9 +71,11 @@ public class OrderRestConsumer implements OrderService {
      * @param
      */
     @Override
-    public void add(Order order) {
+    public Order add(Order order) {
         LOGGER.debug("add({})", order);
-        restTemplate.postForEntity(url, order, Order.class);
+        ResponseEntity responseEntity = restTemplate.postForEntity(url, order, Order.class);
+        Object result = responseEntity.getBody();
+        return (Order) result;
     }
 
     /**

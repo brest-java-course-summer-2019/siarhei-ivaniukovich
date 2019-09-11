@@ -60,19 +60,27 @@ public class ItemInOrderController {
 
     /**
      * Add iteminorder
-     * @param iteminorder
+     * @param iteminorderin
      * @param result
      * @return
      */
     @PostMapping(value = "/iteminorder")
-    public final String addItemInOrder(@Valid ItemInOrder iteminorder, BindingResult result) {
-        LOGGER.debug("addItemInOrder({}, {})", iteminorder, result);
-        iteminorderValidator.validate(iteminorder, result);
-        if (result.hasErrors()) {
-            return "iteminorder";
-        } else {
-            this.itemInOrderService.add(iteminorder);
-            return "redirect:/iteminorders";
+    public final String addItemInOrder(@Valid ItemInOrder iteminorderin, BindingResult result) {
+        LOGGER.debug("addItemInOrder({}, {})", iteminorderin, result);
+        iteminorderValidator.validate(iteminorderin, result);
+        try {
+            ItemInOrder iioAlreadyInDB = this.itemInOrderService.findIioByOrderItemId(iteminorderin.getIioOrderId(), iteminorderin.getIioItemId());
+            iioAlreadyInDB.setIioItemCount(iioAlreadyInDB.getIioItemCount() + iteminorderin.getIioItemCount());
+            this.itemInOrderService.update(iioAlreadyInDB);
+            return "redirect:/order/" + iteminorderin.getIioOrderId();
+        }
+        catch(Exception e) {
+            if (result.hasErrors()) {
+                return "iteminorder";
+            } else {
+                this.itemInOrderService.add(iteminorderin);
+                return "redirect:/order/" + iteminorderin.getIioOrderId();
+            }
         }
     }
 
