@@ -56,7 +56,13 @@ public class ItemServiceImpl implements ItemService {
     public Item findItemById(Integer itemId) {
         LOGGER.debug("Find item by itemId: findItemById({})", itemId);
         return itemDao.findItemById(itemId)
-                .orElseThrow(() ->  new RuntimeException("Failed to get items from DB"));
+                .orElseThrow(() -> new RuntimeException("Failed to get items from DB"));
     }
 
+    @Override
+    public Item findItemByName(String itemName) {
+        LOGGER.debug("Find item by itemName: findItemByName({})", itemName);
+        return itemDao.findItemByName(itemName)
+                .orElseThrow(() -> new RuntimeException("Failed to get items from DB"));
+    }
 }

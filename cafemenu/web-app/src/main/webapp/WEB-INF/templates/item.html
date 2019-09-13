@@ -51,7 +51,7 @@
                             th:field="*{itemId}"/>
                             <div class="form-group">
                                 <label class="form-control-label" for="field_itemName">Item name:</label>
-                                <input class="form-control "
+                                <input class="form-control" pattern="[A-Za-z0-9]"
                                        id="field_itemName"
                                        type="text" value=""
                                        th:class="${#fields.hasErrors('itemName')} ? 'form-control is-invalid' : 'form-control'"

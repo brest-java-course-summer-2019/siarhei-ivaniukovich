@@ -123,6 +123,20 @@ public class ItemRestControllerTest {
         Mockito.verify(itemService, Mockito.times(1)).findItemById(1);
     }
 
+    @Test
+    public void testItemFindByName() throws Exception {
+        Mockito.when(itemService.findItemByName("Nuggets")).thenReturn(createItem(2,2));
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/items/byname/Nuggets")
+                        .accept(MediaType.APPLICATION_JSON_UTF8)
+        ).andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.itemName", Matchers.is("Item2")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.itemPrice", Matchers.is(2.2)))
+        ;
+        Mockito.verify(itemService, Mockito.times(1)).findItemByName("Nuggets");
+    }
+
     private Item createItem(int itemId, int namePostfix) {
         Item item = new Item();
         item.setItemId(itemId);

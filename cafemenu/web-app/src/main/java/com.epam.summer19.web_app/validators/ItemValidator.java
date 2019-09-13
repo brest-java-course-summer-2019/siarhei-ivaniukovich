@@ -1,6 +1,8 @@
 package com.epam.summer19.web_app.validators;
 
 import com.epam.summer19.model.Item;
+import com.epam.summer19.service.ItemService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -11,6 +13,9 @@ import org.springframework.validation.Validator;
 public class ItemValidator implements Validator {
 
     public static final int ITEM_NAME_MAX_SIZE = 255;
+
+    @Autowired
+    ItemService itemService;
 
     @Override
     public boolean supports(Class<?> clazz) {
@@ -32,6 +37,14 @@ public class ItemValidator implements Validator {
         if (item.getItemPrice() != null
                 && item.getItemPrice().floatValue() < 0) {
             errors.rejectValue("itemPrice", "itemPrice.negative");
+        }
+
+        try {
+            this.itemService.findItemByName(item.getItemName());
+            errors.rejectValue("itemName", "itemName.alreadyInDB");
+        }
+        catch (Exception e) {
+            return;
         }
 
     }

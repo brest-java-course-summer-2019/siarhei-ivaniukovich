@@ -52,4 +52,11 @@ public class ItemRestController {
         LOGGER.debug("REST Find item by itemId({})", id);
         return itemService.findItemById(id);
     }
+
+    @GetMapping(value = "/items/byname/{name}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public Item findItemByName(@PathVariable("name") String itemName) {
+        LOGGER.debug("REST Find item by itemName({})", itemName);
+        return itemService.findItemByName(itemName);
+    }
 }

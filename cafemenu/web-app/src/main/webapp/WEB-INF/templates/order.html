@@ -15,24 +15,24 @@
     <title>CafeMenu - Orders list</title>
 </head>
 <body>
-
-<header>
-    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
-        <a class="navbar-brand">
-            <img src="../../resources/static/img/cmlogo.png"
+    <header>
+        <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+            <a class="navbar-brand">
+                <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
-        </a>
-        <div class="collapse navbar-collapse">
-            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
-            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
-            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
-        </div>
-    </nav>
-    <nav id="headername" class="navbar bg-light text-dark">
-        <h5 th:object="${order}" th:text="${isNew} ? 'New order' : 'Edit order #'+${order.orderId}">Order #00</h5>
-    </nav>
-</header>
+            </a>
+            <div class="collapse navbar-collapse">
+                <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
+                <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
+                <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
+            </div>
+        </nav>
+        <nav id="headername" class="navbar bg-light text-dark">
+            <h5 th:object="${order}" th:text="${isNew} ? 'New order' : 'Edit order #'+${order.orderId}">Order #00</h5>
+        </nav>
+        </header>
 
+<!-- ORDER main form -->
 <section id="order">
     <br>
     <div class="container-fluid">
@@ -53,9 +53,8 @@
                             th:field="*{orderId}"/>
                             <div class="form-group">
                                 <label class="form-control-label" for="field_orderEmployeeId">Employee ID:</label>
-                                <input class="form-control "
-                                       id="field_orderEmployeeId"
-                                       type="text" value=""
+                                <input class="form-control form-control" type="text" maxlength="5" value="1"
+                                       min="1" max="99999" step="1"  onkeypress="return isNumberKey(event)" id="field_orderEmployeeId"
                                        th:class="${#fields.hasErrors('orderEmployeeId')} ? 'form-control is-invalid' : 'form-control'"
                                        th:field="*{orderEmployeeId}"/>
                                 <div th:if="${#fields.hasErrors('orderEmployeeId')}"
@@ -64,51 +63,52 @@
                             </div>
                         </form>
                         <!-- Employee ID form END -->
+
+                        <!-- Add item to order BUTTON -->
                         <div>
-                        <span th:hidden="${isNew}" data-toggle="modal" data-target="#itemsModal">
-                            <a href="#" class="btn btn-secondary">Add item to order</a>
-                            <h6></h6>
-                        </span>
+                            <span th:hidden="${isNew}" data-toggle="modal" data-target="#itemsModal">
+                                <a href="#" class="btn btn-secondary">Add item to order</a>
+                                <h6></h6>
+                            </span>
                         </div>
-                        <!-- ItemInOrder list START -->
-                        <table th:hidden="${isNew}" class="table table-striped text-left">
+
+                        <!-- ORDER: ItemInOrder list START -->
+                        <table th:hidden="${isNew}" th:if="${not #lists.isEmpty(iteminorders)}" class="table table-striped text-left">
                             <thead class="thead-light">
-                            <tr>
-                                <th width="4%" class="text-center">ID</th>
-                                <th width="30%">Item name</th>
-                                <th width="10%" class="text-center">Price $</th>
-                                <th width="10%" class="text-center">Quantity</th>
-                                <th></th>
-                            </tr>
+                                <tr>
+                                    <th width="4%" class="text-center">ID</th>
+                                    <th width="30%">Item name</th>
+                                    <th width="10%" class="text-center">Price $</th>
+                                    <th width="10%" class="text-center">Quantity</th>
+                                    <th></th>
+                                </tr>
                             </thead>
-                            <!-- ItemInOrder - fill itemInOrders list with Remove button: -->
+                            <!-- ItemInOrders - fill itemInOrders list with Remove button: -->
                             <tbody>
-                            <tr th:each="iteminorder : ${iteminorders}">
-                                <td class="text-center" th:text="${iteminorder.iioItemId}">IioItemId</td>
-                                <td th:text="${iteminorder.iioItemName}">IioItemName</td>
-                                <td class="text-center" th:text="${iteminorder.iioItemPrice}">0.00</td>
-                                <td class="text-center" th:text="${iteminorder.iioItemCount}">0</td>
-                                <td>
-                                    <span data-toggle="modal" data-target="#deleteDialog"
+                                <tr th:each="iteminorder : ${iteminorders}">
+                                    <td class="text-center" th:text="${iteminorder.iioItemId}">IioItemId</td>
+                                    <td th:text="${iteminorder.iioItemName}">IioItemName</td>
+                                    <td class="text-center" th:text="${iteminorder.iioItemPrice}">0.00</td>
+                                    <td class="text-center" th:text="${iteminorder.iioItemCount}">0</td>
+                                    <td>
+                                        <span data-toggle="modal" data-target="#deleteDialog"
                                           th:attr="data-id1=${iteminorder.iioOrderId}, data-id2=${iteminorder.iioItemId},
                                           data-id2name=${iteminorder.iioItemName}">
-                                        <a href="#" class="btn btn-sm btn-danger">Remove</a>
-                                    </span>
-                                </td>
-                            </tr>
+                                            <a href="#" class="btn btn-sm btn-danger">Remove</a>
+                                        </span>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                        <!-- ItemInOrder list END -->
+                        <!-- ORDER: ItemInOrder list END -->
 
-                        <!-- Buttons Create/Edit & cancel START -->
+                        <!-- Buttons Create/Edit order & Cancel-->
                         <div>
                             <a href="ordersdto.html" class="btn btn-success"
                                th:text="${isNew} ? 'Create new order' : 'Save & return to orders'"
                                th:onclick="@{document.forms['orderForm'].submit(); return false;}">Create/Edit order</a>
                             <a th:hidden="!${isNew}" th:href="@{/ordersdto}" href="ordersdto.html" class="btn btn-danger">Cancel</a>
                         </div>
-                        <!-- BUTTONS Create/Edit & cancel END -->
-
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
     </div>
 </section>
 
-<!-- Item select MODAL window -->
+<!-- ADD ITEM: Item select MODAL window -->
 <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg modal-notify modal-dialog-scrollable" role="document">
@@ -130,7 +130,7 @@
                 </button>
             </div>
 
-            <!-- Items list BODY -->
+            <!-- Items list form -->
             <div class="modal-body">
                 <div class="text-center">
                     <table class="table table-striped text-left">
@@ -144,43 +144,43 @@
                             <th></th>
                         </tr>
                         </thead>
+
+                        <!-- Items list content -->
                         <tbody>
-                        <tr th:each="item,stat : ${items}">
-                            <td th:text="${item.itemId}">ItemId</td>
-                            <td th:text="${item.itemName}">ItemName</td>
-                            <td th:text="${item.itemPrice}">0.00</td>
-                            <form id="iteminorderinForm" th:id="'iioForm' + __${stat.index}__"
-                                  th:object="${iteminorderin}"
-                                  th:action="'../iteminorder'"
-                                  th:method="@{post}">
-                                <td>
-                                    <input type="number" value="1" min="1" max="10000" step="1" onkeypress="return isNumberKey(event)" name="iioItemCount"/>
-                                </td>
-                                <td>
+                            <tr th:each="item,stat : ${items}">
+                                <td th:text="${item.itemId}">ItemId</td>
+                                <td th:text="${item.itemName}">ItemName</td>
+                                <td th:text="${item.itemPrice}">0.00</td>
+                                <form id="iteminorderinForm" th:id="'iioForm' + __${stat.index}__"
+                                      th:object="${iteminorderin}"
+                                      th:action="'../iteminorder'"
+                                      th:method="@{post}">
+                                    <td>
+                                        <input class="form-control form-control" type="text" maxlength="5" value="1"
+                                               min="1" max="99999" step="1"  onkeypress="return isNumberKey(event)" name="iioItemCount"/>
+                                    </td>
+                                    <td>
                                         <input id="orderId" type="hidden" th:value="${order.orderId}" name="iioOrderId"/>
                                         <input id="itemId" type="hidden" th:value="${item.itemId}" name="iioItemId"/>
                                         <input id="itemName" type="hidden" th:value="${item.itemName}" name="iioItemName"/>
                                         <input id="itemPrice" type="hidden" th:value="${item.itemPrice}" name="iioItemPrice"/>
-                                </td>
-                            </form>
-                            <td>
+                                    </td>
+                                </form>
+                                <td>
                                     <a class="btn btn-sm btn-success"
-                                    th:href="@{/order/} + ${order.orderId}"
-                                    th:onclick="@{document.forms['iioForm' + __${stat.index}__].submit(); return false;}">Add</a>
-                            </td>
-                        </tr>
+                                       th:href="@{/order/} + ${order.orderId}"
+                                       th:onclick="@{document.forms['iioForm' + __${stat.index}__].submit(); return false;}">Add</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <!--Footer-->
             <div class="modal-footer justify-content-center">
                 <a type="button" class="btn btn-outline-success waves-effect" data-dismiss="modal"
                    th:href="@{/order/} + ${order.orderId}">Close</a>
             </div>
         </div>
-        <!--/.Content-->
     </div>
 </div>
 
@@ -213,9 +213,6 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
-</body>
-
-</html>
 
 <!-- SCRIPT for delete IIO: -->
 <script>

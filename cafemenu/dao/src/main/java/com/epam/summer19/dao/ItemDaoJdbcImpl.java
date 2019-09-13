@@ -35,6 +35,9 @@ public class ItemDaoJdbcImpl implements ItemDao {
     @Value("${item.findById}")
     private String findByIdSql;
 
+    @Value("${item.findByName}")
+    private String findByNameSql;
+
     private final static String ITEM_ID = "itemId";
     private final static String ITEM_NAME = "itemName";
     private final static String ITEM_PRICE = "itemPrice";
@@ -87,6 +90,14 @@ public class ItemDaoJdbcImpl implements ItemDao {
     public Optional<Item> findItemById(Integer itemId) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(ITEM_ID, itemId);
         List<Item> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
+                BeanPropertyRowMapper.newInstance(Item.class));
+        return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
+    }
+
+    @Override
+    public Optional<Item> findItemByName(String itemName) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource(ITEM_NAME, itemName);
+        List<Item> results = namedParameterJdbcTemplate.query(findByNameSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Item.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }

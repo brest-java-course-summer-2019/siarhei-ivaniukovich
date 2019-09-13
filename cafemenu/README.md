@@ -45,9 +45,9 @@
 ---
 
 **External server**
- For testing available (based on buddy.works autopack & deploy to own server):
-   - rest-app `http://***.***.***.71:8089/cafemenu-restapp/`
-   - web-app `http://***.***.***.71:8089/cafemenu-webapp/`
+ For testing ability (based on buddy.works autodeploy to own server):
+   - rest-app `http://***.***.***.71:8082`
+   - web-app `http://***.***.***.71:8083`
 
 ***
 

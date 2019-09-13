@@ -94,4 +94,11 @@ public class ItemRestConsumer implements ItemService {
         ResponseEntity<Item> responseEntity = restTemplate.getForEntity(url + "/" + itemId, Item.class);
         return responseEntity.getBody();
     }
+
+    @Override
+    public Item findItemByName(String itemName) {
+        LOGGER.debug("findItemByName({})", itemName);
+        ResponseEntity<Item> responseEntity = restTemplate.getForEntity(url + "/byname/" + itemName, Item.class);
+        return responseEntity.getBody();
+    }
 }

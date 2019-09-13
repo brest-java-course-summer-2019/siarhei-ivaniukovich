@@ -44,4 +44,11 @@ public interface ItemService {
      * @return
      */
     Item findItemById(Integer itemId);
+
+    /**
+     * Find item by itemName
+     * @param itemName
+     * @return
+     */
+    Item findItemByName(String itemName);
 }

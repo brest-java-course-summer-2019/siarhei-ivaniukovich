@@ -33,12 +33,38 @@
     </nav>
 </header>
 
+<!-- ORDERS list-->
 <section id="orders">
     <div class="container-fluid">
         <br>
         <div>
             <a href="order.html" th:href="@{/order}" class="btn btn-secondary">Add new order</a>&nbsp;
             <a href="#filterdatetime" class="btn btn-info" data-toggle="collapse">Filter by date&time</a>
+        </div>
+        <!-- Filter ORDERs by Date&Time field -->
+        <div id="filterdatetime" class="collapse">
+            <div class="modal-sm">
+                <form id="filterForm"
+                      th:action="@{${#httpServletRequest.servletPath}+'/'+${startDateTime}+'/'+${endDateTime}}"
+                      th:method="@{get}">
+                    <div class="form-group">
+                        <label th:text="'Start'">startDateTime</label>
+                        <div class="well">
+                            <div id="datetimepicker1" class="input-append date">
+                                <input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
+                                <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+                            </div>
+                        </div>
+                        <input th:class="'form-control'" class="form-control" type="datetime-local" name="startDateTime">
+                        <label th:text="'End'">endDateTime</label>
+                        <input th:class="'form-control'" class="form-control" type="datetime-local" name="endDateTime">
+                    </div>
+
+                </form>
+            </div>
         </div>
         <h6></h6>
         <div class="row">
@@ -55,7 +81,7 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <!-- Next lines - fill orders list:-->
+                        <!-- ORDERS list content -->
                         <tbody>
                             <tr th:each="orderdto : ${ordersdto}">
                                 <td th:text="${orderdto.orderId}">orderId</td>
@@ -79,36 +105,11 @@
             </div>
         </div>
 
-        <div id="filterdatetime" class="collapse">
-            <div class="card-header">
-                <p th:text="'Orders date & time filter'">filterName</p>
-            </div>
-            <!--<div class="card-body">
-                <form id="filterForm"
-                      th:action="@{${#httpServletRequest.servletPath}+'/'+${startDateTime}+'/'+${endDateTime}}"
-                      th:with="startDateTime=${startDateTime}"
-                      th:with="endDateTime=${endDateTime}"
-                      th:method="@{get}">
 
-                    <div class="form-group">
-                        <label for="startDateTime" th:text="'Start date & time'">startDateTime</label>
-                        <input th:class="'form-control'"
-                               th:field="*{startDateTime}" class="form-control" type="datetime-local" id="startDateTime">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="startDateTime" th:text="'End date & time'">endDateTime</label>
-                        <input th:class="'form-control'"
-                               th:field="*{endDateTime}" class="form-control" type="datetime-local" id="endDateTime">
-                    </div>
-
-                </form>
-            </div>-->
-        </div>
     </div>
 </section>
 
-<!-- Confirm delete Modal -->
+<!-- DELETE ORDER Modal dialog window -->
 <div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -136,7 +137,10 @@
         th:src="@{/resources/static/js/popper.min.js}"></script>
 <script src="../../resources/static/js/bootstrap.min.js"
         th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+<script src="../../resources/static/js/bootstrap-datetimepicker.min.js"
+        th:src="@{/resources/static/js/bootstrap-datetimepicker.min.js}"></script>
 
+<!-- DELETE ORDER dialog script -->
 <script>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
@@ -146,6 +150,15 @@
         $(this).find('.modal-body').text('Confirm order delete: ' + target.data('id'))
         document.getElementById('deleteUrl').href = '/orders/' + target.data('id') + '/delete';
     })
+</script>
+
+<!-- Date & Time picker -->
+<script type="text/javascript">
+    $(function() {
+        $('#datetimepicker1').datetimepicker({
+            language: 'en-EN'
+        });
+    });
 </script>
 
 </body>

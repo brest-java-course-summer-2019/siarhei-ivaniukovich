@@ -75,17 +75,6 @@ public class OrderController {
     @GetMapping(value = "/order")
     public final String gotoAddOrderPage(Model model) {
         LOGGER.debug("gotoAddOrderPage({})", model);
-        /**Order order = new Order();
-        order.setOrderEmployeeId(1);
-        orderService.add(order);
-        List<ItemInOrder> iteminorders = itemInOrderService.findIioByOrderId(id);
-        List<Item> items =  itemService.findAll();
-        ItemInOrder iteminorderin = new ItemInOrder();
-        model.addAttribute("isNew", false);
-        model.addAttribute("iteminorders", iteminorders);
-        model.addAttribute("iteminorderin", iteminorderin);
-        model.addAttribute("items", items);
-        model.addAttribute("order", order);**/
         Order order = new Order();
         model.addAttribute("isNew", true);
         model.addAttribute("order", order);
@@ -105,7 +94,7 @@ public class OrderController {
         if (result.hasErrors()) {
             return "order";
         } else {
-            this.orderService.add(order);
+            orderService.add(order);
             return "redirect:/ordersdto";
         }
 

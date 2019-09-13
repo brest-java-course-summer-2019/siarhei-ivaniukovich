@@ -91,6 +91,18 @@ public class ItemServiceImplMockTest {
         assertEquals(expectedResult, result);
     }
 
+    @Test
+    public void testFindItemByName() {
+        final String itemName = "Nuggets";
+        final Item expectedResult = new Item();
+        expectedResult.setItemName("Nuggets");
+        when(mockItemdao.findItemByName("Nuggets")).thenReturn(Optional.of(expectedResult));
+
+        final Item result = itemServiceImplUnderTest.findItemByName(itemName);
+
+        assertEquals(expectedResult, result);
+    }
+
     private static Item createItem(Integer itemId) {
         Item item = new Item();
         item.setItemId(itemId);
