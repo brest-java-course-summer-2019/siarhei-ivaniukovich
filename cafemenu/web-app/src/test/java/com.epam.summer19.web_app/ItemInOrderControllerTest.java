@@ -2,6 +2,7 @@ package com.epam.summer19.web_app;
 
 import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.service.ItemInOrderService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -64,6 +65,12 @@ class ItemInOrderControllerTest {
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/order/1"));
 
         Mockito.verify(itemInOrderService, Mockito.times(1)).delete(Mockito.anyInt(), Mockito.anyInt());
+    }
+
+    @AfterEach
+    void afterEach() {
+//        Mockito.verifyNoMoreInteractions(itemInOrderService);
+        Mockito.reset(itemInOrderService);
     }
 
 }

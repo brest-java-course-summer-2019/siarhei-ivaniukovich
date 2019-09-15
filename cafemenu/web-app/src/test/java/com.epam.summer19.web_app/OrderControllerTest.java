@@ -4,6 +4,7 @@ import com.epam.summer19.model.Order;
 import com.epam.summer19.service.ItemInOrderService;
 import com.epam.summer19.service.OrderService;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -124,7 +125,13 @@ class OrderControllerTest {
         Mockito.verify(orderService, Mockito.times(1)).delete(Mockito.anyInt());
     }
 
-
+    @AfterEach
+    void afterEach() {
+        Mockito.verifyNoMoreInteractions(itemInOrderService);
+        Mockito.verifyNoMoreInteractions(orderService);
+        Mockito.reset(orderService);
+        Mockito.reset(itemInOrderService);
+    }
 
     private static Order createOrder(Integer orderId) {
         Order order = new Order();

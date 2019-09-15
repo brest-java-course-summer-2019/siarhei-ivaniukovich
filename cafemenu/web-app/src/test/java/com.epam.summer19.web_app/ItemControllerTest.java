@@ -3,6 +3,7 @@ package com.epam.summer19.web_app;
 import com.epam.summer19.model.Item;
 import com.epam.summer19.service.ItemService;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -119,6 +120,13 @@ class ItemControllerTest {
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/items"));
 
         Mockito.verify(itemService, Mockito.times(1)).delete(Mockito.anyInt());
+    }
+
+    @AfterEach
+    void afterEach() {
+
+        Mockito.verifyNoMoreInteractions(itemService);
+        Mockito.reset(itemService);
     }
 
     private static Item createItem(Integer itemId) {
