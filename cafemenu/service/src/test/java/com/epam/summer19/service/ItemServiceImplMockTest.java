@@ -53,11 +53,12 @@ public class ItemServiceImplMockTest {
 
     @Test
     public void testUpdate() {
-        final Item item = null;
+        final Item item = createItem(5);
+        item.setItemName("Another");
         
         itemServiceImplUnderTest.update(item);
 
-        verify(mockItemdao).update(null);
+        verify(mockItemdao).update(item);
     }
 
     @Test

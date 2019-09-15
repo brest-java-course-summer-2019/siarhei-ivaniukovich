@@ -39,12 +39,8 @@ public class ItemValidator implements Validator {
             errors.rejectValue("itemPrice", "itemPrice.negative");
         }
 
-        try {
-            this.itemService.findItemByName(item.getItemName());
+        if(item.getItemId() == null && itemService.findItemByName(item.getItemName()) != null) {
             errors.rejectValue("itemName", "itemName.alreadyInDB");
-        }
-        catch (Exception e) {
-            return;
         }
 
     }

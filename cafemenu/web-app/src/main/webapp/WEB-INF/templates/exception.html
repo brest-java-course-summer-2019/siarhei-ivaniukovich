@@ -1,18 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <title>CafeMenu - Items list</title>
 </head>
 <body>
 
-<div class="container-fluid pt-2">
-    <div class="card">
-        <div class="card-body">
-            <p class="h3 text-danger">Oopss..! Something goes wrong!</p>
-            <p class="h5">Don't worry. While we are trying to understand what happened you may browse the
-                <a class="font-weight-bold" th:href="@{/orders}" href="/orders">orders</a> and
-                <a class="font-weight-bold" th:href="@{/items}" href="/items">items</a> pages.</p>
-            <p th:text="${exception}"></p>
-            <p th:if="${response} != null" th:text="${response.message}"></p>
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
         </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5 class="text-danger">Exception</h5>
+    </nav>
+</header>
+
+<div class="container-fluid pt-2">
+    <div class="modal-body">
+            <p class="h4 text-danger">CafeMenu makes an error</p>
+            <p class="h6">Please return back to
+                <a class="font-weight-bold" th:href="@{/orders}" href="/mainpage">Main Page</a> or to
+                <a class="font-weight-bold" th:href="@{/items}" href="/orders">Orders list</a></p>
+        <div class="modal-sm bg-light rounded-sm">
+            <p th:text="${exception}">Exception body text</p>
+        </div>
+
     </div>
 </div>
 </body>

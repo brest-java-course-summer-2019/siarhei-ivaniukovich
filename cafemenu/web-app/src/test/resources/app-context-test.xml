@@ -17,17 +17,14 @@
     <context:component-scan base-package="com.epam.summer19.*"/>
     <context:property-placeholder location="classpath:application.properties"/>
 
-    <bean id="itemService" class="com.epam.summer19.web_app.consumers.ItemRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.items}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <bean id="itemService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.summer19.service.ItemService"/>
     </bean>
-    <bean id="orderService" class="com.epam.summer19.web_app.consumers.OrderRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.orders}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <bean id="orderService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.summer19.service.OrderService"/>
     </bean>
-    <bean id="itemInOrderService" class="com.epam.summer19.web_app.consumers.ItemInOrderRestConsumer">
-        <constructor-arg index="0" value="${protocol}://${host}:${port}/${point.iios}"/>
-        <constructor-arg index="1" ref="restTemplate"/>
+    <bean id="itemInOrderService" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.summer19.service.ItemInOrderService"/>
     </bean>
 
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">

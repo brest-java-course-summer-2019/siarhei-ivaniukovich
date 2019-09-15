@@ -63,6 +63,6 @@ public class ItemServiceImpl implements ItemService {
     public Item findItemByName(String itemName) {
         LOGGER.debug("Find item by itemName: findItemByName({})", itemName);
         return itemDao.findItemByName(itemName)
-                .orElseThrow(() -> new RuntimeException("Failed to get items from DB"));
+                .orElse(null);
     }
 }

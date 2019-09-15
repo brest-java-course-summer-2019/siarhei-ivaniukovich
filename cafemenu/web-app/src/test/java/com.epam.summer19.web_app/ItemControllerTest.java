@@ -42,8 +42,6 @@ class ItemControllerTest {
 
     @Test
     public void listAllItemsTest() throws Exception {
-        Mockito.when(itemService.findAll()).thenReturn(Arrays.asList(createItem(1)
-                , createItem(2)));
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/items")
@@ -62,20 +60,20 @@ class ItemControllerTest {
                 MockMvcRequestBuilders.get("/item")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string(Matchers
-                        .containsString("New item")));
+                .andExpect(MockMvcResultMatchers.content()
+                        .string(Matchers.containsString("New item")));
+
+        //Mockito.verify(itemService, Mockito.times(1)).findItemById(Mockito.anyInt());
     }
 
     @Test
     void AddItemTest() throws Exception {
-        Mockito.doNothing().doThrow(new IllegalStateException())
-                .when(itemService).add(createItem(1));
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/item")
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("itemId", "1")
-                        .param("itemName", "Item1")
+                        .param("itemName", "Item123")
                         .param("itemPrice", "2.00")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isFound())
@@ -86,7 +84,7 @@ class ItemControllerTest {
 
     @Test
     void gotoEditItemPageTest() throws Exception {
-        Mockito.when(itemService.findItemById(Mockito.anyInt())).thenReturn(createItem(2));
+        Mockito.when(itemService.findItemById(Mockito.anyInt())).thenReturn(createItem(1)) ;
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/item/1")
@@ -96,18 +94,15 @@ class ItemControllerTest {
                         .string(Matchers.containsString("Edit item #")));
 
         Mockito.verify(itemService, Mockito.times(1)).findItemById(Mockito.anyInt());
-    }
+   }
 
     @Test
     void updateItemTest() throws Exception {
-        Mockito.doNothing().doThrow(new IllegalStateException())
-                .when(itemService).update(createItem(1));
-
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/item/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .param("itemId", "1")
-                        .param("itemName", "Item1")
+                        .param("itemName", "Item11")
                         .param("itemPrice", "2.00")
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isFound())
@@ -118,11 +113,8 @@ class ItemControllerTest {
 
     @Test
     void deleteItemTest() throws Exception {
-        Mockito.doNothing().doThrow(new IllegalStateException())
-                .when(itemService).delete(Mockito.anyInt());
-
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/item/1/delete")
+                MockMvcRequestBuilders.get("/items/1/delete")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/items"));

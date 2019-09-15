@@ -71,7 +71,7 @@ public class ItemController {
         if (result.hasErrors()) {
             return "item";
         } else {
-            this.itemService.add(item);
+            itemService.add(item);
             return "redirect:/items";
         }
     }
@@ -104,7 +104,7 @@ public class ItemController {
         if (result.hasErrors()) {
             return "item";
         } else {
-            this.itemService.update(item);
+            itemService.update(item);
             return "redirect:/items";
         }
 
