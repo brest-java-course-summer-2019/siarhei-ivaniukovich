@@ -1,7 +1,6 @@
 package com.epam.summer19.web_app;
 
 import com.epam.summer19.model.Order;
-import com.epam.summer19.dto.OrderDTO;
 import com.epam.summer19.service.ItemInOrderService;
 import com.epam.summer19.service.OrderService;
 import org.hamcrest.Matchers;
@@ -20,9 +19,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
