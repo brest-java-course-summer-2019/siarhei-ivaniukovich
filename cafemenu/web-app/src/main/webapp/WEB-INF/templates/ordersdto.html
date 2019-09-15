@@ -12,7 +12,7 @@
     <link rel="stylesheet"
           href="../../resources/static/css/style.css"
           th:href="@{/resources/static/css/style.css}">
-    <title>CafeMenu - Items list</title>
+    <title>CafeMenu - Orders list</title>
 </head>
 <body>
 
@@ -49,23 +49,16 @@
                       th:method="@{get}">
                     <div class="form-group">
                         <label th:text="'Start'">startDateTime</label>
-                        <div class="well">
-                            <div id="datetimepicker1" class="input-append date">
-                                <input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
-                                <span class="add-on">
-      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-      </i>
-    </span>
-                            </div>
-                        </div>
-                        <input th:class="'form-control'" class="form-control" type="datetime-local" name="startDateTime">
+                         <input th:class="'form-control'" class="form-control" type="datetime-local" id="startDateTime">
                         <label th:text="'End'">endDateTime</label>
-                        <input th:class="'form-control'" class="form-control" type="datetime-local" name="endDateTime">
+                        <input th:class="'form-control'" class="form-control" type="datetime-local" id="endDateTime">
                     </div>
 
                 </form>
-            </div>
+            </div><a href="#" class="btn btn-info" data-toggle="tooltip" th:href="@{/ordersdto}" title="Apply date filter"
+                     th:onclick="@{document.forms['filterdatetimeForm'].submit(); return false;}">Apply filter</a>
         </div>
+
         <h6></h6>
         <div class="row">
             <div class="col">
