@@ -40,8 +40,7 @@ public class ItemValidator implements Validator {
         }
 
         Item foundItem = itemService.findItemByName(item.getItemName());
-        if(foundItem != null) {
-            if(item.getItemId() != foundItem.getItemId())
+        if(foundItem != null && item.getItemId() != foundItem.getItemId()) {
             errors.rejectValue("itemName", "itemName.alreadyInDB");
         }
     }

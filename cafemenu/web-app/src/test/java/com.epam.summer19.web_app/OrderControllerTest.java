@@ -2,6 +2,7 @@ package com.epam.summer19.web_app;
 
 import com.epam.summer19.model.Order;
 import com.epam.summer19.service.ItemInOrderService;
+import com.epam.summer19.service.ItemService;
 import com.epam.summer19.service.OrderService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
@@ -36,6 +37,9 @@ class OrderControllerTest {
 
     @Autowired
     private ItemInOrderService itemInOrderService;
+
+    @Autowired
+    private ItemService itemService;
 
     @BeforeEach
     public void setup() {
@@ -97,6 +101,7 @@ class OrderControllerTest {
 
         Mockito.verify(orderService, Mockito.times(1)).findOrderById(Mockito.anyInt());
         Mockito.verify(itemInOrderService, Mockito.times(1)).findIioByOrderId(Mockito.anyInt());
+        Mockito.verify(itemService, Mockito.times(1)).findAll();
 
     }
 
