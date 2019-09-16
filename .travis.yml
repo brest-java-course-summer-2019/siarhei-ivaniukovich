@@ -7,3 +7,4 @@ jdk:
 before_script: cd cafemenu
 script:
   - mvn clean test coveralls:report
+

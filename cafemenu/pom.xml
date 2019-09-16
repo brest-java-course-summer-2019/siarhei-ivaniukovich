@@ -364,9 +364,6 @@
                            </limits>
                         </rule>
                      </rules>
-                     <excludes>
-                        <exclude>web-app/src/main/java/com.epam.summer19.web_app.consumers</exclude>
-                     </excludes>
                   </configuration>
                </execution>
                <execution>
