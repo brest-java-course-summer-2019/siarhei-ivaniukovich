@@ -145,11 +145,11 @@ public class OrderRestControllerTest {
     @Test
     public void testOrderFindDTOByDateTime() throws Exception {
         Mockito.when(orderService.findOrdersDTOByDateTime(
-                LocalDateTime.parse("2019-08-15_09:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
-                LocalDateTime.parse("2019-08-15_10:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+                LocalDateTime.parse("2019-08-15T09:05:00",DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                LocalDateTime.parse("2019-08-15T10:05:00",DateTimeFormatter.ISO_LOCAL_DATE_TIME)
                 )).thenReturn(new ArrayList<OrderDTO>() {{add(createOrderDTO(2,6));}});
         mockMvc.perform(
-                MockMvcRequestBuilders.get("/ordersdto/2019-08-15_09:05:00/2019-08-15_10:05:00")
+                MockMvcRequestBuilders.get("/ordersdto/2019-08-15T09:05:00/2019-08-15T10:05:00")
                         .accept(MediaType.APPLICATION_JSON_UTF8)
         ).andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -157,8 +157,8 @@ public class OrderRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].employeeId", Matchers.is(6)))
         ;
         Mockito.verify(orderService, Mockito.times(1)).findOrdersDTOByDateTime(
-                LocalDateTime.parse("2019-08-15_09:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
-                LocalDateTime.parse("2019-08-15_10:05:00",DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
+                LocalDateTime.parse("2019-08-15T09:05:00",DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                LocalDateTime.parse("2019-08-15T10:05:00",DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         );
     }
 

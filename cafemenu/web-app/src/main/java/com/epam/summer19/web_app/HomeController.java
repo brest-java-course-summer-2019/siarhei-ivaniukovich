@@ -25,5 +25,15 @@ public class HomeController {
         return "mainpage";
     }
 
+    /**
+     * Errors handling below: ...
+     * @return
+     */
+    @GetMapping(value = "/404")
+    public String errorNotFoundRedirect() {
+        LOGGER.debug("errorPageRedirect()");
+        return "exception";
+    }
+
 }
 

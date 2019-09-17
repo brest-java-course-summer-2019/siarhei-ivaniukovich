@@ -17,7 +17,7 @@
 <body>
 
 <header>
-    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+    <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
         <a class="navbar-brand">
             <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
@@ -45,16 +45,18 @@
         <!-- Filter ORDERs by Date&Time field -->
         <div id="filterdatetime" class="collapse">
             <div class="modal-sm">
-                <form id="filterForm"
+                <!-- Filter Date&Time FORM to send: -->
+                <form id="filterdatetimeForm"
                       th:action="@{${#httpServletRequest.servletPath}+'/'+${startDateTime}+'/'+${endDateTime}}"
                       th:method="@{get}">
                     <div class="form-group">
                         <label th:text="'Start'">startDateTime</label>
-                         <input th:class="'form-control'" class="form-control" type="datetime-local" id="startDateTime">
+                        <input th:class="'form-control'" class="form-control" type="datetime-local" id="startDateTime"
+                               value="2009-08-15T09:00:00.000">
                         <label th:text="'End'">endDateTime</label>
-                        <input th:class="'form-control'" class="form-control" type="datetime-local" id="endDateTime">
+                        <input th:class="'form-control'" class="form-control" type="datetime-local" id="endDateTime"
+                               value="2019-12-15T09:00:00.000">
                     </div>
-
                 </form>
             </div><a href="#" class="btn btn-info" data-toggle="tooltip" th:href="@{/ordersdto}" title="Apply date filter"
                      th:onclick="@{document.forms['filterdatetimeForm'].submit(); return false;}">Apply filter</a>
@@ -63,16 +65,16 @@
         <h6></h6>
         <div class="row">
             <div class="col">
-                <div class="card">
-                    <table class="table table-striped text-left">
+                <div class="card" style="max-width: 850px;">
+                    <table class="table table-striped">
                         <thead class="thead-light">
-                        <tr class="text-left">
-                            <th width="6%">ID</th>
-                            <th width="6%">Emp ID</th>
-                            <th width="15%">Order Date&Time</th>
-                            <th width="10%">Total price</th>
-                            <th width="10%">Items quantity</th>
-                            <th></th>
+                        <tr class="text">
+                            <th width="7%">ID</th>
+                            <th width="10%">Empl ID</th>
+                            <th width="24%">Order Date&Time</th>
+                            <th width="20%" class="text-right">Total price</th>
+                            <th width="17%" class="text-center">Items quantity</th>
+                            <th width="25%"></th>
                         </tr>
                         </thead>
                         <!-- ORDERS list content -->
@@ -81,9 +83,9 @@
                                 <td th:text="${orderdto.orderId}">orderId</td>
                                 <td th:text="${orderdto.employeeId}">empId</td>
                                 <td th:text="${orderdto.orderDateTime}">DateTime</td>
-                                <td th:text="${orderdto.summaryPrice}">00.00</td>
-                                <td th:text="${orderdto.itemsQuantity}">00</td>
-                                <td>
+                                <td th:text="${#numbers.formatDecimal(orderdto.summaryPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">00.00</td>
+                                <td th:text="${orderdto.itemsQuantity}" align="center">00</td>
+                                <td class="text-right">
                                  <a th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
                                     data-placement="top">Edit</a>

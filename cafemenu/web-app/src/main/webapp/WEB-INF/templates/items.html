@@ -17,7 +17,7 @@
 <body>
 
 <header>
-    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+    <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
         <a class="navbar-brand">
             <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
@@ -42,14 +42,14 @@
         <h6></h6>
         <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card" style="max-width: 850px;">
                     <table class="table table-striped text-left">
                         <thead class="thead-light">
                         <tr class="text-left">
-                            <th width="4%">ID</th>
-                            <th width="30%">Item name</th>
-                            <th width="10%">Price $</th>
-                            <th></th>
+                            <th width="5%">ID</th>
+                            <th width="50%">Item name</th>
+                            <th width="20%" class="text-right">Price $</th>
+                            <th width="25%"></th>
                         </tr>
                         </thead>
                         <!-- Next lines - fill items list:-->
@@ -57,8 +57,9 @@
                             <tr th:each="item : ${items}">
                                 <td th:text="${item.itemId}">ItemId</td>
                                 <td th:text="${item.itemName}">ItemName</td>
-                                <td th:text="${item.itemPrice}">0.00</td>
-                                <td>
+                                <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">0.00</td>
+                                </span>
+                                <td class="text-right">
                                  <a th:href="@{|/item/${item.itemId}|}" href="items_edit.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
                                     data-placement="top">Edit</a>

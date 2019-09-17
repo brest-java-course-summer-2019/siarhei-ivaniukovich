@@ -1,6 +1,7 @@
 package com.epam.summer19.dao;
 
 import com.epam.summer19.model.Item;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -10,7 +11,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +41,7 @@ public class ItemDaoJdbcImpl implements ItemDao {
     private final static String ITEM_ID = "itemId";
     private final static String ITEM_NAME = "itemName";
     private final static String ITEM_PRICE = "itemPrice";
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate1;
 
     public ItemDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
@@ -65,18 +66,18 @@ public class ItemDaoJdbcImpl implements ItemDao {
 
     @Override
     public void update(Item item) {
-        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(item)))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update item in DB"));
+        if(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(item)) < 1) {
+            throw new RuntimeException("Item DAO: Failed to update item in DB");
+        }
     }
 
     @Override
     public void delete(Integer itemId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(ITEM_ID, itemId);
-        Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete item from DB"));
+        if(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource) < 1) {
+            throw new RuntimeException("Item DAO: Failed to delete item from DB");
+        }
     }
 
     @Override
@@ -97,7 +98,8 @@ public class ItemDaoJdbcImpl implements ItemDao {
     @Override
     public Optional<Item> findItemByName(String itemName) {
         SqlParameterSource namedParameters = new MapSqlParameterSource(ITEM_NAME, itemName);
-        List<Item> results = namedParameterJdbcTemplate.query(findByNameSql, namedParameters,
+        namedParameterJdbcTemplate1 = namedParameterJdbcTemplate;
+        List<Item> results = namedParameterJdbcTemplate1.query(findByNameSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(Item.class));
         return Optional.ofNullable(DataAccessUtils.uniqueResult(results));
     }

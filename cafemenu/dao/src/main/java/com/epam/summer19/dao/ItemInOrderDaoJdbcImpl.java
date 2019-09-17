@@ -66,9 +66,9 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public void update(ItemInOrder iteminorder) {
-        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(iteminorder)))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update ItemInOrder in DB"));
+        if (namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(iteminorder)) < 1) {
+            throw new RuntimeException("ItemInOrder DAO: Failed to update iteminorder in DB");
+        }
     }
 
     @Override
@@ -76,9 +76,9 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(IIO_ORDER_ID, iioOrderId);
         mapSqlParameterSource.addValue(IIO_ITEM_ID, iioItemId);
-        Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete ItemInOrder from DB"));
+        if (namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource) < 1) {
+            throw new RuntimeException("ItemInOrder DAO: Failed to delete iteminorder from DB");
+        }
 
     }
 

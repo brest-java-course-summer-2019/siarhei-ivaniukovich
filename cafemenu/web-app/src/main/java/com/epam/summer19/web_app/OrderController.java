@@ -25,6 +25,7 @@ import java.util.List;
  * Order controller
  */
 @Controller
+
 public class OrderController {
     /**
      * Logger
@@ -64,6 +65,25 @@ public class OrderController {
     public final String listAllOrdersDTO(Model model) {
         LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
         model.addAttribute("ordersdto", orderService.findAllDTO());
+        return "ordersdto";
+    }
+
+
+    /**
+     * List all ordersDTO page filtered between START and END date&time
+     * @param model
+     * @return
+     */
+    @GetMapping(value = "/ordersdto/{startDateTime}/{endDateTime}")
+    public final String listAllOrdersDTOByDateTime(
+            @PathVariable("startDateTime") String startDateTime,
+            @PathVariable("endDateTime") String endDateTime, Model model) {
+        LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
+        model.addAttribute("isNew", false);
+        model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
+                LocalDateTime.parse(startDateTime,DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                LocalDateTime.parse(endDateTime,DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        ));
         return "ordersdto";
     }
 
@@ -152,22 +172,5 @@ public class OrderController {
         return "redirect:/ordersdto";
     }
 
-    /**
-     * List all orders page filtered between START and END date&time
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/ordersdto/{startDateTime}/{endDateTime}")
-    public final String listAllOrdersDTOByDateTime(
-            @PathVariable("startDateTime") String startDateTime,
-            @PathVariable("endDateTime") String endDateTime, Model model) {
-        LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
-        model.addAttribute("isNew", false);
-        model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
-                LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
-                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))
-        ));
-        return "ordersdto";
-    }
 
 }

@@ -17,7 +17,7 @@
 <body>
 
 <header>
-    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+    <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
         <a class="navbar-brand">
             <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
@@ -38,7 +38,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card" style="max-width: 850px;">
                     <div class="card-body">
                         <form id="itemForm"
                               th:object="${item}"
@@ -63,10 +63,9 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label" for="field_itemprice">Item price:</label>
-                                <input class="form-control"
-                                       id="field_itemprice"
-                                       type="number" value="0.00"
-                                       th:class="${#fields.hasErrors('itemPrice')} ? 'form-control is-invalid' : 'form-control'"
+                                <input id="field_itemprice" type="text"
+                                       class="currency form-control"
+                                       th:class="${#fields.hasErrors('itemPrice')} ? 'currency form-control is-invalid' : 'currency form-control'"
                                        th:field="*{itemPrice}"/>
                                 <div th:if="${#fields.hasErrors('itemPrice')}"
                                      class="invalid-feedback"
@@ -89,6 +88,15 @@
 
 </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.2.6/jquery.inputmask.bundle.min.js"></script>
+
+<script>$(document).ready(function(){
+    $(".currency").inputmask('currency',{rightAlign: false, prefix: '' });
+});
+</script>
+
 
 
 </body>

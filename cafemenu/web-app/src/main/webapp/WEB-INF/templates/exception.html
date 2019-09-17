@@ -17,7 +17,7 @@
 <body>
 
 <header>
-    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+    <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
         <a class="navbar-brand">
             <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
@@ -28,9 +28,6 @@
             <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
         </div>
     </nav>
-    <nav id="headername" class="navbar bg-light text-dark">
-        <h5 class="text-danger">Exception</h5>
-    </nav>
 </header>
 
 <div class="container-fluid pt-2">
@@ -39,6 +36,8 @@
             <p class="h6">Please return back to
                 <a class="font-weight-bold" th:href="@{/orders}" href="/mainpage">Main Page</a> or to
                 <a class="font-weight-bold" th:href="@{/items}" href="/orders">Orders list</a></p>
+        <br>
+        <p class="h6 text-danger">Error description:</p>
         <div class="modal-sm bg-light rounded-sm">
             <p th:text="${exception}">Exception body text</p>
         </div>

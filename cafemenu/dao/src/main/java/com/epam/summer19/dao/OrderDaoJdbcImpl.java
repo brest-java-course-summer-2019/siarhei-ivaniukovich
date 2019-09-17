@@ -81,18 +81,18 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public void update(Order order) {
-        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(order)))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update order in DB"));
+        if (namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(order)) < 1) {
+            throw new RuntimeException("ItemInOrder DAO: Failed to delete iteminorder from DB");
+        }
     }
 
     @Override
     public void delete(Integer orderId) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(ORDER_ID, orderId);
-        Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete order from DB"));
+        if(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource) < 1) {
+            throw new RuntimeException("ItemInOrder DAO: Failed to delete iteminorder from DB");
+        }
     }
 
     @Override

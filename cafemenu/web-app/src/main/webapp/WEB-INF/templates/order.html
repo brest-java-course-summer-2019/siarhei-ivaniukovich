@@ -16,7 +16,7 @@
 </head>
 <body>
     <header>
-        <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
             <a class="navbar-brand">
                 <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
@@ -38,7 +38,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <div class="card">
+                <div class="card" style="max-width: 850px;">
                     <div class="card-body">
                         <!-- Employee ID form START -->
                         <form id="orderForm"
@@ -88,7 +88,7 @@
                                 <tr th:each="iteminorder : ${iteminorders}">
                                     <td class="text-center" th:text="${iteminorder.iioItemId}">IioItemId</td>
                                     <td th:text="${iteminorder.iioItemName}">IioItemName</td>
-                                    <td class="text-center" th:text="${iteminorder.iioItemPrice}">0.00</td>
+                                    <td class="text-center" th:text="${#numbers.formatDecimal(iteminorder.iioItemPrice, 1, 'COMMA', 2, 'POINT')}" align="right">0.00</td>
                                     <td class="text-center" th:text="${iteminorder.iioItemCount}">0</td>
                                     <td>
                                         <span data-toggle="modal" data-target="#deleteDialog"
@@ -138,8 +138,8 @@
                         <tr class="text-left">
                             <th width="5%">ID</th>
                             <th width="40%">Item</th>
-                            <th width="20%">Price $</th>
-                            <th width="20%">Quantity</th>
+                            <th width="20%" class="text-right">Price $</th>
+                            <th width="20%" class="text-center">Quantity</th>
                             <th width="15%"></th>
                             <th></th>
                         </tr>
@@ -150,16 +150,14 @@
                             <tr th:each="item,stat : ${items}">
                                 <td th:text="${item.itemId}">ItemId</td>
                                 <td th:text="${item.itemName}">ItemName</td>
-                                <td th:text="${item.itemPrice}">0.00</td>
+                                <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">0.00</td>
                                 <form id="iteminorderinForm" th:id="'iioForm' + __${stat.index}__"
                                       th:object="${iteminorderin}"
                                       th:action="'../iteminorder'"
-                                      th:method="@{post}">
-                                    <td>
-                                        <input class="form-control form-control" type="text" maxlength="5" value="1"
+                                      th:method="@{post}" class="text-right">
+                                    <td class="text-right">
+                                        <input class="form-control" type="text" maxlength="5" value="1"
                                                min="1" max="99999" step="1"  onkeypress="return isNumberKey(event)" name="iioItemCount"/>
-                                    </td>
-                                    <td>
                                         <input id="orderId" type="hidden" th:value="${order.orderId}" name="iioOrderId"/>
                                         <input id="itemId" type="hidden" th:value="${item.itemId}" name="iioItemId"/>
                                         <input id="itemName" type="hidden" th:value="${item.itemName}" name="iioItemName"/>
