@@ -43,7 +43,7 @@
 
  - Download project from github
  URL: `https://github.com/brest-java-course-summer-2019/siarhei-ivaniukovich.git`
- - Run at root of unpacked project folder to build project:
+ - Run at root of unpacked project /cafemenu folder to build project:
  `mvn clean install`
  
 **Running app**

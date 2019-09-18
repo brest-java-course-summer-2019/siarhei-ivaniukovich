@@ -22,45 +22,45 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
 
     @Override
     public void add(ItemInOrder... iteminorders) {
+        LOGGER.debug("Service: Multiple ItemInOrder's add(...)");
         for(ItemInOrder iteminorder : iteminorders) {
             itemInOrderDao.add(iteminorder);
-            //orderDao.calcSummaryOrderPrice(iteminorder.getIioOrderId());
         }
     }
 
     @Override
     public void add(ItemInOrder iteminorder) {
-        LOGGER.debug("Single ItemInOrder add({})", iteminorder);
+        LOGGER.debug("Service: Single ItemInOrder add({})", iteminorder);
         itemInOrderDao.add(iteminorder);
     }
 
     @Override
     public void update(ItemInOrder iteminorder) {
-        LOGGER.debug("ItemInOrder update({})", iteminorder);
+        LOGGER.debug("Service: ItemInOrder update({})", iteminorder);
         itemInOrderDao.update(iteminorder);
     }
 
     @Override
     public void delete(Integer iioOrderId, Integer iioItemId) {
-        LOGGER.debug("ItemInOrder delete({})", iioOrderId+','+iioItemId);
+        LOGGER.debug("Service: ItemInOrder delete({})", iioOrderId+','+iioItemId);
         itemInOrderDao.delete(iioOrderId, iioItemId);
     }
 
     @Override
     public List<ItemInOrder> findAll() {
-        LOGGER.debug("Find all ItemInOrders");
+        LOGGER.debug("Service: Find all ItemInOrders");
         return itemInOrderDao.findAll();
     }
 
     @Override
     public List<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
-        LOGGER.debug("Find ItemInOrder by iioOrderId={}", iioOrderId);
+        LOGGER.debug("Service: Find ItemInOrder by iioOrderId={}", iioOrderId);
         return itemInOrderDao.findIioByOrderId(iioOrderId);
     }
 
     @Override
     public ItemInOrder findIioByOrderItemId(Integer iioOrderId, Integer iioItemId) {
-        LOGGER.debug("Find ItemInOrder by iioOrderId={} & iioItemId={}", iioOrderId, iioItemId);
+        LOGGER.debug("Service: Find ItemInOrder by iioOrderId={} & iioItemId={}", iioOrderId, iioItemId);
         return itemInOrderDao.findIioByOrderItemId(iioOrderId, iioItemId)
                 .orElse(null);
    }

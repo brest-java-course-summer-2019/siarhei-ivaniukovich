@@ -7,14 +7,14 @@ import java.util.List;
 public interface ItemService {
 
     /**
-     * Add multiple items
+     * Add few items
      * @param items
      * @return
      */
     void add(Item... items);
 
     /**
-     * Add item
+     * Add single item
      * @param item
      * @return
      */

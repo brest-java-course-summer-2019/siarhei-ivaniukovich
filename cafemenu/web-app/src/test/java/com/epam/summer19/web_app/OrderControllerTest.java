@@ -80,9 +80,8 @@ class OrderControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("orderId", "1")
                         .param("orderEmployeeId", "6")
-                        //.param("orderDateTime", "2019-09-15 23:00:01")
         ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isFound())
+                .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/ordersdto"));
 
         Mockito.verify(orderService, Mockito.times(1)).add(Mockito.any(Order.class));

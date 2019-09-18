@@ -32,14 +32,14 @@ public interface ItemInOrderDao {
     List<ItemInOrder> findAll();
 
     /**
-     * Finditem in order by orderId
+     * Find item in order by orderId
      * @param iioOrderId
      * @return
      */
     List<ItemInOrder> findIioByOrderId(Integer iioOrderId);
 
     /**
-     * Finditem in order by orderId
+     * Find item in order by orderId & itemId
      * @param iioOrderId, iioItemId
      * @return
      */

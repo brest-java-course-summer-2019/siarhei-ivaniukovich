@@ -70,9 +70,6 @@ public class OrderRestController {
         LOGGER.debug("REST Find orders between {} and {}", startDateTime, endDateTime);
         return orderService.findOrdersDTOByDateTime(
                 LocalDateTime.parse(startDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME),
-                LocalDateTime.parse(endDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-                /**LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss")),
-                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss"))**/
-        );
+                LocalDateTime.parse(endDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME));
     }
 }

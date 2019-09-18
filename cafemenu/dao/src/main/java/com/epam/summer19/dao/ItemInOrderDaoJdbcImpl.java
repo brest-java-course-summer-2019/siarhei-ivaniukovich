@@ -47,10 +47,6 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    private boolean successfullyUpdated(int numRowsUpdated) {
-        return numRowsUpdated > 0;
-    }
-
     @Override
     public ItemInOrder add(ItemInOrder iteminorder) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();

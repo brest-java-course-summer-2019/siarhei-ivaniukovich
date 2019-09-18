@@ -9,7 +9,7 @@ import java.util.List;
 public interface OrderService {
 
     /**
-     * Create new multiple orders
+     * Create new few Order's
      *
      * @param orders
      * @return
@@ -17,7 +17,7 @@ public interface OrderService {
     void add(Order... orders);
 
     /**
-     * Create new order
+     * Create new single Order
      *
      * @param order
      * @return
@@ -25,35 +25,35 @@ public interface OrderService {
     Order add(Order order);
 
     /**
-     * Update order
+     * Update Order
      *
      * @param order
      */
     void update(Order order);
 
     /**
-     * Delete order
+     * Delete Order
      *
      * @param orderId
      */
     void delete(Integer orderId);
 
     /**
-     * Get all orders
+     * List all Order's
      *
      * @return
      */
     List<Order> findAll();
 
     /**
-     * Get all orders DTO
+     * List all OrderDTO objects
      *
      * @return
      */
     List<OrderDTO> findAllDTO();
 
     /**
-     * Find order by orderId
+     * Find Order by orderId
      *
      * @param orderId
      * @return
@@ -61,7 +61,7 @@ public interface OrderService {
     Order findOrderById(Integer orderId);
 
     /**
-     * Find orders by Date and Time set
+     * Find all OrderDTO's by Date and Time set
      *
      * @param startDateTime
      * @param endDateTime

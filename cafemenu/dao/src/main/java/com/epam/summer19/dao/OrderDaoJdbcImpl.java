@@ -61,10 +61,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    private boolean successfullyUpdated(int numRowsUpdated) {
-        return numRowsUpdated > 0;
-    }
-
     @Override
     public Order add(Order order) {
 
@@ -126,7 +122,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 BeanPropertyRowMapper.newInstance(OrderDTO.class));
         return results;
     }
-
 
     private class OrderRowMapper implements RowMapper<Order> {
         @Override

@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -102,7 +101,6 @@ public class OrderController {
                 .minusYears(25).truncatedTo(ChronoUnit.MINUTES));
         dateTimeFilterDTO.setEndDateTime(LocalDateTime.now()
                 .plusHours(24).truncatedTo(ChronoUnit.MINUTES));
-        dateTimeFilterDTO.setResetFilter(false);
         return dateTimeFilterDTO;
     }
 

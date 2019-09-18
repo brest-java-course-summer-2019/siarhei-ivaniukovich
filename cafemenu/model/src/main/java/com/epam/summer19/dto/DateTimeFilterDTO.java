@@ -6,21 +6,18 @@ import java.time.LocalDateTime;
 
 public class DateTimeFilterDTO {
 
+
+    /**
+     * DateTime start
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     LocalDateTime startDateTime;
 
+    /**
+     * DateTime end
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     LocalDateTime endDateTime;
-
-    Boolean resetFilter;
-
-    public Boolean getResetFilter() {
-        return resetFilter;
-    }
-
-    public void setResetFilter(Boolean resetFilter) {
-        this.resetFilter = resetFilter;
-    }
 
     public DateTimeFilterDTO() {
         this.startDateTime = LocalDateTime.MIN;

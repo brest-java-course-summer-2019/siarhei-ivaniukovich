@@ -23,7 +23,7 @@ public class ItemInOrderRestController {
      *  */
     @PostMapping(value = "/iteminorders")              /** value = "/iteminorder" **/
     public void add(@RequestBody ItemInOrder itemInOrder) {
-        LOGGER.debug("REST Add iteminorder({})", itemInOrder);
+        LOGGER.debug("REST: Add iteminorder({})", itemInOrder);
         itemInOrderService.add(itemInOrder);
     }
 
@@ -33,7 +33,7 @@ public class ItemInOrderRestController {
     @PutMapping(value = "/iteminorders")               /** value = "/iteminorder" **/
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody ItemInOrder itemInOrder) {
-        LOGGER.debug("REST Update iteminorder({})", itemInOrder);
+        LOGGER.debug("REST: Update iteminorder({})", itemInOrder);
         itemInOrderService.update(itemInOrder);
     }
 
@@ -44,7 +44,7 @@ public class ItemInOrderRestController {
     public void delete(
             @PathVariable("orderId") Integer orderId,
             @PathVariable("itemId") Integer itemId) {
-        LOGGER.debug("REST Delete iteminorder({},{})", orderId, itemId);
+        LOGGER.debug("REST: Delete iteminorder({},{})", orderId, itemId);
         itemInOrderService.delete(orderId, itemId);
     }
 
@@ -53,7 +53,7 @@ public class ItemInOrderRestController {
      *  */
     @GetMapping(value = "/iteminorders")
     public Collection<ItemInOrder> findAll() {
-        LOGGER.debug("REST List all iteminorders");
+        LOGGER.debug("REST: List all iteminorders");
         return itemInOrderService.findAll();
     }
 
@@ -65,7 +65,7 @@ public class ItemInOrderRestController {
     @GetMapping(value = "/iteminorders/{orderId}")
     @ResponseStatus(value = HttpStatus.OK)
     public Collection<ItemInOrder> findItemInOrderByOrderId(@PathVariable("orderId") Integer orderId) {
-        LOGGER.debug("REST Find iteminorder by orderId({})", orderId);
+        LOGGER.debug("REST: Find iteminorder by orderId({})", orderId);
         Collection<ItemInOrder> result = itemInOrderService.findIioByOrderId(orderId);
         return result;
     }
@@ -81,7 +81,7 @@ public class ItemInOrderRestController {
     public ItemInOrder findItemInOrderByOrderItemId(
             @PathVariable("orderId") Integer orderId,
             @PathVariable("itemId") Integer itemId) {
-        LOGGER.debug("REST Find iteminorder by orderId({}) & itemId({})", orderId, itemId);
+        LOGGER.debug("REST: Find iteminorder by orderId({}) & itemId({})", orderId, itemId);
         return itemInOrderService.findIioByOrderItemId(orderId, itemId);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 public interface ItemInOrderService {
 
     /**
-     * Create new multiple ItemInOrder
+     * Create new few ItemInOrder's
      * @param iteminorders
      * @return
      */
@@ -34,20 +34,20 @@ public interface ItemInOrderService {
     void delete(Integer iioOrderId, Integer iioItemId);
 
     /**
-     * Get all item in order
+     * Get all ItemInOrder's
      * @return
      */
     List<ItemInOrder> findAll();
 
     /**
-     * Finditem in order by orderId
+     * Find ItemInOrder by orderId
      * @param iioOrderId
      * @return
      */
     List<ItemInOrder> findIioByOrderId(Integer iioOrderId);
 
     /**
-     * Finditem in order by orderId
+     * Find ItemInOrder by orderId & itemId
      * @param iioOrderId, iioItemId
      * @return
      */

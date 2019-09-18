@@ -22,7 +22,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void add(Item... items) {
-        LOGGER.debug("multiple items add({})");
+        LOGGER.debug("Service: Multiple Items add(...)");
         for(Item item : items) {
             itemDao.add(item);
         }
@@ -30,38 +30,38 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void add(Item item) {
-        LOGGER.debug("single item add({})", item);
+        LOGGER.debug("Service: Single Item add({})", item);
         itemDao.add(item);
     }
 
     @Override
     public void update(Item item) {
-        LOGGER.debug("item update({})", item);
+        LOGGER.debug("Service: Item update({})", item);
         itemDao.update(item);
     }
 
     @Override
     public void delete(Integer itemId) {
-        LOGGER.debug("item delete({})", itemId);
+        LOGGER.debug("Service: Item delete({})", itemId);
         itemDao.delete(itemId);
     }
 
     @Override
     public List<Item> findAll() {
-        LOGGER.debug("Find all Items");
+        LOGGER.debug("Service: Find all Items");
         return itemDao.findAll();
     }
 
     @Override
     public Item findItemById(Integer itemId) {
-        LOGGER.debug("Find item by itemId: findItemById({})", itemId);
+        LOGGER.debug("Service: Find Item by itemId:{}", itemId);
         return itemDao.findItemById(itemId)
                 .orElseThrow(() -> new RuntimeException("Failed to get items from DB"));
     }
 
     @Override
     public Item findItemByName(String itemName) {
-        LOGGER.debug("Find item by itemName: findItemByName({})", itemName);
+        LOGGER.debug("Service: Find item by itemName:{}", itemName);
         return itemDao.findItemByName(itemName)
                 .orElse(null);
     }

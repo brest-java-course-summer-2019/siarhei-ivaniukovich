@@ -47,11 +47,6 @@ public class ItemDaoJdbcImpl implements ItemDao {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    private boolean successfullyUpdated(int numRowsUpdated) {
-        return numRowsUpdated > 0;
-    }
-
-
     @Override
     public Item add(Item item) {
         MapSqlParameterSource parameters = new MapSqlParameterSource();

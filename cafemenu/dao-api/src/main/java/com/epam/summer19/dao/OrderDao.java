@@ -47,5 +47,11 @@ public interface OrderDao {
      */
     Optional<Order> findOrderById(Integer orderId);
 
+    /**
+     * Find orders via OrderDTO object (by price SUM, items Q and order by Date & Time)
+     * @param startDateTime
+     * @param endDateTime
+     * @return
+     */
     List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime);
 }
