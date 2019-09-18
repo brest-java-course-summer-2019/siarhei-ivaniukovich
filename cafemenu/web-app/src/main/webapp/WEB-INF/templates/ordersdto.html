@@ -41,26 +41,33 @@
             <a href="order.html" th:href="@{/order}" class="btn btn-secondary">Add new order</a>&nbsp;
             <a href="#filterdatetime" class="btn btn-info" data-toggle="collapse">Filter by date&time</a>
         </div>
-        <!-- ###### TODO: to action send startDateTime & endDateTime & test address must be .../ordersdto/YYYY-MM-DDTHH:mm:ss/YYYY-MM-DDTHH:mm:ss  -->
         <!-- Filter ORDERs by Date&Time field -->
         <div id="filterdatetime" class="collapse">
             <div class="modal-sm">
+
                 <!-- Filter Date&Time FORM to send: -->
                 <form id="filterdatetimeForm"
                       th:object="${dateTimeFilterDTO}"
                       th:action="'../ordersdtofilterbydatetime'"
                       th:method="@{post}">
+                    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                        <p>Please use correct date:</p>
+                    </div>
+
                     <div class="form-group">
                         <label th:text="'Start'">startDateTime</label>
                         <input th:class="'form-control'" class="form-control" type="datetime-local" id="startDateTime"
-                               th:field="*{startDateTime}" value="2009-08-15T09:00:00.000">
+                               th:field="*{startDateTime}" >
                         <label th:text="'End'">endDateTime</label>
-                        <input th:class="'form-control'" class="form-control" type="datetime-local" name="endDateTime"
-                               th:field="*{endDateTime}" value="2019-12-15T09:00:00.000">
+                        <input th:class="'form-control'" class="form-control" type="datetime-local" id="endDateTime"
+                               th:field="*{endDateTime}" >
                     </div>
                 </form>
-            </div><a href="#" class="btn btn-info" data-toggle="tooltip" th:href="@{/ordersdto}" title="Apply date filter"
-                     th:onclick="@{document.forms['filterdatetimeForm'].submit(); return false;}">Apply filter</a>
+            </div>
+            <a href="#" class="btn btn-info" data-toggle="tooltip" th:href="@{/ordersdto}" title="Apply date filter"
+               th:onclick="@{document.forms['filterdatetimeForm'].submit(); return false;}">Apply filter</a>
+            <a href="#" class="btn btn-warning" data-toggle="tooltip"
+               th:href="@{/ordersdtofilterreset}" title="Reset date filter">Reset filter</a>
         </div>
 
         <h6></h6>

@@ -21,8 +21,8 @@ public class OrderValidator implements Validator {
         Order order = (Order) target;
 
         if (order.getOrderEmployeeId() != null && order.getOrderEmployeeId().intValue() < 0) {
-
             errors.rejectValue("orderEmployeeId", "orderEmployeeId.negative");
         }
+
     }
 }

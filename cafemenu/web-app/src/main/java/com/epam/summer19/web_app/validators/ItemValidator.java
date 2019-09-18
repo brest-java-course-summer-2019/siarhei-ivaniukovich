@@ -9,6 +9,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
+import java.util.regex.Pattern;
+
 @Component
 public class ItemValidator implements Validator {
 
@@ -34,6 +36,11 @@ public class ItemValidator implements Validator {
             errors.rejectValue("itemName", "itemName.maxSize255");
         }
         // TODO: add '/'  ' ' not allowed in item name validation
+
+        Pattern regex = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]");
+        if (regex.matcher(item.getItemName()).find()) {
+            errors.rejectValue("itemName", "itemName.incorrect");
+        }
 
         if (item.getItemPrice() != null
                 && item.getItemPrice().floatValue() < 0) {

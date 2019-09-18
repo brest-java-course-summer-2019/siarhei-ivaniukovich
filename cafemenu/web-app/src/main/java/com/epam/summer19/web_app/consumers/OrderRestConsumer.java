@@ -120,7 +120,7 @@ public class OrderRestConsumer implements OrderService {
     @Override
     public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         LOGGER.debug("findOrdersDTOByDateTime({},{})", startDateTime, endDateTime);
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/" + startDateTime + "/" + endDateTime, List.class);
+        ResponseEntity responseEntity = restTemplate.getForEntity(url + "dto/" + startDateTime + ":00/" + endDateTime + ":00", List.class);
         return (List<OrderDTO>) responseEntity.getBody();
     }
 

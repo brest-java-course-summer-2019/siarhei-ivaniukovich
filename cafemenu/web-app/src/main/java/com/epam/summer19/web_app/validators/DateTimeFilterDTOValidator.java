@@ -1,7 +1,6 @@
 package com.epam.summer19.web_app.validators;
 
 import com.epam.summer19.dto.DateTimeFilterDTO;
-import com.epam.summer19.model.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -13,7 +12,7 @@ public class DateTimeFilterDTOValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return dateTimeFilterDTO.class.equals(clazz);
+        return DateTimeFilterDTO.class.equals(clazz);
     }
 
     @Override
