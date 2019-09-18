@@ -21,6 +21,20 @@
 
 ***
 **Installing**  
+ - Preinstalling:
+   - <details>
+       <summary>install jdk11</summary>
+       prepare: `sudo apt update`
+       install: `sudo apt install openjdk-11-jre-headless`
+       check: `java -version`
+     </details>
+   - <details>
+       <summary>install maven</summary>
+       prepare: `sudo apt update`   
+       install: `sudo apt install maven`
+       check: `mvn -version`
+       </details>
+
  - Download project from github
  URL: `https://github.com/brest-java-course-summer-2019/siarhei-ivaniukovich.git`
  - Run at root of unpacked project folder to build project:
