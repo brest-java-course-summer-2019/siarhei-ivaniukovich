@@ -48,7 +48,7 @@
  
 **Running app**
  - Using plugin jetty:
-   - inside /cafemenu/rest-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082/cafemenurest` for REST API examples
+   - inside /cafemenu/rest-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8082` for REST API with examples
    - inside /cafemenu/web-app dir run: `mvn jetty:run`, then open in browser: `http://localhost:8083` for WEB startpage
  
  - Using server tomcat9:
