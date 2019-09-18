@@ -33,6 +33,7 @@ public class ItemValidator implements Validator {
                 && item.getItemName().length() > ITEM_NAME_MAX_SIZE) {
             errors.rejectValue("itemName", "itemName.maxSize255");
         }
+        // TODO: add '/'  ' ' not allowed in item name validation
 
         if (item.getItemPrice() != null
                 && item.getItemPrice().floatValue() < 0) {

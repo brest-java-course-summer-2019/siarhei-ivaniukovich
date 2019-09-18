@@ -1,6 +1,7 @@
 package com.epam.summer19.web_app;
 
 import com.epam.summer19.model.Item;
+import com.epam.summer19.dto.DateTimeFilterDTO;
 import com.epam.summer19.model.ItemInOrder;
 import com.epam.summer19.model.Order;
 import com.epam.summer19.service.ItemInOrderService;
@@ -16,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
+
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,7 +28,6 @@ import java.util.List;
  * Order controller
  */
 @Controller
-
 public class OrderController {
     /**
      * Logger
@@ -65,6 +67,8 @@ public class OrderController {
     public final String listAllOrdersDTO(Model model) {
         LOGGER.debug("ListAllOrdersDTO findAllDTO({})", model);
         model.addAttribute("ordersdto", orderService.findAllDTO());
+        DateTimeFilterDTO dateTimeFilterDTO = new DateTimeFilterDTO();
+        model.addAttribute("dateTimeFilterDTO", dateTimeFilterDTO);
         return "ordersdto";
     }
 
@@ -73,19 +77,44 @@ public class OrderController {
      * List all ordersDTO page filtered between START and END date&time
      * @param model
      * @return
-     */
+     *
     @GetMapping(value = "/ordersdto/{startDateTime}/{endDateTime}")
     public final String listAllOrdersDTOByDateTime(
             @PathVariable("startDateTime") String startDateTime,
             @PathVariable("endDateTime") String endDateTime, Model model) {
         LOGGER.debug("findOrdersByDateTime({}{})", startDateTime, endDateTime, model);
         model.addAttribute("isNew", false);
+        model.addAttribute("startDateTimeA", startDateTime);
+        model.addAttribute("endDateTimeA", endDateTime);
         model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
                 LocalDateTime.parse(startDateTime,DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                 LocalDateTime.parse(endDateTime,DateTimeFormatter.ISO_LOCAL_DATE_TIME)
         ));
         return "ordersdto";
+    }*/
+
+    /** TODO: Complete Date&Time FILTER ! **/
+    @GetMapping(value = "/ordersdtofilterbydatetime")
+    public final String listAllOrdersDTOByDateTime(DateTimeFilterDTO dateTimeFilterDTO, Model model) {
+        LOGGER.debug("findOrdersByDateTime({})", model);
+        model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
+                dateTimeFilterDTO.getStartDateTime(), dateTimeFilterDTO.getEndDateTime()));
+        model.addAttribute("dateTimeFilterDTO", dateTimeFilterDTO);
+        return "ordersdtofilterbydatetime";
     }
+
+    @PostMapping(value = "/ordersdtofilterbydatetime")
+    public final String postAllOrdersDTOByDateTime(DateTimeFilterDTO dateTimeFilterDTO, BindingResult result,
+                                                   Model model) {
+        LOGGER.debug("Post filter byDateTime params({}, {})", dateTimeFilterDTO, result);
+        model.addAttribute("ordersdto",orderService.findOrdersDTOByDateTime(
+                dateTimeFilterDTO.getStartDateTime(), dateTimeFilterDTO.getEndDateTime()));
+        return "ordersdtofilterbydatetime";
+    }
+
+
+
+
 
     /**
      * GOTO Order add page
@@ -114,8 +143,8 @@ public class OrderController {
         if (result.hasErrors()) {
             return "order";
         } else {
-            orderService.add(order);
-            return "redirect:/ordersdto";
+            order = orderService.add(order);
+            return "redirect:/order/"+order.getOrderId();
         }
 
     }

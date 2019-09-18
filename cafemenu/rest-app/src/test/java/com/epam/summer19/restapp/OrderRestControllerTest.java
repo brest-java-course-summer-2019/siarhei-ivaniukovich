@@ -68,7 +68,7 @@ public class OrderRestControllerTest {
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
                         .content(objectMapper.writeValueAsString(createOrder(1,2)))
                         .accept(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isCreated())
         ;
 
         Mockito.verify(orderService, Mockito.times(1)).add(any(Order.class));

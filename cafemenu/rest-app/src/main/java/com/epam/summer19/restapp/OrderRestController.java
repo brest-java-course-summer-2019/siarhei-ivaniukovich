@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -23,9 +24,9 @@ public class OrderRestController {
     private OrderService orderService;
 
     @PostMapping(value = "/orders")              /** value = "/order" **/
-    public void add(@RequestBody Order order) {
+    public ResponseEntity<Order> add(@RequestBody Order order) {
         LOGGER.debug("REST Add order({})", order);
-        orderService.add(order);
+        return new ResponseEntity<>(orderService.add(order), HttpStatus.CREATED);
     }
 
 
@@ -70,8 +71,8 @@ public class OrderRestController {
         return orderService.findOrdersDTOByDateTime(
                 LocalDateTime.parse(startDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                 LocalDateTime.parse(endDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-                /**LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss")),
-                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss"))**/
+                /**LocalDateTime.parse(startDateTime,DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss")),
+                LocalDateTime.parse(endDateTime,DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm:ss"))**/
         );
     }
 }

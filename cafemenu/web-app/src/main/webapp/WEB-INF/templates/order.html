@@ -103,12 +103,13 @@
                         <!-- ORDER: ItemInOrder list END -->
 
                         <!-- Buttons Create/Edit order & Cancel-->
+                        <!-- TODO: Fix buttons position/hiding when th:hasErrors appears -->
                         <div>
                             <a href="ordersdto.html" class="btn btn-success"
-                               th:text="${isNew} ? 'Create new order' : 'Save & return to orders'"
+                               th:text="${isNew} ? 'Create new order' : 'Return to orders'"
                                th:onclick="@{document.forms['orderForm'].submit(); return false;}">Create/Edit order</a>
                             <a th:hidden="!${isNew}" th:href="@{/ordersdto}" href="ordersdto.html" class="btn btn-danger">Cancel</a>
-                        </div>
+                                                </div>
                     </div>
                 </div>
             </div>
