@@ -33,32 +33,6 @@ public class ItemInOrderController {
     ItemInOrderValidator iteminorderValidator;
 
     /**
-     * List all iteminorders page
-     * @param model
-     * @return
-     *
-    @GetMapping(value = "/iteminorders")
-    public final String listAllItemInOrders(Model model) {
-        LOGGER.debug("ListAllItemInOrders findAll({})", model);
-        model.addAttribute("iteminorders", itemInOrderService.findAll());
-        return "iteminorders";
-    }*/
-
-    /**
-     * GOTO ItemInOrder add page
-     * @param model
-     * @return
-     */
-    @GetMapping(value = "/iteminorder")
-    public final String gotoAddItemInOrderPage(Model model) {
-        LOGGER.debug("gotoAddItemInOrderPage({})", model);
-        ItemInOrder iteminorder = new ItemInOrder();
-        model.addAttribute("isNew", true);
-        model.addAttribute("iteminorder", iteminorder);
-        return "iteminorder";
-    }
-
-    /**
      * Add iteminorder
      * @param iteminorderin
      * @param result
@@ -85,7 +59,7 @@ public class ItemInOrderController {
         }
     }
 
-    /**
+    /** ###### DO NOT DELETE !!! - for iio edit (quantity) may be needed #####
      * GOTO Edit iteminorder page
      * @param orderId, itemId
      * @param model

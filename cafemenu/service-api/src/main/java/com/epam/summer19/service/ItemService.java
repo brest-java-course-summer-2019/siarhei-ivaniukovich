@@ -7,13 +7,6 @@ import java.util.List;
 public interface ItemService {
 
     /**
-     * Add few items
-     * @param items
-     * @return
-     */
-    void add(Item... items);
-
-    /**
      * Add single item
      * @param item
      * @return

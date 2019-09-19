@@ -21,14 +21,6 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public void add(Item... items) {
-        LOGGER.debug("Service: Multiple Items add(...)");
-        for(Item item : items) {
-            itemDao.add(item);
-        }
-    }
-
-    @Override
     public void add(Item item) {
         LOGGER.debug("Service: Single Item add({})", item);
         itemDao.add(item);

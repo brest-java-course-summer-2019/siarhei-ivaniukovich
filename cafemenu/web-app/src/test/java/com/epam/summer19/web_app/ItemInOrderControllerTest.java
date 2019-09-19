@@ -54,6 +54,7 @@ class ItemInOrderControllerTest {
                 .andExpect(MockMvcResultMatchers.redirectedUrl("/order/1"));
 
         Mockito.verify(itemInOrderService, Mockito.times(1)).add(Mockito.any(ItemInOrder.class));
+
     }
 
     @Test
