@@ -57,7 +57,38 @@ class OrderControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.
                 containsString("CafeMenu - Orders list")));
 
-        Mockito.verify(orderService, Mockito.times(1)).findAllDTO();
+        Mockito.verify(orderService, Mockito.times(1))
+                .findOrdersDTOByDateTime(Mockito.any(), Mockito.any());
+    }
+
+    @Test
+    void PostAllOrdersDTOByDateTimeTest() throws Exception {
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.post("/ordersdtofilterbydatetime")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("startDateTime", "2012-09-20T16:43")
+                        .param("endDateTime", "2019-09-21T16:43")
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        Mockito.verify(orderService, Mockito.times(1))
+                .findOrdersDTOByDateTime(Mockito.any(), Mockito.any());
+    }
+
+    @Test
+    void OrdersDtoFilterResetTest() throws Exception {
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/ordersdtofilterreset")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content()
+                        .string(Matchers.containsString("Orders list")));
+
+        Mockito.verify(orderService, Mockito.times(1))
+                .findOrdersDTOByDateTime(Mockito.any(), Mockito.any());
     }
 
     @Test
@@ -81,8 +112,7 @@ class OrderControllerTest {
                         .param("orderId", "1")
                         .param("orderEmployeeId", "6")
         ).andDo(MockMvcResultHandlers.print())
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.redirectedUrl("/ordersdto"));
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
         Mockito.verify(orderService, Mockito.times(1)).add(Mockito.any(Order.class));
     }
