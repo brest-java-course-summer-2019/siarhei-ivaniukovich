@@ -55,18 +55,6 @@ public class OrderRestConsumer implements OrderService {
     }
 
     /**
-     * add() new multiple orders.
-     * @param
-     */
-    @Override
-    public void add(Order... orders) {
-        LOGGER.debug("Multiple orders add({})");
-        for(Order order : orders) {
-            restTemplate.postForEntity(url, order, Order.class);
-        }
-    }
-
-    /**
      * add() new order.
      * @param
      */

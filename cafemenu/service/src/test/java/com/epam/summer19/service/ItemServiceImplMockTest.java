@@ -39,17 +39,6 @@ public class ItemServiceImplMockTest {
 
         verify(mockItemdao).add(item);
     }
-    
-    @Test
-    public void testAddMultiple() {
-        final Item itemone = createItem(3);
-        final Item itemtwo = createItem(4);
-        when(mockItemdao.add(any(Item.class))).thenReturn(itemone);
-
-        itemServiceImplUnderTest.add(itemone, itemtwo);
-
-        verify(mockItemdao).add(itemone);
-    }
 
     @Test
     public void testUpdate() {

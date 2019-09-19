@@ -21,14 +21,6 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
     }
 
     @Override
-    public void add(ItemInOrder... iteminorders) {
-        LOGGER.debug("Service: Multiple ItemInOrder's add(...)");
-        for(ItemInOrder iteminorder : iteminorders) {
-            itemInOrderDao.add(iteminorder);
-        }
-    }
-
-    @Override
     public void add(ItemInOrder iteminorder) {
         LOGGER.debug("Service: Single ItemInOrder add({})", iteminorder);
         itemInOrderDao.add(iteminorder);
