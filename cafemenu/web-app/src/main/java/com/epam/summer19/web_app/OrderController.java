@@ -64,6 +64,7 @@ public class OrderController {
             Model model)
     {
         LOGGER.debug("listAllOrdersDTOByDateTime({})", dateTimeFilterDTO);
+        model.addAttribute("isFilterExpanded", false);
         model.addAttribute("dateTimeFilterDTO", dateTimeFilterDTO);
         model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
                 dateTimeFilterDTO.getStartDateTime(), dateTimeFilterDTO.getEndDateTime()));
@@ -78,6 +79,7 @@ public class OrderController {
         LOGGER.debug("Post filter byDateTime params({}, {})", dateTimeFilterDTO, result);
         dateTimeFilterDTOValidator.validate(dateTimeFilterDTO, result);
         if (result.hasErrors()) {
+            model.addAttribute("isFilterExpanded", true);
             return "ordersdto";
         } else {
             model.addAttribute("ordersdto",orderService.findOrdersDTOByDateTime(
@@ -91,6 +93,7 @@ public class OrderController {
     {
         DateTimeFilterDTO dateTimeFilterDTO = defDateTime();
         LOGGER.debug("listAllOrdersDTOByDateTime({})", dateTimeFilterDTO);
+        model.addAttribute("isFilterExpanded", true);
         model.addAttribute("dateTimeFilterDTO", dateTimeFilterDTO);
         model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
                 dateTimeFilterDTO.getStartDateTime(), dateTimeFilterDTO.getEndDateTime()));
