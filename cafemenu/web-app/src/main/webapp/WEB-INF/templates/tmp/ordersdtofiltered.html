@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <title>CafeMenu - Items list</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/orders}+'\''">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
+       </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5>Orders list</h5>
+    </nav>
+</header>
+
+<section id="orders">
+    <div class="container-fluid">
+        <div>
+            <a href="order.html" th:href="@{/order}" class="btn btn-secondary">Add new order</a>
+            <a href="sdtofiltered.html" th:href="@{/ordersdto}" class="btn btn-secondary">Hide filter (list all orders)</a>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <table class="table table-striped text-left">
+                        <thead>
+                        <tr class="text-left">
+                            <th width="4%">ID</th>
+                            <th width="4%">Emp ID</th>
+                            <th width="15%">Order Date&Time</th>
+                            <th width="10%">Total price</th>
+                            <th width="10%">Items quantity</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <!-- Next lines - fill orders list:-->
+                        <tbody>
+                            <tr th:each="orderdto : ${ordersdtofiltered}">
+                                <td th:text="${orderdto.orderId}">orderId</td>
+                                <td th:text="${orderdto.employeeId}">empId</td>
+                                <td th:text="${orderdto.orderDateTime}">DateTime</td>
+                                <td th:text="${orderdto.summaryPrice}">00.00</td>
+                                <td th:text="${orderdto.itemsQuantity}">00</td>
+                                <td>
+                                 <a th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
+                                    class="btn btn-sm btn-secondary" data-toggle="tooltip"
+                                    data-placement="top">Edit</a>
+                                 <span data-toggle="modal" data-target="#deleteDialog"
+                                    th:attr="data-id=${orderdto.orderId}">
+                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                 </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <p th:text="'Orders date & time filter'">filterName</p>
+                </div>
+                <div class="card-body">
+                    <form id="filterForm"
+                          th:action="@{${#httpServletRequest.servletPath}+'/'+${startDateTime}+'/'+${endDateTime}}"
+                          th:object="${ordersdtofiltered}"
+                          th:method="@{get}">
+
+                        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                            <p>Please fix errors below:</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startDateTime" th:text="'Start date & time'">startDateTime</label>
+                            <input th:class="${#fields.hasErrors('startDateTime')} ? 'form-control is-invalid' : 'form-control'"
+                                   th:field="*{startDateTime}" class="form-control" type="datetime-local" id="startDateTime">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="startDateTime" th:text="'End date & time'">endDateTime</label>
+                            <input th:class="${#fields.hasErrors('endDateTime')} ? 'form-control is-invalid' : 'form-control'"
+                                   th:field="*{endDateTime}" class="form-control" type="datetime-local" id="endDateTime">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+    </div>
+</section>
+
+<!-- Confirm delete Modal -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Delete order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Confirm order delete: "' + target.data('id') + '"')
+        document.getElementById('deleteUrl').href = '/orders/' + target.data('id') + '/delete';
+    })
+</script>
+
+</body>
+</html>

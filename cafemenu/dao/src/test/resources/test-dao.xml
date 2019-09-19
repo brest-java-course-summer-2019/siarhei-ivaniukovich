@@ -24,7 +24,7 @@
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
-    <bean id="ordersListDao" class="com.epam.summer19.dao.ItemInOrderDaoJdbcImpl">
+    <bean id="itemInOrderDao" class="com.epam.summer19.dao.ItemInOrderDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 

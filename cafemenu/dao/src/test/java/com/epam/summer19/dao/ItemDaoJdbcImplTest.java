@@ -80,4 +80,12 @@ public class ItemDaoJdbcImplTest {
         assertTrue(testItem.getItemId().equals(1));
         assertEquals("Burger",testItem.getItemName());
     }
+
+    @Test
+    public void findItemByName() {
+        Item testItem = itemDao.findItemByName("Nuggets").get();
+        assertNotNull(testItem);
+        assertTrue(testItem.getItemName().equals("Nuggets"));
+        assertEquals("Nuggets",testItem.getItemName());
+    }
 }

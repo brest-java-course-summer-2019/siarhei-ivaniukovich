@@ -25,15 +25,10 @@ public class OrderTest {
     }
 
     @Test
-    public void getOrderTime() {
-        LocalDateTime time = LocalDateTime.now();
-        order.setOrderTime(time);
-        Assert.assertTrue(order.getOrderTime().equals(time));
+    public void getOrderDateTime() {
+        LocalDateTime datetime = LocalDateTime.now();
+        order.setOrderDateTime(datetime);
+        Assert.assertTrue(order.getOrderDateTime().equals(datetime));
     }
 
-    @Test
-    public void getOrderStatus() {
-        order.setOrderStatus(1);
-        Assert.assertTrue(order.getOrderStatus().equals(1));
-    }
 }

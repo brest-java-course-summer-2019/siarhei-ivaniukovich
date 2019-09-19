@@ -28,7 +28,7 @@ public class ItemInOrderDaoJdbcImplTest {
     private static final Integer IIO_ITEM_COUNT = 1;
 
     @Autowired
-    ItemInOrderDao iioDao;
+    ItemInOrderDao itemInOrderDao;
 
     @Test
     public void add() {
@@ -38,7 +38,7 @@ public class ItemInOrderDaoJdbcImplTest {
         testIio.setIioItemName(IIO_ITEM_NAME);
         testIio.setIioItemPrice(IIO_ITEM_PRICE);
         testIio.setIioItemCount(IIO_ITEM_COUNT);
-        ItemInOrder newIio = iioDao.add(testIio);
+        ItemInOrder newIio = itemInOrderDao.add(testIio);
         assertEquals(IIO_ORDER_ID,newIio.getIioOrderId());
         assertEquals(IIO_ITEM_ID,newIio.getIioItemId());
         assertEquals(IIO_ITEM_NAME,newIio.getIioItemName());
@@ -54,14 +54,14 @@ public class ItemInOrderDaoJdbcImplTest {
         testIio.setIioItemName(IIO_ITEM_NAME);
         testIio.setIioItemPrice(IIO_ITEM_PRICE);
         testIio.setIioItemCount(IIO_ITEM_COUNT);
-        testIio = iioDao.add(testIio);
+        testIio = itemInOrderDao.add(testIio);
         testIio.setIioOrderId(new Integer(2));
         testIio.setIioItemId(new Integer(3));
         testIio.setIioItemName("AnotherWrap");
         testIio.setIioItemPrice(new BigDecimal("4.0"));
         testIio.setIioItemCount(new Integer(2));
-        iioDao.update(testIio);
-        ItemInOrder updatedIio = iioDao.findIioByOrderItemId(testIio.getIioOrderId(), testIio.getIioItemId()).get();
+        itemInOrderDao.update(testIio);
+        ItemInOrder updatedIio = itemInOrderDao.findIioByOrderItemId(2, 3).get();
         assertTrue(testIio.getIioOrderId().equals(updatedIio.getIioOrderId()));
         assertTrue(testIio.getIioItemId().equals(updatedIio.getIioItemId()));
         assertTrue(testIio.getIioItemName().equals(updatedIio.getIioItemName()));
@@ -77,47 +77,44 @@ public class ItemInOrderDaoJdbcImplTest {
         testIio.setIioItemName(IIO_ITEM_NAME);
         testIio.setIioItemPrice(IIO_ITEM_PRICE);
         testIio.setIioItemCount(IIO_ITEM_COUNT);
-        testIio = iioDao.add(testIio);
-        List<ItemInOrder> iio = iioDao.findAll();
+        testIio = itemInOrderDao.add(testIio);
+        List<ItemInOrder> iio = itemInOrderDao.findAll();
         int sizeBefore = iio.size();
-        iioDao.delete(testIio.getIioOrderId(), testIio.getIioItemId());
-        assertTrue((sizeBefore - 1) == iioDao.findAll().size());
+        itemInOrderDao.delete(testIio.getIioOrderId(), testIio.getIioItemId());
+        assertTrue((sizeBefore - 1) == itemInOrderDao.findAll().size());
     }
 
     @Test
     public void findAll() {
-        List<ItemInOrder> iio = iioDao.findAll();
+        List<ItemInOrder> iio = itemInOrderDao.findAll();
         assertNotNull(iio);
         assertTrue(iio.size() > 0);
     }
 
     @Test
     public void findIioByOrderId() {
-        Integer iioOrderId = 1;
         ItemInOrder testIio = new ItemInOrder();
         testIio.setIioOrderId(IIO_ORDER_ID);
         testIio.setIioItemId(IIO_ITEM_ID);
         testIio.setIioItemName(IIO_ITEM_NAME);
         testIio.setIioItemPrice(IIO_ITEM_PRICE);
         testIio.setIioItemCount(IIO_ITEM_COUNT);
-        testIio = iioDao.add(testIio);
-        List<ItemInOrder> findIios = iioDao.findIioByOrderId(iioOrderId);
+        testIio = itemInOrderDao.add(testIio);
+        List<ItemInOrder> findIios = itemInOrderDao.findIioByOrderId(IIO_ORDER_ID);
         assertNotNull(findIios);
         assertTrue(findIios.size() > 0);
     }
 
     @Test
     public void findIioByOrderItemId() {
-        Integer iioOrderId = 1;
-        Integer iioItemId = 2;
         ItemInOrder testIio = new ItemInOrder();
         testIio.setIioOrderId(IIO_ORDER_ID);
         testIio.setIioItemId(IIO_ITEM_ID);
         testIio.setIioItemName(IIO_ITEM_NAME);
         testIio.setIioItemPrice(IIO_ITEM_PRICE);
         testIio.setIioItemCount(IIO_ITEM_COUNT);
-        testIio = iioDao.add(testIio);
-        ItemInOrder findIio = iioDao.findIioByOrderItemId(iioOrderId, iioItemId).get();
+        itemInOrderDao.add(testIio);
+        ItemInOrder findIio = itemInOrderDao.findIioByOrderItemId(IIO_ORDER_ID, IIO_ITEM_ID).get();
         assertNotNull(findIio);
         assertEquals(IIO_ORDER_ID, findIio.getIioOrderId());
         assertEquals(IIO_ITEM_ID, findIio.getIioItemId());

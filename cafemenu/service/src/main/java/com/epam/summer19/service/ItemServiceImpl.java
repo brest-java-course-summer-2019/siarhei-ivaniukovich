@@ -14,49 +14,55 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemServiceImpl.class);
-    private ItemDao itemdao;
+    private ItemDao itemDao;
 
-    public ItemServiceImpl(ItemDao itemdao) {
-        this.itemdao = itemdao;
+    public ItemServiceImpl(ItemDao itemDao) {
+        this.itemDao = itemDao;
     }
 
     @Override
     public void add(Item... items) {
-        LOGGER.debug("multiple items add({})", items);
+        LOGGER.debug("Service: Multiple Items add(...)");
         for(Item item : items) {
-            itemdao.add(item);
+            itemDao.add(item);
         }
     }
 
     @Override
-    public Item add(Item item) {
-        LOGGER.debug("single item add({})", item);
-        return itemdao.add(item);
+    public void add(Item item) {
+        LOGGER.debug("Service: Single Item add({})", item);
+        itemDao.add(item);
     }
 
     @Override
     public void update(Item item) {
-        LOGGER.debug("item update({})", item);
-        itemdao.update(item);
+        LOGGER.debug("Service: Item update({})", item);
+        itemDao.update(item);
     }
 
     @Override
     public void delete(Integer itemId) {
-        LOGGER.debug("item delete({})", itemId);
-        itemdao.delete(itemId);
+        LOGGER.debug("Service: Item delete({})", itemId);
+        itemDao.delete(itemId);
     }
 
     @Override
     public List<Item> findAll() {
-        LOGGER.debug("Find all Items");
-        return itemdao.findAll();
+        LOGGER.debug("Service: Find all Items");
+        return itemDao.findAll();
     }
 
     @Override
     public Item findItemById(Integer itemId) {
-        LOGGER.debug("Find item by itemId: findItemById({})", itemId);
-        return itemdao.findItemById(itemId)
-                .orElseThrow(() ->  new RuntimeException("Failed to get items from DB"));
+        LOGGER.debug("Service: Find Item by itemId:{}", itemId);
+        return itemDao.findItemById(itemId)
+                .orElseThrow(() -> new RuntimeException("Failed to get items from DB"));
     }
 
+    @Override
+    public Item findItemByName(String itemName) {
+        LOGGER.debug("Service: Find item by itemName:{}", itemName);
+        return itemDao.findItemByName(itemName)
+                .orElse(null);
+    }
 }
