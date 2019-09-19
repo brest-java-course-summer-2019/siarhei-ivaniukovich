@@ -42,17 +42,6 @@ public class OrderServiceImplMockTest {
     }
 
     @Test
-    public void testAddMultiple() {
-        final Order orderone = createOrder(1);
-        final Order ordertwo = createOrder(2);
-        when(mockOrderdao.add(any(Order.class))).thenReturn(orderone);
-
-        orderServiceImplUnderTest.add(orderone, ordertwo);
-
-        verify(mockOrderdao).add(orderone);
-    }
-
-    @Test
     public void testUpdate() {
         final Order order = createOrder(3);
         order.setOrderEmployeeId(9);

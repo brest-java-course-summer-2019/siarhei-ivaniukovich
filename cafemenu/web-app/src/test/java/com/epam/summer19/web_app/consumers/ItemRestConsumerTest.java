@@ -47,9 +47,9 @@ public class ItemRestConsumerTest {
     @Test
     public void testAdd() throws Exception {
         // Setup
-        final Item item = null;
+        final Item item = createItem(2,2);
         when(mockRestTemplate.postForEntity("url", createItem(2,2), Item.class))
-                .thenReturn(new ResponseEntity<>(createItem(1,1),HttpStatus.OK));
+                .thenReturn(new ResponseEntity<>(createItem(1,1), HttpStatus.OK));
 
         // Run the test
         itemRestConsumerUnderTest.add(item);

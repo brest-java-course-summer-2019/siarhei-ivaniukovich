@@ -9,14 +9,6 @@ import java.util.List;
 public interface OrderService {
 
     /**
-     * Create new few Order's
-     *
-     * @param orders
-     * @return
-     */
-    void add(Order... orders);
-
-    /**
      * Create new single Order
      *
      * @param order

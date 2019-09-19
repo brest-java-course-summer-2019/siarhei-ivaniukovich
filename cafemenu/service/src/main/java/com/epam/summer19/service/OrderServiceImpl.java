@@ -22,14 +22,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void add(Order... orders) {
-        LOGGER.debug("Service: Multiple Orders add(...)");
-        for(Order order : orders) {
-            orderDao.add(order);
-        }
-    }
-
-    @Override
     public Order add(Order order) {
         LOGGER.debug("Service: Order update({})", order);
         return orderDao.add(order);
