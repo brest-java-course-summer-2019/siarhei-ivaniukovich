@@ -8,12 +8,13 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
-
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -35,6 +36,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
     @Value("${iio.findByOrderItemId}")
     private String findByOrderItemIdSql;
 
+
     private static final String IIO_ORDER_ID = "iioOrderId";
     private static final String IIO_ITEM_ID = "iioItemId";
     private static final String IIO_ITEM_NAME = "iioItemName";
@@ -43,10 +45,6 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     public ItemInOrderDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-    }
-
-    private boolean successfullyUpdated(int numRowsUpdated) {
-        return numRowsUpdated > 0;
     }
 
     @Override
@@ -64,9 +62,9 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public void update(ItemInOrder iteminorder) {
-        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(iteminorder)))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update ItemInOrder in DB"));
+        if (namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(iteminorder)) < 1) {
+            throw new RuntimeException("ItemInOrder DAO: Failed to update iteminorder in DB");
+        }
     }
 
     @Override
@@ -74,9 +72,9 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(IIO_ORDER_ID, iioOrderId);
         mapSqlParameterSource.addValue(IIO_ITEM_ID, iioItemId);
-        Optional.of(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to delete itemINorder from DB"));
+        if (namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource) < 1) {
+            throw new RuntimeException("ItemInOrder DAO: Failed to delete iteminorder from DB");
+        }
 
     }
 

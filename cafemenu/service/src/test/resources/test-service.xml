@@ -11,25 +11,25 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="ItemDao" class="com.epam.summer19.dao.ItemDaoJdbcImpl">
+    <bean id="itemDao" class="com.epam.summer19.dao.ItemDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
-    <bean id="ItemService" class="com.epam.summer19.service.ItemServiceImpl">
-        <constructor-arg ref="ItemDao"/>
+    <bean id="itemService" class="com.epam.summer19.service.ItemServiceImpl">
+        <constructor-arg ref="itemDao"/>
     </bean>
 
-    <bean id="OrderDao" class="com.epam.summer19.dao.OrderDaoJdbcImpl">
+    <bean id="orderDao" class="com.epam.summer19.dao.OrderDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
-    <bean id="OrderService" class="com.epam.summer19.service.OrderServiceImpl">
-        <constructor-arg ref="OrderDao"/>
+    <bean id="orderService" class="com.epam.summer19.service.OrderServiceImpl">
+        <constructor-arg ref="orderDao"/>
     </bean>
 
-    <bean id="ItemInOrderDao" class="com.epam.summer19.dao.ItemInOrderDaoJdbcImpl">
+    <bean id="itemInOrderDao" class="com.epam.summer19.dao.ItemInOrderDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
-    <bean id="ItemInOrderService" class="com.epam.summer19.service.ItemInOrderServiceImpl">
-        <constructor-arg ref="ItemInOrderDao"/>
+    <bean id="itemInOrderService" class="com.epam.summer19.service.ItemInOrderServiceImpl">
+        <constructor-arg ref="itemInOrderDao"/>
     </bean>
 
 </beans>

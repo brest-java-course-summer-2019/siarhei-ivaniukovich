@@ -7,18 +7,18 @@ import java.util.List;
 public interface ItemService {
 
     /**
-     * Add multiple items
+     * Add few items
      * @param items
      * @return
      */
     void add(Item... items);
 
     /**
-     * Add item
+     * Add single item
      * @param item
      * @return
      */
-    Item add(Item item);
+    void add(Item item);
 
     /**
      * Update item
@@ -44,4 +44,11 @@ public interface ItemService {
      * @return
      */
     Item findItemById(Integer itemId);
+
+    /**
+     * Find item by itemName
+     * @param itemName
+     * @return
+     */
+    Item findItemByName(String itemName);
 }

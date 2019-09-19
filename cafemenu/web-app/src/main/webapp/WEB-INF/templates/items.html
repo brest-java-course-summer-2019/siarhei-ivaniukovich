@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+    <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+    <title>CafeMenu - Items list</title>
+</head>
+<body>
+
+<header>
+    <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
+       </div>
+    </nav>
+    <nav id="headername" class="navbar bg-light text-dark">
+        <h5>Items list</h5>
+    </nav>
+</header>
+
+<section id="items">
+    <div class="container-fluid">
+        <br>
+        <div>
+            <a href="item.html" th:href="@{/item}" class="btn btn-secondary">Add new item</a>
+        </div>
+        <h6></h6>
+        <div class="row">
+            <div class="col">
+                <div class="card" style="max-width: 850px;">
+                    <table class="table table-striped text-left">
+                        <thead class="thead-light">
+                        <tr class="text-left">
+                            <th width="5%">ID</th>
+                            <th width="50%">Item name</th>
+                            <th width="20%" class="text-right">Price $</th>
+                            <th width="25%"></th>
+                        </tr>
+                        </thead>
+                        <!-- Next lines - fill items list:-->
+                        <tbody>
+                            <tr th:each="item : ${items}">
+                                <td th:text="${item.itemId}">ItemId</td>
+                                <td th:text="${item.itemName}">ItemName</td>
+                                <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">0.00</td>
+                                </span>
+                                <td class="text-right">
+                                 <a th:href="@{|/item/${item.itemId}|}" href="items_edit.html"
+                                    class="btn btn-sm btn-secondary" data-toggle="tooltip"
+                                    data-placement="top">Edit</a>
+                                 <span data-toggle="modal" data-target="#deleteDialog"
+                                    th:attr="data-id=${item.itemId}, data-name=${item.itemName}">
+                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                 </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Confirm delete Modal -->
+<div class="modal fade" id="deleteDialog" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert-danger">
+                <h5 class="modal-title" id="exampleModalLabel">Delete item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Please confirm delete
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a id="deleteUrl" href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../resources/static/js/jquery.min.js"
+        th:src="@{/resources/static/js/jquery.min.js}"></script>
+<script src="../../resources/static/js/popper.min.js"
+        th:src="@{/resources/static/js/popper.min.js}"></script>
+<script src="../../resources/static/js/bootstrap.min.js"
+        th:src="@{/resources/static/js/bootstrap.min.js}"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    $('#deleteDialog').on('show.bs.modal', function (event) {
+        var target = $(event.relatedTarget)
+        $(this).find('.modal-body').text('Confirm item delete: ' + target.data('name'))
+        document.getElementById('deleteUrl').href = '/items/' + target.data('id') + '/delete';
+    })
+</script>
+
+</body>
+</html>

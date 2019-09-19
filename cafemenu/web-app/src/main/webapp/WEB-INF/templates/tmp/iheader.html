@@ -1,0 +1,11 @@
+    <nav class="p-1 navbar navbar-expand-sm text-white rounded bg-secondary">
+        <a class="navbar-brand">
+            <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+        </a>
+        <div class="collapse navbar-collapse">
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='main.html'" th:href="@{/main}">Main</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='orders_list.html'" th:href="@{/orders}">Orders</button>&nbsp;
+            <button class="btn btn-outline-dark text-white" type="button" onclick="window.location.href='items_list.html'" th:href="@{/items}">Items</button>
+        </div>
+    </nav>

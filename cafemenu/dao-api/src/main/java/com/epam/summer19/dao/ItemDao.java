@@ -38,4 +38,11 @@ public interface ItemDao {
      * @return
      */
     Optional<Item> findItemById(Integer itemId);
+
+    /**
+     * Find item by itemName
+     * @param itemName
+     * @return
+     */
+    Optional<Item> findItemByName(String itemName);
 }

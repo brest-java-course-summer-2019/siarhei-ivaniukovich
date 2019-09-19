@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
    <modelVersion>4.0.0</modelVersion>
+
+
    <groupId>com.epam.summer19</groupId>
    <artifactId>cafemenu</artifactId>
    <version>1.0.0-SNAPSHOT</version>
@@ -16,7 +18,7 @@
       <module>service-api</module>
       <module>test-db</module>
       <module>rest-app</module>
-       <!--<module>web-app</module>-->
+      <module>web-app</module>
    </modules>
 
    <distributionManagement>
@@ -50,7 +52,11 @@
       <jacoco.bundle.coveredratio.minimum>0%</jacoco.bundle.coveredratio.minimum>
       <org.springframework.version>5.1.8.RELEASE</org.springframework.version>
       <thymeleaf-spring5.version>3.0.11.RELEASE</thymeleaf-spring5.version>
-      <jackson-databind.version>2.9.8</jackson-databind.version>
+      <jackson-databind.version>2.9.9</jackson-databind.version>
+      <slf4j-api.version>1.7.28</slf4j-api.version>
+      <slf4j-simple.version>1.7.28</slf4j-simple.version>
+      <javax.servlet.version>4.0.0</javax.servlet.version>
+      <validation-api.version>2.0.1.Final</validation-api.version>
    </properties>
 
    <dependencyManagement>
@@ -84,12 +90,6 @@
             <groupId>com.epam.summer19</groupId>
             <artifactId>test-db</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
-         </dependency>
-         <dependency>
-            <groupId>com.epam.summer19</groupId>
-            <artifactId>web-app</artifactId>
-            <version>${project.version}</version>
          </dependency>
          <dependency>
             <groupId>org.springframework</groupId>
@@ -120,7 +120,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.199</version>
-            <scope>test</scope>
          </dependency>
          <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -143,7 +142,12 @@
          <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+            <version>${slf4j-api.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
          </dependency>
          <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -185,8 +189,13 @@
          <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.0</version>
+            <version>${javax.servlet.version}</version>
             <scope>provided</scope>
+         </dependency>
+         <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${validation-api.version}</version>
          </dependency>
          <dependency>
             <groupId>org.hamcrest</groupId>
@@ -203,6 +212,16 @@
          <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson-databind.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
             <version>${jackson-databind.version}</version>
          </dependency>
       </dependencies>
@@ -283,7 +302,7 @@
                      <contextPath>/</contextPath>
                   </webApp>
                   <httpConnector>
-                     <port>8080</port>
+                     <port>8081</port>
                   </httpConnector>
                </configuration>
             </plugin>
@@ -386,7 +405,7 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
             <configuration>
-               <failOnViolation>true</failOnViolation> <!-- this is actually true by default, but can be disabled -->
+               <failOnViolation>false</failOnViolation> <!-- this is actually true by default, but can be disabled -->
                <printFailingErrors>true</printFailingErrors>
             </configuration>
             <executions>
@@ -409,6 +428,7 @@
             <groupId>org.eluder.coveralls</groupId>
             <artifactId>coveralls-maven-plugin</artifactId>
          </plugin>
+         <!-- Embedded Jetty HTTP Server for testing war application -->
       </plugins>
    </build>
 
@@ -428,11 +448,14 @@
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-pmd-plugin</artifactId>
-            <configuration>
-               <linkXref>true</linkXref>
-               <sourceEncoding>utf-8</sourceEncoding>
-               <minimumTokens>100</minimumTokens>
-            </configuration>
+            <reportSets>
+               <reportSet>
+                  <reports>
+                     <report>pmd</report>
+                     <report>cpd</report>
+                  </reports>
+               </reportSet>
+            </reportSets>
          </plugin>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
