@@ -1,5 +1,6 @@
 package com.epam.summer19.web_app;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ class HomeControllerTest {
     }
 
     @Test
-    public void home() throws Exception {
+    public void defaultPageRedirectTest() throws Exception {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/")
         ).andDo(MockMvcResultHandlers.print())
@@ -38,4 +39,28 @@ class HomeControllerTest {
                 .andExpect(MockMvcResultMatchers.redirectedUrl("mainpage"))
         ;
     }
+
+    @Test
+    public void mainPageTest() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/mainpage")
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.
+                        containsString("Welcome to CafeMenu")));
+        ;
+    }
+
+    @Test
+    public void errorNotFoundRedirectTest() throws Exception {
+        mockMvc.perform(
+                MockMvcRequestBuilders.get("/404")
+        ).andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.
+                        containsString("CafeMenu makes an error")));
+        ;
+    }
+
+
 }

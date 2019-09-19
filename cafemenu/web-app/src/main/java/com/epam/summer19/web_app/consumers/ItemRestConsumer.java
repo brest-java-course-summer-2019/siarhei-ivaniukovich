@@ -40,17 +40,6 @@ public class ItemRestConsumer implements ItemService {
         return (List<Item>) responseEntity.getBody();
     }
 
-    /**
-     * add() new multiple items.
-     * @param
-     */
-    @Override
-    public void add(Item... items) {
-        LOGGER.debug("Multiple items add({})");
-        for(Item item : items) {
-            restTemplate.postForEntity(url, item, Item.class);
-        }
-    }
 
     /**
      * add() new item.

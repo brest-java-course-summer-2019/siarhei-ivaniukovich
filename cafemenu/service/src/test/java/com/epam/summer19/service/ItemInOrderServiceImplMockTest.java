@@ -38,12 +38,6 @@ public class ItemInOrderServiceImplMockTest {
     }
 
     @Test
-    public void testAddMultiple() {
-        itemInOrderServiceImplUnderTest.add(createIio(1,3,"Item2"), createIio(1,4,"Item22"));
-        verify(mockIiodao, atLeast(2)).add(any());
-    }
-
-    @Test
     public void testUpdate() {
         itemInOrderServiceImplUnderTest.update(createIio(1,2,"Item3"));
         verify(mockIiodao).update(any());

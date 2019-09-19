@@ -46,18 +46,6 @@ public class ItemInOrderRestConsumer implements ItemInOrderService {
     }
 
     /**
-     * add() new multiple iios.
-     * @param
-     */
-    @Override
-    public void add(ItemInOrder... iios) {
-        LOGGER.debug("Multiple iios add({})");
-        for(ItemInOrder iio : iios) {
-            restTemplate.postForEntity(url, iio, ItemInOrder.class);
-        }
-    }
-
-    /**
      * add() new iio.
      * @param
      */
