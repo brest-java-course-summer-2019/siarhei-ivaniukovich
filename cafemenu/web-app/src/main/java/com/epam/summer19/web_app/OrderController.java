@@ -52,7 +52,7 @@ public class OrderController {
     DateTimeFilterDTO defDateTime() {
         DateTimeFilterDTO dateTimeFilterDTO = new DateTimeFilterDTO();
         dateTimeFilterDTO.setStartDateTime(LocalDateTime.now()
-                .minusYears(25).truncatedTo(ChronoUnit.MINUTES));
+                .minusYears(1).truncatedTo(ChronoUnit.MINUTES));
         dateTimeFilterDTO.setEndDateTime(LocalDateTime.now()
                 .plusHours(24).truncatedTo(ChronoUnit.MINUTES));
         return dateTimeFilterDTO;

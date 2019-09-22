@@ -35,9 +35,8 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public List<Item> findAll() {
-        LOGGER.debug("ItemRestConsumer findAll()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return (List<Item>) responseEntity.getBody();
+        LOGGER.debug("WEB-REST-CONSUMER: ItemRestConsumer findAll()");
+        return (List<Item>) restTemplate.getForEntity(url, List.class).getBody();
     }
 
 
@@ -47,7 +46,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public void add(Item item) {
-        LOGGER.debug("add({})", item);
+        LOGGER.debug("WEB-REST-CONSUMER: add({})", item);
         restTemplate.postForEntity(url, item, Item.class);
     }
 
@@ -57,7 +56,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public void update(Item item) {
-        LOGGER.debug("update({})", item);
+        LOGGER.debug("WEB-REST-CONSUMER: update({})", item);
         restTemplate.put(url, item);
 
     }
@@ -68,7 +67,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public void delete(Integer itemId) {
-        LOGGER.debug("delete({})", itemId);
+        LOGGER.debug("WEB-REST-CONSUMER: delete({})", itemId);
         restTemplate.delete(url + "/" + itemId);
     }
 
@@ -79,15 +78,14 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public Item findItemById(Integer itemId) {
-        LOGGER.debug("findItemById({})", itemId);
-        ResponseEntity<Item> responseEntity = restTemplate.getForEntity(url + "/" + itemId, Item.class);
-        return responseEntity.getBody();
+        LOGGER.debug("WEB-REST-CONSUMER: findItemById({})", itemId);
+        return restTemplate.getForEntity(url + "/" + itemId, Item.class).getBody();
     }
 
     @Override
     public Item findItemByName(String itemName) {
-        LOGGER.debug("findItemByName({})", itemName);
-        ResponseEntity<Item> responseEntity = restTemplate.getForEntity(url + "/byname/" + itemName, Item.class);
-        return responseEntity.getBody();
+        LOGGER.debug("WEB-REST-CONSUMER: findItemByName({})", itemName);
+        // fixme: itemName to REST sending with extra quotes -> ????
+        return restTemplate.postForEntity(url + "/byname", itemName, Item.class).getBody();
     }
 }

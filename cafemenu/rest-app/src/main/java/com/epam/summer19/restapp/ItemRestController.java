@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -53,10 +54,14 @@ public class ItemRestController {
         return itemService.findItemById(id);
     }
 
-    @GetMapping(value = "/items/byname/{name}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public Item findItemByName(@PathVariable("name") String itemName) {
-        LOGGER.debug("REST Find item by itemName({})", itemName);
-        return itemService.findItemByName(itemName);
+    @PostMapping(value = "/items/byname")
+    public ResponseEntity<Item> postFindItemByName(@RequestBody String itemName) {
+        LOGGER.debug("REST Find item by name -> itemName({})", itemName);
+        // fixme: next IF need to be deleted WHEN ItemRestConsumer postForEntity will be FIXED (String with EXTRA quotes)
+        if (itemName.charAt(0) == '"' && itemName.charAt(itemName.length()-1) == '"')
+            itemName = itemName.substring(1, itemName.length()-1);
+        itemName = itemName.replaceAll("\\\\\"","\"");
+        itemName = itemName.replaceAll("\\\\\'","\'");
+        return new ResponseEntity<>(itemService.findItemByName(itemName), HttpStatus.FOUND);
     }
 }

@@ -35,12 +35,12 @@ public class ItemValidator implements Validator {
                 && item.getItemName().length() > ITEM_NAME_MAX_SIZE) {
             errors.rejectValue("itemName", "itemName.maxSize255");
         }
-        // TODO: add '/'  ' ' not allowed in item name validation
 
+        /** UNCOMMENT to add ExtraSymbols validation
         Pattern regex = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]");
         if (regex.matcher(item.getItemName()).find()) {
             errors.rejectValue("itemName", "itemName.incorrect");
-        }
+        }*/
 
         if (item.getItemPrice() != null
                 && item.getItemPrice().floatValue() < 0) {

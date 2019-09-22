@@ -126,15 +126,14 @@ public class ItemRestControllerTest {
     @Test
     public void testItemFindByName() throws Exception {
         Mockito.when(itemService.findItemByName("Nuggets")).thenReturn(createItem(2,2));
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/items/byname/Nuggets")
-                        .accept(MediaType.APPLICATION_JSON_UTF8)
-        ).andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.itemName", Matchers.is("Item2")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.itemPrice", Matchers.is(2.2)))
+        mockMvc.perform(MockMvcRequestBuilders.post("/items/byname")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(objectMapper.writeValueAsString("Item2"))
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(MockMvcResultMatchers.status().isFound())
         ;
-        Mockito.verify(itemService, Mockito.times(1)).findItemByName("Nuggets");
+
+        Mockito.verify(itemService, Mockito.times(1)).findItemByName("Item2");
     }
 
     private Item createItem(int itemId, int namePostfix) {
