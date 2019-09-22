@@ -41,8 +41,7 @@ public class ItemInOrderRestConsumer implements ItemInOrderService {
     @Override
     public List<ItemInOrder> findAll() {
         LOGGER.debug("findAll()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/all", List.class);
-        return (List<ItemInOrder>) responseEntity.getBody();
+        return restTemplate.getForEntity(url + "/all", List.class).getBody();
     }
 
     /**
@@ -84,8 +83,7 @@ public class ItemInOrderRestConsumer implements ItemInOrderService {
     @Override
     public List<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
         LOGGER.debug("findIioByOrderId({})", iioOrderId);
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "/" + iioOrderId, List.class);
-        return (List<ItemInOrder>) responseEntity.getBody();
+        return restTemplate.getForEntity(url + "/" + iioOrderId, List.class).getBody();
     }
 
     /**
@@ -97,8 +95,8 @@ public class ItemInOrderRestConsumer implements ItemInOrderService {
     @Override
     public ItemInOrder findIioByOrderItemId(Integer iioOrderId, Integer iioItemId) {
         LOGGER.debug("findIioByOrderId({}{})", iioOrderId, iioItemId);
-        ResponseEntity<ItemInOrder> responseEntity = restTemplate.getForEntity(url + "/" + iioOrderId + "/" + iioItemId, ItemInOrder.class);
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(
+                url + "/" + iioOrderId + "/" + iioItemId, ItemInOrder.class).getBody();
     }
 
 

@@ -103,7 +103,7 @@ public class ItemRestConsumerTest {
         // Setup
         final String itemName = "It1";
         final Item expectedResult = createItem(1,1);
-        when(mockRestTemplate.getForEntity("url/byname/"+itemName, Item.class))
+        when(mockRestTemplate.postForEntity("url/byname", itemName, Item.class))
                 .thenReturn(new ResponseEntity<>(createItem(1,1), HttpStatus.OK));
 
         // Run the test

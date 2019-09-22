@@ -43,15 +43,13 @@ public class OrderRestConsumer implements OrderService {
     @Override
     public List<Order> findAll() {
         LOGGER.debug("findAll()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url, List.class);
-        return (List<Order>) responseEntity.getBody();
+        return restTemplate.getForEntity(url, List.class).getBody();
     }
 
     @Override
     public List<OrderDTO> findAllDTO() {
         LOGGER.debug("findAllDTO()");
-        ResponseEntity responseEntity = restTemplate.getForEntity(url+"dto", List.class);
-        return (List<OrderDTO>) responseEntity.getBody();
+        return restTemplate.getForEntity(url+"dto", List.class).getBody();
     }
 
     /**
@@ -61,9 +59,7 @@ public class OrderRestConsumer implements OrderService {
     @Override
     public Order add(Order order) {
         LOGGER.debug("add({})", order);
-        ResponseEntity responseEntity = restTemplate.postForEntity(url, order, Order.class);
-        Object result = responseEntity.getBody();
-        return (Order) result;
+        return restTemplate.postForEntity(url, order, Order.class).getBody();
     }
 
     /**
@@ -95,8 +91,7 @@ public class OrderRestConsumer implements OrderService {
     @Override
     public Order findOrderById(Integer orderId) {
         LOGGER.debug("findOrderById({})", orderId);
-        ResponseEntity<Order> responseEntity = restTemplate.getForEntity(url + "/" + orderId, Order.class);
-        return responseEntity.getBody();
+        return restTemplate.getForEntity(url + "/" + orderId, Order.class).getBody();
     }
 
     /**
@@ -108,8 +103,8 @@ public class OrderRestConsumer implements OrderService {
     @Override
     public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         LOGGER.debug("findOrdersDTOByDateTime({},{})", startDateTime, endDateTime);
-        ResponseEntity responseEntity = restTemplate.getForEntity(url + "dto/" + startDateTime + ":00/" + endDateTime + ":00", List.class);
-        return (List<OrderDTO>) responseEntity.getBody();
+        return restTemplate.getForEntity(
+                url + "dto/" + startDateTime + ":00/" + endDateTime + ":00", List.class).getBody();
     }
 
 }
