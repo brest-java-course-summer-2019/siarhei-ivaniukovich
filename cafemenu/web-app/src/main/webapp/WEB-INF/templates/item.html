@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="incl/header_ :: header (pagename='Item'+${item.itemId>0?': '+item.itemName:''})">header</div>
+<div th:replace="incl/header_ :: header (pagename='Item'+${item.itemId>0?': '+item.itemName:' new'})">header</div>
 
 <section id="item">
     <br>

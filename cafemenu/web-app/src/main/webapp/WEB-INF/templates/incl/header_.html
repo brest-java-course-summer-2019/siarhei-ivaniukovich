@@ -17,8 +17,8 @@
     </head>
     <body>
 
-    <header>
-        <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary sticky-top">
+    <header class="sticky-top" >
+        <nav class="sticky-top p-1 navbar navbar-expand text-white rounded bg-secondary">
             <a class="navbar-brand">
                 <img src="../../resources/static/img/cmlogo.png"
                  th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
@@ -29,7 +29,7 @@
                 <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
             </div>
         </nav>
-        <nav id="headername" class="navbar bg-light text-dark">
+        <nav id="headername" class="navbar-expand-sm bg-light text-dark m-0 py-1 px-3">
             <h5 th:text="${pagename}">Page name</h5>
         </nav>
     </header>
