@@ -22,5 +22,4 @@
         <jdbc:script location="classpath:create-tables.sql"/>
         <jdbc:script location="classpath:data-script.sql"/>
     </jdbc:initialize-database>
-
 </beans>
