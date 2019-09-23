@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +25,8 @@ import java.util.Optional;
 
 @Component
 public class OrderDaoJdbcImpl implements OrderDao {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(ItemDaoJdbcImpl.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -63,7 +67,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Order add(Order order) {
-
+        LOGGER.debug("OrderDaoJdbcImpl: add({})", order);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(ORDER_EMPLOYEE_ID, order.getOrderEmployeeId());
 
@@ -77,6 +81,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public void update(Order order) {
+        LOGGER.debug("OrderDaoJdbcImpl: update({})", order);
         if (namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(order)) < 1) {
             throw new RuntimeException("ItemInOrder DAO: Failed to delete iteminorder from DB");
         }
@@ -84,6 +89,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public void delete(Integer orderId) {
+        LOGGER.debug("OrderDaoJdbcImpl: delete({})", orderId);
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(ORDER_ID, orderId);
         if(namedParameterJdbcTemplate.update(deleteSql, mapSqlParameterSource) < 1) {
@@ -93,6 +99,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public List<Order> findAll() {
+        LOGGER.debug("OrderDaoJdbcImpl: findAll()");
         List<Order> order =
                 namedParameterJdbcTemplate.query(findAllSql, new OrderDaoJdbcImpl.OrderRowMapper());
         return order;
@@ -100,6 +107,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public List<OrderDTO> findAllDTO() {
+        LOGGER.debug("OrderDaoJdbcImpl: findAllDTO()");
         List<OrderDTO> orderDTO =
                 namedParameterJdbcTemplate.query(findAllDTOSql, BeanPropertyRowMapper.newInstance(OrderDTO.class));
         return orderDTO;
@@ -107,6 +115,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> findOrderById(Integer orderId) {
+        LOGGER.debug("OrderDaoJdbcImpl: findOrderById({})", orderId);
         SqlParameterSource namedParameters = new MapSqlParameterSource(ORDER_ID, orderId);
         List<Order> results = namedParameterJdbcTemplate.query(findByIdSql, namedParameters,
                 new OrderDaoJdbcImpl.OrderRowMapper());
@@ -115,6 +124,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        LOGGER.debug("OrderDaoJdbcImpl: findOrdersDTOByDateTime({},{})", startDateTime, endDateTime);
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(ORDER_DATETIME_START, startDateTime);
         mapSqlParameterSource.addValue(ORDER_DATETIME_END, endDateTime);
@@ -123,6 +133,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return results;
     }
 
+    // Custom RowMapper as EXAMPLE
     private class OrderRowMapper implements RowMapper<Order> {
         @Override
         public Order mapRow(ResultSet resultSet, int i) throws SQLException {
