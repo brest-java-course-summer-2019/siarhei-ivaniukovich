@@ -25,7 +25,7 @@ public class OrderRestController {
 
     @PostMapping(value = "/orders")              /** value = "/order" **/
     public ResponseEntity<Order> add(@RequestBody Order order) {
-        LOGGER.debug("REST Add order({})", order);
+        LOGGER.debug("OrderRestController: add({})", order);
         return new ResponseEntity<>(orderService.add(order), HttpStatus.CREATED);
     }
 
@@ -33,32 +33,32 @@ public class OrderRestController {
     @PutMapping(value = "/orders")               /** value = "/order" **/
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Order order) {
-        LOGGER.debug("REST Update order({})", order);
+        LOGGER.debug("OrderRestController: update({})", order);
         orderService.update(order);
     }
 
     @DeleteMapping(value = "/orders/{id}")
     public void delete(@PathVariable("id") int id) {
-        LOGGER.debug("REST Delete order ({})", id);
+        LOGGER.debug("OrderRestController: delete({})", id);
         orderService.delete(id);
     }
 
     @GetMapping(value = "/orders")
     public Collection<Order> findAll() {
-        LOGGER.debug("REST List all orders");
+        LOGGER.debug("OrderRestController: findAll()");
         return orderService.findAll();
     }
 
     @GetMapping(value = "/ordersdto")
     public Collection<OrderDTO> findAllDTO() {
-        LOGGER.debug("REST List all orders DTO");
+        LOGGER.debug("OrderRestController: findAllDTO()");
         return orderService.findAllDTO();
     }
 
     @GetMapping(value = "/orders/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Order findOrderById(@PathVariable("id") Integer id) {
-        LOGGER.debug("REST Find order by orderId({})", id);
+        LOGGER.debug("OrderRestController: findOrderById({})", id);
         return orderService.findOrderById(id);
     }
 
@@ -67,7 +67,7 @@ public class OrderRestController {
     public Collection<OrderDTO> findOrdersDTOByDateTime(
             @PathVariable("startDateTime") String startDateTime,
             @PathVariable("endDateTime") String endDateTime) {
-        LOGGER.debug("REST Find orders between {} and {}", startDateTime, endDateTime);
+        LOGGER.debug("OrderRestController: findOrdersDTOByDateTime({}, {})", startDateTime, endDateTime);
         return orderService.findOrdersDTOByDateTime(
                 LocalDateTime.parse(startDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME),
                 LocalDateTime.parse(endDateTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME));

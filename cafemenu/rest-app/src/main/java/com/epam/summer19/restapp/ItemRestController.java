@@ -24,39 +24,39 @@ public class ItemRestController {
      */
     @PostMapping(value = "/items")              /** value = "/item" **/
     public void add(@RequestBody Item item) {
-        LOGGER.debug("REST Add item({})", item);
+        LOGGER.debug("ItemRestController: add({})", item);
         itemService.add(item);
     }
 
     @PutMapping(value = "/items")               /** value = "/item" **/
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Item item) {
-        LOGGER.debug("REST Update item({})", item);
+        LOGGER.debug("ItemRestController:update({})", item);
         itemService.update(item);
     }
 
     @DeleteMapping(value = "/items/{id}")
     public void delete(@PathVariable("id") int id) {
-        LOGGER.debug("REST Delete item ({})", id);
+        LOGGER.debug("ItemRestController: delete({})", id);
         itemService.delete(id);
     }
 
     @GetMapping(value = "/items")
     public Collection<Item> findAll() {
-        LOGGER.debug("REST List all items");
+        LOGGER.debug("ItemRestController: findAll()");
         return itemService.findAll();
     }
 
     @GetMapping(value = "/items/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public Item findItemById(@PathVariable("id") Integer id) {
-        LOGGER.debug("REST Find item by itemId({})", id);
+        LOGGER.debug("ItemRestController: findItemById({})", id);
         return itemService.findItemById(id);
     }
 
     @PostMapping(value = "/items/byname")
     public ResponseEntity<Item> postFindItemByName(@RequestBody String itemName) {
-        LOGGER.debug("REST Find item by name -> itemName({})", itemName);
+        LOGGER.debug("ItemRestController: postFindItemByName({})", itemName);
         // fixme: next IF need to be deleted WHEN ItemRestConsumer postForEntity will be FIXED (String with EXTRA quotes)
         if (itemName.charAt(0) == '"' && itemName.charAt(itemName.length()-1) == '"')
             itemName = itemName.substring(1, itemName.length()-1);
