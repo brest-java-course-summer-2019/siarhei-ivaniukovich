@@ -26,23 +26,3 @@ CREATE TABLE item_in_order (
 );
 
 
-
-
-
-
-/* //// AUTO SUM PRICE on INS/UPD/DEL - Not supported in H2...
-CREATE TRIGGER summary_price_update
-ON item_in_order
-AFTER INSERT, UPDATE, DELETE
-AS
-BEGIN
- UPDATE orders
-    SET orders.order_summary_price = (SELECT SUM(item_price)
-                                            FROM item_in_order
-                                            WHERE item_in_order.order_id = orders.order_id)
-    FROM orders
-    ON orders.order_id = item_in_order.order_id;
-END;
-*/
-
-
