@@ -22,37 +22,37 @@ public class ItemInOrderServiceImpl implements ItemInOrderService {
 
     @Override
     public void add(ItemInOrder iteminorder) {
-        LOGGER.debug("Service: Single ItemInOrder add({})", iteminorder);
+        LOGGER.debug("ItemInOrderServiceImpl: add({})", iteminorder);
         itemInOrderDao.add(iteminorder);
     }
 
     @Override
     public void update(ItemInOrder iteminorder) {
-        LOGGER.debug("Service: ItemInOrder update({})", iteminorder);
+        LOGGER.debug("ItemInOrderServiceImpl: update({})", iteminorder);
         itemInOrderDao.update(iteminorder);
     }
 
     @Override
     public void delete(Integer iioOrderId, Integer iioItemId) {
-        LOGGER.debug("Service: ItemInOrder delete({})", iioOrderId+','+iioItemId);
+        LOGGER.debug("ItemInOrderServiceImpl: delete({})", iioOrderId+','+iioItemId);
         itemInOrderDao.delete(iioOrderId, iioItemId);
     }
 
     @Override
     public List<ItemInOrder> findAll() {
-        LOGGER.debug("Service: Find all ItemInOrders");
+        LOGGER.debug("ItemInOrderServiceImpl: findAll()");
         return itemInOrderDao.findAll();
     }
 
     @Override
     public List<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
-        LOGGER.debug("Service: Find ItemInOrder by iioOrderId={}", iioOrderId);
+        LOGGER.debug("ItemInOrderServiceImpl: findIioByOrderId({})", iioOrderId);
         return itemInOrderDao.findIioByOrderId(iioOrderId);
     }
 
     @Override
     public ItemInOrder findIioByOrderItemId(Integer iioOrderId, Integer iioItemId) {
-        LOGGER.debug("Service: Find ItemInOrder by iioOrderId={} & iioItemId={}", iioOrderId, iioItemId);
+        LOGGER.debug("ItemInOrderServiceImpl: findIioByOrderItemId({},{})", iioOrderId, iioItemId);
         return itemInOrderDao.findIioByOrderItemId(iioOrderId, iioItemId)
                 .orElse(null);
    }

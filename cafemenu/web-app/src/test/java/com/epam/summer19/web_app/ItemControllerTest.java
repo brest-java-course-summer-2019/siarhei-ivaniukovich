@@ -49,7 +49,7 @@ class ItemControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.
-                containsString("CafeMenu - Items list")));
+                containsString("Items")));
 
         Mockito.verify(itemService, Mockito.times(1)).findAll();
     }
@@ -61,7 +61,7 @@ class ItemControllerTest {
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
-                        .string(Matchers.containsString("New item")));
+                        .string(Matchers.containsString("Item new")));
 
         //Mockito.verify(itemService, Mockito.times(1)).findItemById(Mockito.anyInt());
     }
@@ -92,7 +92,7 @@ class ItemControllerTest {
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
-                        .string(Matchers.containsString("Edit item #")));
+                        .string(Matchers.containsString("Item:")));
 
         Mockito.verify(itemService, Mockito.times(1)).findItemById(Mockito.anyInt());
    }

@@ -35,7 +35,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public List<Item> findAll() {
-        LOGGER.debug("WEB-REST-CONSUMER: ItemRestConsumer findAll()");
+        LOGGER.debug("ItemRestConsumer: findAll()");
         return (List<Item>) restTemplate.getForEntity(url, List.class).getBody();
     }
 
@@ -46,7 +46,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public void add(Item item) {
-        LOGGER.debug("WEB-REST-CONSUMER: add({})", item);
+        LOGGER.debug("ItemRestConsumer: add({})", item);
         restTemplate.postForEntity(url, item, Item.class);
     }
 
@@ -56,7 +56,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public void update(Item item) {
-        LOGGER.debug("WEB-REST-CONSUMER: update({})", item);
+        LOGGER.debug("ItemRestConsumer: update({})", item);
         restTemplate.put(url, item);
 
     }
@@ -67,7 +67,7 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public void delete(Integer itemId) {
-        LOGGER.debug("WEB-REST-CONSUMER: delete({})", itemId);
+        LOGGER.debug("ItemRestConsumer: delete({})", itemId);
         restTemplate.delete(url + "/" + itemId);
     }
 
@@ -78,13 +78,13 @@ public class ItemRestConsumer implements ItemService {
      */
     @Override
     public Item findItemById(Integer itemId) {
-        LOGGER.debug("WEB-REST-CONSUMER: findItemById({})", itemId);
+        LOGGER.debug("ItemRestConsumer: findItemById({})", itemId);
         return restTemplate.getForEntity(url + "/" + itemId, Item.class).getBody();
     }
 
     @Override
     public Item findItemByName(String itemName) {
-        LOGGER.debug("WEB-REST-CONSUMER: findItemByName({})", itemName);
+        LOGGER.debug("ItemRestConsumer: findItemByName({})", itemName);
         // fixme: itemName to REST sending with extra quotes -> ????
         return restTemplate.postForEntity(url + "/byname", itemName, Item.class).getBody();
     }

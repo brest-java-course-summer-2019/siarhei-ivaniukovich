@@ -23,44 +23,44 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order add(Order order) {
-        LOGGER.debug("Service: Order update({})", order);
+        LOGGER.debug("OrderServiceImpl: update({})", order);
         return orderDao.add(order);
     }
 
     @Override
     public void update(Order order) {
-        LOGGER.debug("Service: Order update({})", order);
+        LOGGER.debug("OrderServiceImpl: update({})", order);
         orderDao.update(order);
     }
 
     @Override
     public void delete(Integer orderId) {
-        LOGGER.debug("Service: Order delete({})", orderId);
+        LOGGER.debug("OrderServiceImpl: delete({})", orderId);
         orderDao.delete(orderId);
     }
 
     @Override
     public List<Order> findAll() {
-        LOGGER.debug("Service: Find all Orders");
+        LOGGER.debug("OrderServiceImpl: findAll()");
         return orderDao.findAll();
     }
 
     @Override
     public List<OrderDTO> findAllDTO() {
-        LOGGER.debug("Service: Find all OrdersDTO");
+        LOGGER.debug("OrderServiceImpl: findAllDTO()");
         return orderDao.findAllDTO();
     }
 
     @Override
     public Order findOrderById(Integer orderId) {
-        LOGGER.debug("Service: Find Order by orderId:{}", orderId);
+        LOGGER.debug("OrderServiceImpl: findOrderById({})", orderId);
         return orderDao.findOrderById(orderId)
                 .orElseThrow(() ->  new RuntimeException("Failed to get orders from DB"));
     }
 
     @Override
     public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        LOGGER.debug("Service: Find OrderDTO's between dates: {} and {}", startDateTime, endDateTime);
+        LOGGER.debug("OrderServiceImpl: findOrdersDTOByDateTime({}, {})", startDateTime, endDateTime);
         return orderDao.findOrdersDTOByDateTime(startDateTime, endDateTime);
     }
 

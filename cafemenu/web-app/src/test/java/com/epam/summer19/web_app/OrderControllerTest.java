@@ -55,7 +55,7 @@ class OrderControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.
-                containsString("CafeMenu - Orders list")));
+                containsString("Orders")));
 
         Mockito.verify(orderService, Mockito.times(1))
                 .findOrdersDTOByDateTime(Mockito.any(), Mockito.any());
@@ -85,7 +85,7 @@ class OrderControllerTest {
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
-                        .string(Matchers.containsString("Orders list")));
+                        .string(Matchers.containsString("Orders")));
 
         Mockito.verify(orderService, Mockito.times(1))
                 .findOrdersDTOByDateTime(Mockito.any(), Mockito.any());
@@ -98,7 +98,7 @@ class OrderControllerTest {
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
-                        .string(Matchers.containsString("New order")));
+                        .string(Matchers.containsString("Order new")));
 
         //Mockito.verify(orderService, Mockito.times(1)).findOrderById(Mockito.anyInt());
     }
@@ -126,7 +126,7 @@ class OrderControllerTest {
         ).andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content()
-                        .string(Matchers.containsString("Edit order #")));
+                        .string(Matchers.containsString("Order: #")));
 
         Mockito.verify(orderService, Mockito.times(1)).findOrderById(Mockito.anyInt());
         Mockito.verify(itemInOrderService, Mockito.times(1)).findIioByOrderId(Mockito.anyInt());

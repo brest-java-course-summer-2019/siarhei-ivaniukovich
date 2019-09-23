@@ -9,12 +9,16 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(ItemDaoJdbcImpl.class);
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -36,7 +40,6 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
     @Value("${iio.findByOrderItemId}")
     private String findByOrderItemIdSql;
 
-
     private static final String IIO_ORDER_ID = "iioOrderId";
     private static final String IIO_ITEM_ID = "iioItemId";
     private static final String IIO_ITEM_NAME = "iioItemName";
@@ -49,6 +52,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public ItemInOrder add(ItemInOrder iteminorder) {
+        LOGGER.debug("ItemInOrderDaoJdbcImpl: add({})", iteminorder);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(IIO_ORDER_ID, iteminorder.getIioOrderId());
         parameters.addValue(IIO_ITEM_ID, iteminorder.getIioItemId());
@@ -62,6 +66,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public void update(ItemInOrder iteminorder) {
+        LOGGER.debug("ItemInOrderDaoJdbcImpl: update({})", iteminorder);
         if (namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(iteminorder)) < 1) {
             throw new RuntimeException("ItemInOrder DAO: Failed to update iteminorder in DB");
         }
@@ -69,6 +74,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public void delete(Integer iioOrderId, Integer iioItemId) {
+        LOGGER.debug("ItemInOrderDaoJdbcImpl: delete({},{})", iioOrderId, iioItemId);
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue(IIO_ORDER_ID, iioOrderId);
         mapSqlParameterSource.addValue(IIO_ITEM_ID, iioItemId);
@@ -80,6 +86,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public List<ItemInOrder> findAll() {
+        LOGGER.debug("ItemInOrderDaoJdbcImpl: findAll()");
         List<ItemInOrder> iteminorderlist =
                 namedParameterJdbcTemplate.query(findAllSql, BeanPropertyRowMapper.newInstance(ItemInOrder.class));
         return iteminorderlist;
@@ -88,6 +95,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public List<ItemInOrder> findIioByOrderId(Integer iioOrderId) {
+        LOGGER.debug("ItemInOrderDaoJdbcImpl: findIioByOrderId({})", iioOrderId);
         SqlParameterSource namedParameters = new MapSqlParameterSource(IIO_ORDER_ID, iioOrderId);
         List<ItemInOrder> results = namedParameterJdbcTemplate.query(findByOrderIdSql, namedParameters,
                 BeanPropertyRowMapper.newInstance(ItemInOrder.class));
@@ -96,6 +104,7 @@ public class ItemInOrderDaoJdbcImpl implements ItemInOrderDao {
 
     @Override
     public Optional<ItemInOrder> findIioByOrderItemId(Integer iioOrderId, Integer iioItemId) {
+        LOGGER.debug("ItemInOrderDaoJdbcImpl: findIioByOrderItemId({},{})", iioOrderId, iioItemId);
         MapSqlParameterSource parameters = new MapSqlParameterSource();
         parameters.addValue(IIO_ORDER_ID, iioOrderId);
         parameters.addValue(IIO_ITEM_ID, iioItemId);

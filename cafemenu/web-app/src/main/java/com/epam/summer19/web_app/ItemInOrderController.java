@@ -40,7 +40,7 @@ public class ItemInOrderController {
      */
     @PostMapping(value = "/iteminorder")
     public final String addItemInOrder(@Valid ItemInOrder iteminorderin, BindingResult result) {
-        LOGGER.debug("addItemInOrder({}, {})", iteminorderin, result);
+        LOGGER.debug("ItemInOrderController: addItemInOrder({}, {})", iteminorderin, result);
         iteminorderValidator.validate(iteminorderin, result);
         ItemInOrder iioAlreadyInDB = this.itemInOrderService.findIioByOrderItemId(
                 iteminorderin.getIioOrderId(), iteminorderin.getIioItemId());
@@ -101,7 +101,7 @@ public class ItemInOrderController {
     @GetMapping(value = "/iteminorders/{orderId}/{itemId}/delete")
     public final String deleteItemInOrderById(@PathVariable Integer orderId,
                                               @PathVariable Integer itemId, Model model) {
-        LOGGER.debug("delete({},{},{})", orderId, itemId, model);
+        LOGGER.debug("ItemInOrderController: deleteItemInOrderById({},{})", orderId, itemId);
         itemInOrderService.delete(orderId, itemId);
         return "redirect:/order/"+orderId;
     }
