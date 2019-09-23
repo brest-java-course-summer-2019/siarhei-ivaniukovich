@@ -42,13 +42,13 @@ public class OrderRestConsumer implements OrderService {
      */
     @Override
     public List<Order> findAll() {
-        LOGGER.debug("findAll()");
+        LOGGER.debug("OrderRestConsumer: findAll()");
         return restTemplate.getForEntity(url, List.class).getBody();
     }
 
     @Override
     public List<OrderDTO> findAllDTO() {
-        LOGGER.debug("findAllDTO()");
+        LOGGER.debug("OrderRestConsumer: findAllDTO()");
         return restTemplate.getForEntity(url+"dto", List.class).getBody();
     }
 
@@ -58,7 +58,7 @@ public class OrderRestConsumer implements OrderService {
      */
     @Override
     public Order add(Order order) {
-        LOGGER.debug("add({})", order);
+        LOGGER.debug("OrderRestConsumer: add({})", order);
         return restTemplate.postForEntity(url, order, Order.class).getBody();
     }
 
@@ -68,7 +68,7 @@ public class OrderRestConsumer implements OrderService {
      */
     @Override
     public void update(Order order) {
-        LOGGER.debug("update({})", order);
+        LOGGER.debug("OrderRestConsumer: update({})", order);
         restTemplate.put(url, order);
 
     }
@@ -79,7 +79,7 @@ public class OrderRestConsumer implements OrderService {
      */
     @Override
     public void delete(Integer orderId) {
-        LOGGER.debug("delete({})", orderId);
+        LOGGER.debug("OrderRestConsumer: delete({})", orderId);
         restTemplate.delete(url + "/" + orderId);
     }
 
@@ -90,7 +90,7 @@ public class OrderRestConsumer implements OrderService {
      */
     @Override
     public Order findOrderById(Integer orderId) {
-        LOGGER.debug("findOrderById({})", orderId);
+        LOGGER.debug("OrderRestConsumer: findOrderById({})", orderId);
         return restTemplate.getForEntity(url + "/" + orderId, Order.class).getBody();
     }
 
@@ -102,7 +102,7 @@ public class OrderRestConsumer implements OrderService {
      */
     @Override
     public List<OrderDTO> findOrdersDTOByDateTime(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        LOGGER.debug("findOrdersDTOByDateTime({},{})", startDateTime, endDateTime);
+        LOGGER.debug("OrderRestConsumer: findOrdersDTOByDateTime({},{})", startDateTime, endDateTime);
         return restTemplate.getForEntity(
                 url + "dto/" + startDateTime + ":00/" + endDateTime + ":00", List.class).getBody();
     }

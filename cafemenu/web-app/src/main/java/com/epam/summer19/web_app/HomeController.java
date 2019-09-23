@@ -15,13 +15,13 @@ public class HomeController {
 
     @GetMapping(value = "/")
     public String defaultPageRedirect() {
-        LOGGER.debug("defaultPageRedirect()");
+        LOGGER.debug("HomeController: defaultPageRedirect()");
         return "redirect:mainpage";
     }
 
     @GetMapping(value = "/mainpage")
     public String mainPage() {
-        LOGGER.debug("defaultPageRedirect()");
+        LOGGER.debug("HomeController: mainPage()");
         return "mainpage";
     }
 
@@ -31,7 +31,7 @@ public class HomeController {
      */
     @GetMapping(value = "/404")
     public String errorNotFoundRedirect() {
-        LOGGER.debug("errorPageRedirect()");
+        LOGGER.debug("HomeController: errorNotFoundRedirect()");
         return "exception";
     }
 

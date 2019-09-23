@@ -39,7 +39,7 @@ public class ItemController {
      */
     @GetMapping(value = "/items")
     public final String listAllItems(Model model) {
-        LOGGER.debug("ItemController: ListAllItems findAll({})", model);
+        LOGGER.debug("ItemController: listAllItems({})", model);
         model.addAttribute("items", itemService.findAll());
         return "items";
     }
@@ -118,7 +118,7 @@ public class ItemController {
      */
     @GetMapping(value = "/items/{id}/delete")
     public final String deleteItem(@PathVariable Integer id, Model model) {
-        LOGGER.debug("ItemController: delete({},{})", id, model);
+        LOGGER.debug("ItemController: deleteItem({},{})", id, model);
         itemService.delete(id);
         return "redirect:/items";
     }
