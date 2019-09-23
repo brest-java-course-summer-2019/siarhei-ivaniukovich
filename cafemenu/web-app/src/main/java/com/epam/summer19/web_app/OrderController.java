@@ -52,7 +52,7 @@ public class OrderController {
     DateTimeFilterDTO defDateTime() {
         DateTimeFilterDTO dateTimeFilterDTO = new DateTimeFilterDTO();
         dateTimeFilterDTO.setStartDateTime(LocalDateTime.now()
-                .minusYears(25).truncatedTo(ChronoUnit.MINUTES));
+                .minusYears(1).truncatedTo(ChronoUnit.MINUTES));
         dateTimeFilterDTO.setEndDateTime(LocalDateTime.now()
                 .plusHours(24).truncatedTo(ChronoUnit.MINUTES));
         return dateTimeFilterDTO;
@@ -63,7 +63,7 @@ public class OrderController {
             @ModelAttribute("dateTimeFilterDTO") DateTimeFilterDTO dateTimeFilterDTO,
             Model model)
     {
-        LOGGER.debug("listAllOrdersDTOByDateTime({})", dateTimeFilterDTO);
+        LOGGER.debug("OrderController: listAllOrdersDTOByDateTime({})", dateTimeFilterDTO);
         model.addAttribute("isFilterExpanded", false);
         model.addAttribute("dateTimeFilterDTO", dateTimeFilterDTO);
         model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
@@ -76,7 +76,7 @@ public class OrderController {
             @ModelAttribute DateTimeFilterDTO dateTimeFilterDTO,
             BindingResult result, Model model)
     {
-        LOGGER.debug("Post filter byDateTime params({}, {})", dateTimeFilterDTO, result);
+        LOGGER.debug("OrderController: postAllOrdersDTOByDateTime({}, {})", dateTimeFilterDTO, result);
         dateTimeFilterDTOValidator.validate(dateTimeFilterDTO, result);
         if (result.hasErrors()) {
             model.addAttribute("isFilterExpanded", true);
@@ -92,7 +92,7 @@ public class OrderController {
     public final String ordersDtoFilterReset(Model model)
     {
         DateTimeFilterDTO dateTimeFilterDTO = defDateTime();
-        LOGGER.debug("listAllOrdersDTOByDateTime({})", dateTimeFilterDTO);
+        LOGGER.debug("OrderController: ordersDtoFilterReset(), (DTO: {})", dateTimeFilterDTO);
         model.addAttribute("isFilterExpanded", true);
         model.addAttribute("dateTimeFilterDTO", dateTimeFilterDTO);
         model.addAttribute("ordersdto", orderService.findOrdersDTOByDateTime(
@@ -107,7 +107,7 @@ public class OrderController {
      */
     @GetMapping(value = "/order")
     public final String gotoAddOrderPage(Model model) {
-        LOGGER.debug("gotoAddOrderPage({})", model);
+        LOGGER.debug("OrderController: gotoAddOrderPage({})", model);
         Order order = new Order();
         model.addAttribute("isNew", true);
         model.addAttribute("order", order);
@@ -122,7 +122,7 @@ public class OrderController {
      */
     @PostMapping(value = "/order")
     public final String addOrder(@Valid Order order, BindingResult result) {
-        LOGGER.debug("addOrder({}, {})", order, result);
+        LOGGER.debug("OrderController: addOrder({}, {})", order, result);
         orderValidator.validate(order, result);
         if (result.hasErrors()) {
             return "order";
@@ -141,7 +141,7 @@ public class OrderController {
      */
     @GetMapping(value = "/order/{id}")
     public final String gotoEditOrderPage(@PathVariable Integer id, Model model) {
-        LOGGER.debug("gotoEditOrderPage({},{})", id, model);
+        LOGGER.debug("OrderController: gotoEditOrderPage({})", id);
         Order order = orderService.findOrderById(id);
         List<ItemInOrder> iteminorders = itemInOrderService.findIioByOrderId(id);
         List<Item> items =  itemService.findAll();
@@ -162,7 +162,7 @@ public class OrderController {
      */
     @PostMapping(value = "/order/{id}")
     public final String updateOrder(@Valid Order order, BindingResult result) {
-        LOGGER.debug("updateOrder({})", order);
+        LOGGER.debug("OrderController: updateOrder({})", order);
         orderValidator.validate(order, result);
         if (result.hasErrors()) {
             return "order";
@@ -180,7 +180,7 @@ public class OrderController {
      */
     @GetMapping(value = "/orders/{id}/delete")
     public final String deleteOrder(@PathVariable Integer id, Model model) {
-        LOGGER.debug("delete({},{})", id, model);
+        LOGGER.debug("OrderController: deleteOrder({},{})", id);
         orderService.delete(id);
         return "redirect:/ordersdto";
     }

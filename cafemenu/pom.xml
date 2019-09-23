@@ -270,6 +270,9 @@
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-pmd-plugin</artifactId>
                <version>${maven-pmd-plugin.vesrion}</version>
+               <configuration>
+                  <linkXRef>false</linkXRef>
+               </configuration>
             </plugin>
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
