@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet"
+          href="../../resources/static/css/bootstrap.css"
+          th:href="@{/resources/static/css/bootstrap.css}">
+        <link rel="stylesheet"
+          href="../../resources/static/css/style.css"
+          th:href="@{/resources/static/css/style.css}">
+        <title th:text="'Cafemenu - ' + ${pagename}">CafeMenu - Page name</title>
+    </head>
+    <body>
+
+    <header>
+        <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary sticky-top">
+            <a class="navbar-brand">
+                <img src="../../resources/static/img/cmlogo.png"
+                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
+            </a>
+            <div class="collapse navbar-collapse">
+                <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
+                <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
+                <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
+            </div>
+        </nav>
+        <nav id="headername" class="navbar bg-light text-dark">
+            <h5 th:text="${pagename}">Page name</h5>
+        </nav>
+    </header>
+</div>
+</body>
+</html>

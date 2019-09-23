@@ -128,7 +128,7 @@ public class ItemRestControllerTest {
         Mockito.when(itemService.findItemByName("Nuggets")).thenReturn(createItem(2,2));
         mockMvc.perform(MockMvcRequestBuilders.post("/items/byname")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(objectMapper.writeValueAsString("Item2"))
+                .content(objectMapper.writeValueAsString("\"Item2\""))
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(MockMvcResultMatchers.status().isFound())
         ;
