@@ -49,7 +49,7 @@ class ItemControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().contentType("text/html;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.
-                containsString("Items")));
+                containsString("Item")));
 
         Mockito.verify(itemService, Mockito.times(1)).findAll();
     }
@@ -126,7 +126,6 @@ class ItemControllerTest {
 
     @AfterEach
     void afterEach() {
-
         Mockito.verifyNoMoreInteractions(itemService);
         Mockito.reset(itemService);
     }
