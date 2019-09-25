@@ -69,17 +69,17 @@
                                 <td th:text="${#numbers.formatDecimal(orderdto.summaryPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">00.00</td>
                                 <td th:text="${orderdto.itemsQuantity}" align="center">00</td>
                                 <td class="text-right" nowrap>
-                                 <span th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
+                                 <a th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                    data-placement="top">
-                                     <a href="#" class="text-white d-none d-sm-block">Edit</a>
-                                     <a href="#" class="text-white d-sm-none">✎</a>
-                                 </span>&nbsp;
-                                 <span data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
+                                       data-placement="top">
+                                     <div class="d-none d-sm-block">Edit</div>
+                                     <div class="d-block d-sm-none">✎</div>
+                                 </a>&nbsp;
+                                 <a href="#" data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
                                     th:attr="data-id=${orderdto.orderId}">
-                                        <a href="#" class="text-white d-none d-sm-block">Delete</a>
-                                        <a href="#" class="text-white d-sm-none">&times;</a>
-                                 </span>
+                                        <div class="text-white d-none d-sm-block">Delete</div>
+                                        <div class="text-white d-sm-none">&times;</div>
+                                 </a>
                                 </td>
                             </tr>
                         </tbody>

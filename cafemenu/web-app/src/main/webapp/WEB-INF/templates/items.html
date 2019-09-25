@@ -29,17 +29,17 @@
                                 <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">0.00</td>
                                 </span>
                                 <td class="text-right" nowrap>
-                                 <span th:href="@{|/item/${item.itemId}|}" href="items_edit.html"
+                                 <a th:href="@{|/item/${item.itemId}|}" href="items_edit.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
                                     data-placement="top">
-                                     <a href="#" class="text-white d-none d-sm-block">Edit</a>
-                                     <a href="#" class="text-white d-sm-none">✎</a>
-                                 </span>
-                                 <span data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
+                                     <div class="d-none d-sm-block">Edit</div>
+                                     <div class="d-block d-sm-none">✎</div>
+                                 </a>&nbsp;
+                                 <a href="#" data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
                                     th:attr="data-id=${item.itemId}, data-name=${item.itemName}">
-                                    <a href="#" class="text-white d-none d-sm-block">Delete</a>
-                                        <a href="#" class="text-white d-sm-none">&times;</a>
-                                 </span>
+                                     <div class="text-white d-none d-sm-block">Delete</div>
+                                     <div class="text-white d-sm-none">&times;</div>
+                                 </a>
                                 </td>
                             </tr>
                         </tbody>
