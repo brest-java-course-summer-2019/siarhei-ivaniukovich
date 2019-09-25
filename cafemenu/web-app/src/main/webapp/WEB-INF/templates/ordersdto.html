@@ -51,13 +51,13 @@
                 <div class="card" style="max-width: 850px;">
                     <table class="table table-striped">
                         <thead class="thead-light">
-                        <tr class="text">
+                        <tr class="text-sm-center">
                             <th width="7%">ID</th>
-                            <th width="10%">Empl ID</th>
-                            <th width="24%">Order Date&Time</th>
-                            <th width="20%" class="text-right">Total price</th>
-                            <th width="17%" class="text-center">Items quantity</th>
-                            <th width="25%"></th>
+                            <th width="10%">EMP</th>
+                            <th width="24%">Date&Time</th>
+                            <th width="20%" class="text-right" nowrap>Total $</th>
+                            <th width="17%" class="text-center">Quantity</th>
+                            <th width="25%" ></th>
                         </tr>
                         </thead>
                         <!-- ORDERS list content -->
@@ -68,13 +68,17 @@
                                 <td th:text="${orderdto.orderDateTime}">DateTime</td>
                                 <td th:text="${#numbers.formatDecimal(orderdto.summaryPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">00.00</td>
                                 <td th:text="${orderdto.itemsQuantity}" align="center">00</td>
-                                <td class="text-right">
-                                 <a th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
+                                <td class="text-right" nowrap>
+                                 <span th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                    data-placement="top">Edit</a>
-                                 <span data-toggle="modal" data-target="#deleteDialog"
+                                    data-placement="top">
+                                     <a href="#" class="text-white d-none d-sm-block">Edit</a>
+                                     <a href="#" class="text-white d-sm-none">✎</a>
+                                 </span>&nbsp;
+                                 <span data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
                                     th:attr="data-id=${orderdto.orderId}">
-                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                        <a href="#" class="text-white d-none d-sm-block">Delete</a>
+                                        <a href="#" class="text-white d-sm-none">&times;</a>
                                  </span>
                                 </td>
                             </tr>

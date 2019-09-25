@@ -17,7 +17,7 @@
                         <tr class="text-left">
                             <th width="5%">ID</th>
                             <th width="50%">Item name</th>
-                            <th width="20%" class="text-right">Price $</th>
+                            <th width="20%" class="text-right" nowrap>Price $</th>
                             <th width="25%"></th>
                         </tr>
                         </thead>
@@ -28,13 +28,17 @@
                                 <td th:text="${item.itemName}">ItemName</td>
                                 <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">0.00</td>
                                 </span>
-                                <td class="text-right">
-                                 <a th:href="@{|/item/${item.itemId}|}" href="items_edit.html"
+                                <td class="text-right" nowrap>
+                                 <span th:href="@{|/item/${item.itemId}|}" href="items_edit.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                    data-placement="top">Edit</a>
-                                 <span data-toggle="modal" data-target="#deleteDialog"
+                                    data-placement="top">
+                                     <a href="#" class="text-white d-none d-sm-block">Edit</a>
+                                     <a href="#" class="text-white d-sm-none">✎</a>
+                                 </span>
+                                 <span data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
                                     th:attr="data-id=${item.itemId}, data-name=${item.itemName}">
-                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                    <a href="#" class="text-white d-none d-sm-block">Delete</a>
+                                        <a href="#" class="text-white d-sm-none">&times;</a>
                                  </span>
                                 </td>
                             </tr>
