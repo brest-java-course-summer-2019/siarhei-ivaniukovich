@@ -1,40 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet"
-          href="../../resources/static/css/bootstrap.css"
-          th:href="@{/resources/static/css/bootstrap.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/style.css"
-          th:href="@{/resources/static/css/style.css}">
-    <link rel="stylesheet"
-          href="../../resources/static/css/bootstrap-datetimepicker.css"
-          th:href="@{/resources/static/css/bootstrap-datetimepicker.css}">
-    <title>CafeMenu - Orders list</title>
-</head>
-<body>
-
-<header>
-    <nav class="p-1 navbar navbar-expand text-white rounded bg-secondary">
-        <a class="navbar-brand">
-            <img src="../../resources/static/img/cmlogo.png"
-                 th:src="@{/resources/static/img/cmlogo.png}" height="26" width="32" class="d-inline-block">CafeMenu</a>
-        </a>
-        <div class="collapse navbar-collapse">
-            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/mainpage}+'\''">Main</button>&nbsp;
-            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/ordersdto}+'\''">Orders</button>&nbsp;
-            <button class="btn btn-outline-dark text-white" type="button" th:onclick="'window.location.href=\''+@{/items}+'\''">Items</button>
-       </div>
-    </nav>
-    <nav id="headername" class="navbar bg-light text-dark">
-        <h5>Orders list</h5>
-    </nav>
-</header>
+<div th:replace="incl/header_ :: header (pagename='Orders')">header</div>
 
 <!-- ORDERS list-->
 <section id="orders">
@@ -62,7 +28,7 @@
                             <div class="input-group-prepend">
                                 <span th:text="'Start & End'" class="input-group-text" id="">Start&End:</span>
                             </div>
-
+                            <!-- DATETIME INPUTS -->
                         <input th:class="'form-control'" class="form-control" type="datetime-local" id="startDateTime"
                                th:field="*{startDateTime}" >
                         <input th:class="'form-control'" class="form-control" type="datetime-local" id="endDateTime"
@@ -85,13 +51,13 @@
                 <div class="card" style="max-width: 850px;">
                     <table class="table table-striped">
                         <thead class="thead-light">
-                        <tr class="text">
+                        <tr class="text-sm-center">
                             <th width="7%">ID</th>
-                            <th width="10%">Empl ID</th>
-                            <th width="24%">Order Date&Time</th>
-                            <th width="20%" class="text-right">Total price</th>
-                            <th width="17%" class="text-center">Items quantity</th>
-                            <th width="25%"></th>
+                            <th width="10%">EMP</th>
+                            <th width="24%">Date&Time</th>
+                            <th width="20%" class="text-right" nowrap>Total $</th>
+                            <th width="17%" class="text-center">Quantity</th>
+                            <th width="25%" ></th>
                         </tr>
                         </thead>
                         <!-- ORDERS list content -->
@@ -102,14 +68,18 @@
                                 <td th:text="${orderdto.orderDateTime}">DateTime</td>
                                 <td th:text="${#numbers.formatDecimal(orderdto.summaryPrice, 1, 'COMMA', 2, 'POINT')}" class="text-right">00.00</td>
                                 <td th:text="${orderdto.itemsQuantity}" align="center">00</td>
-                                <td class="text-right">
+                                <td class="text-right" nowrap>
                                  <a th:href="@{|/order/${orderdto.orderId}|}" href="order.html"
                                     class="btn btn-sm btn-secondary" data-toggle="tooltip"
-                                    data-placement="top">Edit</a>
-                                 <span data-toggle="modal" data-target="#deleteDialog"
+                                       data-placement="top">
+                                     <div class="d-none d-sm-block">Edit</div>
+                                     <div class="d-block d-sm-none">✎</div>
+                                 </a>&nbsp;
+                                 <a href="#" data-toggle="modal" class="btn btn-sm btn-danger" data-target="#deleteDialog"
                                     th:attr="data-id=${orderdto.orderId}">
-                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
-                                 </span>
+                                        <div class="text-white d-none d-sm-block">Delete</div>
+                                        <div class="text-white d-sm-none">&times;</div>
+                                 </a>
                                 </td>
                             </tr>
                         </tbody>
